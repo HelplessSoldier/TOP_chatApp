@@ -1,0 +1,8 @@
+.signUpContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-column: 2;
+  grid-row: 2;
+  height: 100%;
+}

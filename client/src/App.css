@@ -7,3 +7,11 @@
   height: 100vh;
 }
 
+.mainRoot {
+  display: grid;
+  grid-template-rows: 1fr 13fr;
+  grid-template-columns: 1fr 5fr;
+  width: 100vw;
+  height: 100vh;
+}
+
