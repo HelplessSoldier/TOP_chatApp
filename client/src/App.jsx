@@ -6,12 +6,13 @@ import {
 } from 'react-router-dom';
 import './App.css'
 import Header from './globalPartials/Header';
+import SignUp from './pageStates/signup/SignUp';
 
 function App() {
   return (
     <>
       <Header />
-      <h1>Oh Hi c:</h1>
+      <SignUp />
     </>
   )
 }
