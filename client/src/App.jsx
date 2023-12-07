@@ -8,13 +8,14 @@ import './App.css'
 import Header from './globalPartials/Header';
 import SignUp from './pageStates/signup/SignUp';
 import SideBar from './globalPartials/SideBar';
+import LogIn from './pageStates/login/LogIn';
 
 function App() {
   return (
     <div className='mainRoot'>
       <Header />
       <SideBar />
-      <SignUp />
+      <LogIn />
     </div>
   )
 }
