@@ -15,3 +15,18 @@
   height: 100vh;
 }
 
+.formButton {
+  font-size: 1vw;
+  font-weight: bold;
+  background-color: var(--accent-color);
+  border: none;
+  width: 8vw;
+  height: 5vh;
+  border-radius: 1vh;
+  transition: background-color .34s, color .34s;
+}
+
+.formButton:hover {
+  background-color: var(--secondary-color);
+  color: white;
+}
