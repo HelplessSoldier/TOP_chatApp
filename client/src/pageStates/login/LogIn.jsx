@@ -1,9 +1,14 @@
-import './LogIn.css';
+import "./LogIn.css";
 
 export default function LogIn() {
   function handleSubmitButton(e) {
     e.preventDefault();
     console.log("login submit btn pressed");
+  }
+
+  function handleNoAccButton(e) {
+    e.preventDefault();
+    console.log("no acc btn pressed");
   }
 
   return (
@@ -18,6 +23,10 @@ export default function LogIn() {
           Submit
         </button>
       </form>
+      <div className="noAccContainer">
+        <p>Don't have an account?</p>
+        <button className="noAccBtn" onClick={handleNoAccButton}> Create one here!</button>
+      </div>
     </div>
   );
 }

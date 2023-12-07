@@ -27,3 +27,31 @@
   padding: 2%;
   border-radius: 1vh;
 }
+
+.noAccContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items:center;
+  margin-top: 3vh;
+  gap: 1vw;
+}
+
+.noAccContainer > * {
+  font-size: 2vh;
+}
+
+.noAccBtn {
+  background-color: var(--accent-color);
+  border: none;
+  height: 4vh;
+  width: 13vw;
+  border-radius: 1vh;
+  transition: background-color .34s, color .34s;
+}
+
+.noAccBtn:hover {
+  background-color: var(--background-color);
+  color: white;
+  border: 1px solid var(--text-color);
+}
