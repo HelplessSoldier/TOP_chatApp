@@ -1,7 +1,7 @@
 import './SignUp.css'
-import globals from '../../../../globals/apiGlobals.json';
+import globals from '../../../../publicGlobals/apiGlobals.json';
 
-const apiUri = globals.apiUri + ":" + globals.apiPort + globals.dbRoute;
+const apiUri = globals.serverUri + ":" + globals.serverPort + globals.dbRoute;
 
 export default function SignUp() {
 
@@ -12,6 +12,7 @@ export default function SignUp() {
 
   return (
     <div className="signUpContainer">
+      <h1>Sign Up</h1>
       <form className='signUpForm'>
         <label htmlFor='email'>E-Mail</label>
         <input type='email' name='email' />
@@ -21,7 +22,7 @@ export default function SignUp() {
         <input type='password' name='password' />
         <label htmlFor='confirmPassword'>Confirm Password</label>
         <input type='password' name='confirmPassword' />
-        <button className='formButton' onClick={handleSubmitButton}>Sign Up!</button>
+        <button className='formButton' onClick={handleSubmitButton}>Submit</button>
       </form>
     </div>
   )
