@@ -6,3 +6,23 @@
   grid-row: 2;
   height: 100%;
 }
+
+.signUpForm {
+  display: flex;
+  flex-direction: column;
+  width: 34%;
+}
+
+.signUpForm > label {
+  font-size: 2vh;
+  margin-top: 2vh;
+}
+
+.signUpForm > input {
+  color: var(--text-color);
+  background-color: var(--background-color);
+  border: 1px solid var(--text-color);
+  font-size:2.6vh;
+  padding: 2%;
+  border-radius: 1vh;
+}

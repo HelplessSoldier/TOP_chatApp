@@ -14,12 +14,13 @@ export default function SignUp() {
     <div className="signUpContainer">
       <form className='signUpForm'>
         <label htmlFor='email'>E-Mail</label>
-        <input type='email' />
+        <input type='email' name='email' />
         <label htmlFor='username'>Username</label>
-        <input type='text' />
+        <input type='text' name='username' />
         <label htmlFor='password'>Password</label>
-        <input type='password' />
+        <input type='password' name='password' />
         <label htmlFor='confirmPassword'>Confirm Password</label>
+        <input type='password' name='confirmPassword' />
         <button className='formButton' onClick={handleSubmitButton}>Sign Up!</button>
       </form>
     </div>

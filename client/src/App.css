@@ -24,9 +24,11 @@
   height: 5vh;
   border-radius: 1vh;
   transition: background-color .34s, color .34s;
+  margin-top: 2vh;
 }
 
 .formButton:hover {
-  background-color: var(--secondary-color);
+  background-color: var(--background-color);
   color: white;
+  border: 1px solid var(--text-color);
 }
