@@ -3,11 +3,16 @@ import globals from '../../../../publicGlobals/apiGlobals.json';
 
 const apiUri = globals.serverUri + ":" + globals.serverPort + globals.dbRoute;
 
-export default function SignUp() {
+export default function SignUp({ setPageState }) {
 
   function handleSubmitButton(e) {
     e.preventDefault();
     console.log('hi from the handle submit func!')
+  }
+
+  function handleHasAccButton(e) {
+    e.preventDefault();
+    setPageState("LogIn")
   }
 
   return (
@@ -24,6 +29,10 @@ export default function SignUp() {
         <input type='password' name='confirmPassword' />
         <button className='formButton' onClick={handleSubmitButton}>Submit</button>
       </form>
+      <div className="noAccContainer">
+        <p>Already have an account?</p>
+        <button className="noAccBtn" onClick={handleHasAccButton}> Log in here!</button>
+      </div>
     </div>
   )
 }
