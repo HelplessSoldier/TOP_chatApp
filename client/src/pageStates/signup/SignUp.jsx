@@ -1,12 +1,12 @@
 import './SignUp.css'
 import globals from '../../../../publicGlobals/apiGlobals.json';
 
-const apiUri = globals.serverUri + ":" + globals.serverPort;
+const apiUri = globals.serverUri + ":" + globals.serverPort + globals.apiVersion;
 const singnupUri = apiUri + '/accounts/signup'
 
 export default function SignUp({ setPageState }) {
 
-  function handleSubmitButton(e) {
+  function handleSubmit(e) {
 
     e.preventDefault();
 
@@ -16,6 +16,12 @@ export default function SignUp({ setPageState }) {
       password: e.target.password.value,
       confirmPassword: e.target.confirmPassword.value
     }
+
+    fetch(singnupUri, {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formBody),
+    })
 
     console.log(singnupUri);
   }
@@ -28,7 +34,7 @@ export default function SignUp({ setPageState }) {
   return (
     <div className="signUpContainer">
       <h1>Sign Up</h1>
-      <form className='signUpForm' onSubmit={handleSubmitButton}>
+      <form className='signUpForm' onSubmit={handleSubmit}>
         <label htmlFor='email'>E-Mail</label>
         <input type='email' name='email' />
         <label htmlFor='username'>Username</label>

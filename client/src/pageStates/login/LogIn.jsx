@@ -1,7 +1,7 @@
 import "./LogIn.css";
 
 export default function LogIn({ setPageState }) {
-  function handleSubmitButton(e) {
+  function handleSubmit(e) {
     e.preventDefault();
     console.log("login submit btn pressed");
   }
@@ -14,12 +14,12 @@ export default function LogIn({ setPageState }) {
   return (
     <div className="logInContainer">
       <h1>Log In</h1>
-      <form className="logInForm">
+      <form className="logInForm" onSubmit={handleSubmit}>
         <label htmlFor="email">E-Mail</label>
         <input type="email" name="email" />
         <label htmlFor="password">Password</label>
         <input type="password" name="password" />
-        <button className="formButton" onClick={handleSubmitButton}>
+        <button className="formButton" >
           Submit
         </button>
       </form>

@@ -10,8 +10,8 @@ const app = express();
 connectToMongo('mongodb://localhost:27017')
 
 app.use(morgan("dev"));
-app.use(v1Router);
-app.use('/accounts', v1AccountsRouter);
+app.use('/v1', v1Router);
+app.use('/v1/accounts', v1AccountsRouter);
 
 app.listen(apiPublicGlobals.serverPort, () =>
   console.log(

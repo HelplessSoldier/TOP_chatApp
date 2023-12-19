@@ -1,5 +1,6 @@
 {
   "serverUri": "http://localhost",
   "serverPort": "3000",
-  "dbRoute": "/chatApp"
+  "dbRoute": "/chatApp",
+  "apiVersion": "/v1"
 }
