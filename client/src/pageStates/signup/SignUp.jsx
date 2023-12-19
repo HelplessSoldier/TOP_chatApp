@@ -1,7 +1,8 @@
 import './SignUp.css'
 import globals from '../../../../publicGlobals/apiGlobals.json';
 
-const apiUri = globals.serverUri + ":" + globals.serverPort + globals.dbRoute;
+const apiUri = globals.serverUri + ":" + globals.serverPort;
+const singnupUri = apiUri + '/accounts/signup'
 
 export default function SignUp({ setPageState }) {
 
@@ -16,7 +17,7 @@ export default function SignUp({ setPageState }) {
       confirmPassword: e.target.confirmPassword.value
     }
 
-    console.log(apiUri);
+    console.log(singnupUri);
   }
 
   function handleHasAccButton(e) {
