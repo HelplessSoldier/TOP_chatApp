@@ -6,8 +6,17 @@ const apiUri = globals.serverUri + ":" + globals.serverPort + globals.dbRoute;
 export default function SignUp({ setPageState }) {
 
   function handleSubmitButton(e) {
+
     e.preventDefault();
-    console.log('hi from the handle submit func!')
+
+    const formBody = {
+      email: e.target.email.value,
+      username: e.target.username.value,
+      password: e.target.password.value,
+      confirmPassword: e.target.confirmPassword.value
+    }
+
+    console.log(apiUri);
   }
 
   function handleHasAccButton(e) {
@@ -18,7 +27,7 @@ export default function SignUp({ setPageState }) {
   return (
     <div className="signUpContainer">
       <h1>Sign Up</h1>
-      <form className='signUpForm'>
+      <form className='signUpForm' onSubmit={handleSubmitButton}>
         <label htmlFor='email'>E-Mail</label>
         <input type='email' name='email' />
         <label htmlFor='username'>Username</label>
@@ -27,7 +36,7 @@ export default function SignUp({ setPageState }) {
         <input type='password' name='password' />
         <label htmlFor='confirmPassword'>Confirm Password</label>
         <input type='password' name='confirmPassword' />
-        <button className='formButton' onClick={handleSubmitButton}>Submit</button>
+        <button className='formButton'>Submit</button>
       </form>
       <div className="noAccContainer">
         <p>Already have an account?</p>
