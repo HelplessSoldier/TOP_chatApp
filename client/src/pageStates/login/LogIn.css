@@ -55,3 +55,11 @@
   color: white;
   border: 1px solid var(--text-color);
 }
+
+.validationErrorContainer {
+  margin-top: 2vh;
+}
+
+.validationErrorContainer > p {
+  font-size: 2vh;
+}

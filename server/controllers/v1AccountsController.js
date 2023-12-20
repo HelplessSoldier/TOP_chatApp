@@ -29,10 +29,13 @@ exports.log_in_post = [
       });
     }
 
-    const isCorrectPassword = await bcrypt.compare(
-      password,
-      foundUser.password
-    );
+    let isCorrectPassword = false;
+    if (foundUser && password) {
+      isCorrectPassword = await bcrypt.compare(
+        password,
+        foundUser.password
+      );
+    }
 
     if (!isCorrectPassword) {
       val.errors.push({
@@ -48,8 +51,10 @@ exports.log_in_post = [
       console.log(val);
       res.status(400)
       res.json({ message: "Invalid inputs", errors: val.errors })
+    } else {
+      res.status(200);
+      res.json({ message: "Got past val" })
     }
-    next();
   }),
 ];
 

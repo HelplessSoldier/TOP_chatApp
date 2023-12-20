@@ -28,8 +28,7 @@ export default function SignUp({ setPageState }) {
         setShowSuccess(true);
       } else {
         setShowSuccess(false);
-        const validationErrors = responseData.errors;
-        setValidationErrors(validationErrors);
+        setValidationErrors(responseData.errors);
       }
     } catch (err) {
       console.error(err)
