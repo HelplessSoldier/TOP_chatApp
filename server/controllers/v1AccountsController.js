@@ -53,7 +53,7 @@ exports.log_in_post = [
       res.json({ message: "Invalid inputs", errors: val.errors })
     } else {
       res.status(200);
-      res.json({ message: "Got past val" })
+      res.json({ message: "Log in successful" })
     }
   }),
 ];
