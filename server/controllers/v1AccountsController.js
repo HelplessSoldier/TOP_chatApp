@@ -1,32 +1,57 @@
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const User = require("../models/User");
-const bcrypt = require('bcryptjs');
+const bcrypt = require("bcryptjs");
 
 exports.log_in_post = [
   body("email")
     .trim()
     .notEmpty()
-    .withMessage('E-mail required')
+    .withMessage("E-mail required")
     .isEmail()
     .escape(),
 
-  body("password")
-    .trim()
-    .notEmpty()
-    .withMessage('Password required')
-    .escape(),
+  body("password").trim().notEmpty().withMessage("Password required").escape(),
 
   asyncHandler(async (req, res, next) => {
+    const val = validationResult(req);
     const email = req.body.email;
     const password = req.body.password;
-
     const foundUser = await User.findOne({ email: email });
-    const isCorrectPassword = await bcrypt.compare(password, foundUser.password);
-    console.log(`correct password: ${isCorrectPassword}`)
+
+    if (!foundUser) {
+      val.errors.push({
+        type: "field",
+        value: "",
+        msg: "User not found",
+        path: "email",
+        location: "body",
+      });
+    }
+
+    const isCorrectPassword = await bcrypt.compare(
+      password,
+      foundUser.password
+    );
+
+    if (!isCorrectPassword) {
+      val.errors.push({
+        type: "field",
+        value: "",
+        msg: "Incorrect password",
+        path: "password",
+        location: "body"
+      })
+    }
+
+    if (val.errors.length > 0) {
+      console.log(val);
+      res.status(400)
+      res.json({ message: "Invalid inputs", errors: val.errors })
+    }
     next();
-  })
-]
+  }),
+];
 
 exports.sign_up_post = [
   body("email")
@@ -86,9 +111,9 @@ exports.sign_up_post = [
     });
 
     try {
-      await newUser.save()
-      console.log('user saved')
-      res.json({ message: "Succesfully saved user" })
+      await newUser.save();
+      console.log("user saved");
+      res.json({ message: "Succesfully saved user" });
     } catch (err) {
       res.status(500).json({
         message: "Internal server error when attempting to save new user",

@@ -5,18 +5,29 @@ const apiUri = globals.serverUri + ":" + globals.serverPort + globals.apiVersion
 const loginUri = apiUri + '/accounts/login'
 
 export default function LogIn({ setPageState }) {
+
   async function handleSubmit(e) {
     e.preventDefault();
+
     const formBody = {
       email: e.target.email.value,
       password: e.target.password.value,
     }
+
     try {
       const response = await fetch(loginUri, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formBody),
       })
+
+      const responseData = await response.json();
+
+      if (response.ok) {
+        console.log(responseData);
+      } else {
+        console.log(responseData);
+      }
     } catch (err) {
       console.error(err);
     }
