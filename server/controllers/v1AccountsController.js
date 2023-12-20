@@ -9,6 +9,7 @@ exports.log_in_post = [
     .notEmpty()
     .withMessage("E-mail required")
     .isEmail()
+    .withMessage("Invalid email")
     .escape(),
 
   body("password").trim().notEmpty().withMessage("Password required").escape(),
@@ -48,7 +49,6 @@ exports.log_in_post = [
     }
 
     if (val.errors.length > 0) {
-      console.log(val);
       res.status(400)
       res.json({ message: "Invalid inputs", errors: val.errors })
     } else {

@@ -8,9 +8,11 @@ const loginUri = apiUri + "/accounts/login";
 
 export default function LogIn({ setPageState }) {
   const [validationErrors, setValidationErrors] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setLoading(true);
 
     const formBody = {
       email: e.target.email.value,
@@ -37,6 +39,8 @@ export default function LogIn({ setPageState }) {
       }
     } catch (err) {
       console.error(err);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -46,14 +50,14 @@ export default function LogIn({ setPageState }) {
   }
 
   return (
-    <div className="logInContainer">
+    <div className={`logInContainer ${loading ? 'loading-cursor' : ''}`} >
       <h1>Log In</h1>
-      <form className="logInForm" onSubmit={handleSubmit}>
+      <form className={`logInForm `} onSubmit={handleSubmit}>
         <label htmlFor="email">E-Mail</label>
         <input type="email" name="email" />
         <label htmlFor="password">Password</label>
         <input type="password" name="password" />
-        <button className="formButton">Submit</button>
+        <button className={`formButton ${loading ? 'loading-cursor' : ''}`}>Submit</button>
       </form>
       <div className="noAccContainer">
         <p>Don&apos;t have an account?</p>
@@ -71,6 +75,6 @@ export default function LogIn({ setPageState }) {
           </div>
         )}
       </div>
-    </div>
+    </div >
   );
 }

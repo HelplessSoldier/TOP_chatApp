@@ -63,3 +63,7 @@
 .validationErrorContainer > p {
   font-size: 2vh;
 }
+
+.loading-cursor {
+  cursor: wait;
+}
