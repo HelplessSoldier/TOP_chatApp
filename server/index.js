@@ -5,6 +5,8 @@ const cors = require("cors");
 const v1Router = require("./routes/v1Router");
 const v1AccountsRouter = require("./routes/v1AccountsRouter");
 const apiPublicGlobals = require("../publicGlobals/apiGlobals.json");
+const passport = require('./controllers/passportConfig');
+const session = require('express-session');
 
 const app = express();
 
@@ -16,7 +18,7 @@ app.use(express.json());
 app.use("/v1", v1Router);
 app.use("/v1/accounts", v1AccountsRouter);
 
-app.listen(apiPublicGlobals.serverPort, () =>
+app.listen(apiPublicGlobals.serverPort || 3000, () =>
   console.log(
     `Server listening at: ${apiPublicGlobals.serverUri}:${apiPublicGlobals.serverPort}`
   )
