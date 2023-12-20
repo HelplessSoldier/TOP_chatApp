@@ -44,12 +44,10 @@ exports.sign_up_post = [
 
     foundUser = await User.findOne({ email: email });
     if (foundUser) {
-      console.log(foundUser)
       val.errors.push({ param: "email", msg: "Email in use" });
     }
 
     if (val.errors.length > 0) {
-      console.log(val.errors);
       res.status(403);
       res.json({ message: "Validation errors", errors: val.errors });
       return;

@@ -27,3 +27,11 @@
   padding: 2%;
   border-radius: 1vh;
 }
+
+.signUpSuccessAndErrorContainer {
+  margin-top: 3vh;
+}
+
+.signUpSuccessAndErrorContainer > p {
+  font-size: 2vh;
+}

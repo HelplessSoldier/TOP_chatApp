@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './SignUp.css'
 import globals from '../../../../publicGlobals/apiGlobals.json';
 
@@ -5,25 +6,34 @@ const apiUri = globals.serverUri + ":" + globals.serverPort + globals.apiVersion
 const singnupUri = apiUri + '/accounts/signup'
 
 export default function SignUp({ setPageState }) {
+  const [validationErrors, setValidationErrors] = useState([]);
+  const [showSuccess, setShowSuccess] = useState(false);
 
-  function handleSubmit(e) {
-
+  async function handleSubmit(e) {
     e.preventDefault();
-
     const formBody = {
       email: e.target.email.value,
       username: e.target.username.value,
       password: e.target.password.value,
       confirmPassword: e.target.confirmPassword.value
     }
-
-    fetch(singnupUri, {
-      method: 'POST',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formBody),
-    })
-
-    console.log(singnupUri);
+    try {
+      const response = await fetch(singnupUri, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formBody),
+      })
+      const responseData = await response.json();
+      if (response.ok) {
+        setShowSuccess(true);
+      } else {
+        setShowSuccess(false);
+        const validationErrors = responseData.errors;
+        setValidationErrors(validationErrors);
+      }
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   function handleHasAccButton(e) {
@@ -48,6 +58,16 @@ export default function SignUp({ setPageState }) {
       <div className="noAccContainer">
         <p>Already have an account?</p>
         <button className="noAccBtn" onClick={handleHasAccButton}> Log in here!</button>
+      </div>
+      <div className='signUpSuccessAndErrorContainer'>
+        {showSuccess ? <p>User successfully saved!</p> : null}
+        {validationErrors.length > 0 && (
+          <div>
+            {validationErrors.map(error => (
+              <p key={error.param}>{error.msg}</p>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )
