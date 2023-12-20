@@ -37,19 +37,22 @@ exports.sign_up_post = [
       });
     }
 
-    let foundUser = User.findOne({ username });
+    let foundUser = await User.findOne({ username: username });
     if (foundUser) {
       val.errors.push({ param: "username", msg: "Username in use" });
     }
 
-    foundUser = User.findOne({ email });
+    foundUser = await User.findOne({ email: email });
     if (foundUser) {
+      console.log(foundUser)
       val.errors.push({ param: "email", msg: "Email in use" });
     }
 
     if (val.errors.length > 0) {
+      console.log(val.errors);
       res.status(403);
       res.json({ message: "Validation errors", errors: val.errors });
+      return;
     }
 
     const newUser = new User({
@@ -59,13 +62,11 @@ exports.sign_up_post = [
     });
 
     try {
-      await newUser
-        .save()
-        .then(console.log("new user saved"))
-        .then(res.json({ message: "Successfully added user" }));
+      await newUser.save()
+      console.log('user saved')
+      res.json({ message: "Succesfully saved user" })
     } catch (err) {
-      res.status(500);
-      res.json({
+      res.status(500).json({
         message: "Internal server error when attempting to save new user",
       });
     }

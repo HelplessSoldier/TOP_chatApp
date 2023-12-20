@@ -8,7 +8,7 @@ const apiPublicGlobals = require("../publicGlobals/apiGlobals.json");
 
 const app = express();
 
-connectToMongo("mongodb://localhost:27017");
+connectToMongo("mongodb://localhost:27017/chatApp");
 
 app.use(morgan("dev"));
 app.use(cors());

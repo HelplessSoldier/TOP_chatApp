@@ -11,16 +11,14 @@ const userSchema = new Schema({
   chats: [{ type: Schema.Types.ObjectId, ref: "Chat" }],
 });
 
-userSchema.pre("save", (next) => {
-  var user = this;
-  bcrypt.genSalt(process.env.saltRounds, (err, salt) => {
-    if (err) return next(err);
-    bcrypt.hash(user.password, salt, (err, hash) => {
-      if (err) return next(err);
-      user.password = hash;
-      next();
-    });
-  });
+userSchema.pre("save", async function(next) {
+  try {
+    const salt = await bcrypt.genSalt(Number(process.env.saltRounds));
+    const hashedPassword = await bcrypt.hash(this.password, salt);
+    this.password = hashedPassword;
+  } catch (err) {
+    next(err);
+  }
 });
 
 const User = mongoose.model("User", userSchema);
