@@ -22,7 +22,8 @@ exports.log_in_post = [
     const password = req.body.password;
 
     const foundUser = await User.findOne({ email: email });
-    console.log(foundUser);
+    const isCorrectPassword = await bcrypt.compare(password, foundUser.password);
+    console.log(`correct password: ${isCorrectPassword}`)
     next();
   })
 ]
