@@ -1,6 +1,31 @@
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const User = require("../models/User");
+const bcrypt = require('bcryptjs');
+
+exports.log_in_post = [
+  body("email")
+    .trim()
+    .notEmpty()
+    .withMessage('E-mail required')
+    .isEmail()
+    .escape(),
+
+  body("password")
+    .trim()
+    .notEmpty()
+    .withMessage('Password required')
+    .escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    const foundUser = await User.findOne({ email: email });
+    console.log(foundUser);
+    next();
+  })
+]
 
 exports.sign_up_post = [
   body("email")

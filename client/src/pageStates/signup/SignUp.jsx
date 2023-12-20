@@ -3,7 +3,7 @@ import './SignUp.css'
 import globals from '../../../../publicGlobals/apiGlobals.json';
 
 const apiUri = globals.serverUri + ":" + globals.serverPort + globals.apiVersion;
-const singnupUri = apiUri + '/accounts/signup'
+const signupUri = apiUri + '/accounts/signup'
 
 export default function SignUp({ setPageState }) {
   const [validationErrors, setValidationErrors] = useState([]);
@@ -18,7 +18,7 @@ export default function SignUp({ setPageState }) {
       confirmPassword: e.target.confirmPassword.value
     }
     try {
-      const response = await fetch(singnupUri, {
+      const response = await fetch(signupUri, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formBody),

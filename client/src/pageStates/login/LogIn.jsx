@@ -1,9 +1,25 @@
 import "./LogIn.css";
+import globals from '../../../../publicGlobals/apiGlobals.json';
+
+const apiUri = globals.serverUri + ":" + globals.serverPort + globals.apiVersion;
+const loginUri = apiUri + '/accounts/login'
 
 export default function LogIn({ setPageState }) {
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    console.log("login submit btn pressed");
+    const formBody = {
+      email: e.target.email.value,
+      password: e.target.password.value,
+    }
+    try {
+      const response = await fetch(loginUri, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formBody),
+      })
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   function handleNoAccButton(e) {
