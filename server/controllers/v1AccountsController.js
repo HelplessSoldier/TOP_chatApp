@@ -29,24 +29,24 @@ exports.sign_up_post = [
     const password = req.body.password.value;
     const confirmPassword = req.body.confirmPassword.value;
 
-    const errors = validationResult(req);
+    const val = validationResult(req);
     if (confirmPassword !== password) {
-      errors.push({ param: "confirmPassword", msg: "Passwords do not match" });
+      val.errors.push({ param: "confirmPassword", msg: "Passwords do not match" });
     }
 
     let foundUser = User.findOne({ username })
     if (foundUser) {
-      errors.push({ param: "username", msg: "Username in use" })
+      val.errors.push({ param: "username", msg: "Username in use" })
     }
 
     foundUser = User.findOne({ email })
     if (foundUser) {
-      errors.push({ param: "email", msg: "Email in use" })
+      val.errors.push({ param: "email", msg: "Email in use" })
     }
 
-    if (errors.length > 0) {
+    if (val.errors.length > 0) {
       res.status(403);
-      res.json({ message: "Validation errors", errors });
+      res.json({ message: "Validation errors", errors: val.errors });
     }
 
     const newUser = new User({
