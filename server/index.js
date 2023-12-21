@@ -5,12 +5,13 @@ const cors = require("cors");
 const v1Router = require("./routes/v1Router");
 const v1AccountsRouter = require("./routes/v1AccountsRouter");
 const apiPublicGlobals = require("../publicGlobals/apiGlobals.json");
-const passport = require('./controllers/passportConfig');
-const session = require('express-session');
+const passport = require('passport');
+const initializePassport = require('./helpers/passportConfig');
 
 const app = express();
 
 connectToMongo("mongodb://localhost:27017/chatApp");
+initializePassport(passport);
 
 app.use(morgan("dev"));
 app.use(cors());
