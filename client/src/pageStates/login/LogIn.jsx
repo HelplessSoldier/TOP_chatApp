@@ -33,7 +33,7 @@ export default function LogIn({ setPageState }) {
         setValidationErrors([]);
         setPageState('ProtectedRoutes')
       } else {
-        setValidationErrors(responseData.errors);
+        setValidationErrors(['Incorrect credentials']);
       }
     } catch (err) {
       console.error(err);
@@ -66,11 +66,7 @@ export default function LogIn({ setPageState }) {
       </div>
       <div className="validationErrorContainer">
         {validationErrors.length > 0 && (
-          <div>
-            {validationErrors.map((error) => (
-              <p key={error.param}>{error.msg}</p>
-            ))}
-          </div>
+          <p>Incorrect credentials</p>
         )}
       </div>
     </div >
