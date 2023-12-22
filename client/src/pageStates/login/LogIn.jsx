@@ -28,13 +28,12 @@ export default function LogIn({ setPageState }) {
       });
 
       const responseData = await response.json();
-      console.log(responseData)
+      console.log(responseData.errors);
 
-      if (response.ok && responseData.message === 'login success') {
+      if (response.ok && responseData.message !== "Validation error") {
         setValidationErrors([]);
-        setPageState('ProtectedRoutes')
       } else {
-        setValidationErrors(['Incorrect credentials']);
+        setValidationErrors(responseData.errors);
       }
     } catch (err) {
       console.error(err);
@@ -49,14 +48,16 @@ export default function LogIn({ setPageState }) {
   }
 
   return (
-    <div className={`logInContainer ${loading ? 'loading-cursor' : ''}`} >
+    <div className={`logInContainer ${loading ? "loading-cursor" : ""}`}>
       <h1>Log In</h1>
       <form className={`logInForm `} onSubmit={handleSubmit}>
         <label htmlFor="email">E-Mail</label>
         <input type="email" name="email" />
         <label htmlFor="password">Password</label>
         <input type="password" name="password" />
-        <button className={`formButton ${loading ? 'loading-cursor' : ''}`}>Submit</button>
+        <button className={`formButton ${loading ? "loading-cursor" : ""}`}>
+          Submit
+        </button>
       </form>
       <div className="noAccContainer">
         <p>Don&apos;t have an account?</p>
@@ -66,10 +67,9 @@ export default function LogIn({ setPageState }) {
         </button>
       </div>
       <div className="validationErrorContainer">
-        {validationErrors.length > 0 && (
-          <p>Incorrect credentials</p>
-        )}
+        {validationErrors.length > 0 &&
+          validationErrors.map((error) => <p key={error.msg}>{error.msg}</p>)}
       </div>
-    </div >
+    </div>
   );
 }
