@@ -12,18 +12,51 @@ exports.log_in_post = [
     .withMessage("Invalid E-mail format")
     .escape(),
 
-  body('password')
-    .trim()
-    .notEmpty()
-    .withMessage('Password required')
-    .escape(),
+  body("password").trim().notEmpty().withMessage("Password required").escape(),
 
   asyncHandler(async (req, res, next) => {
     const val = validationResult(req);
     if (val.errors.length > 0) {
-      res.json({ message: 'Validation error', errors: val.errors })
+      res.json({ message: "Validation error", errors: val.errors });
     }
-  })
+
+    const foundUser = await User.findOne({ email: req.body.email });
+    if (foundUser === null) {
+      res.json({
+        message: "Validation error",
+        errors: [
+          {
+            location: "body",
+            msg: "User not found",
+            path: "email",
+            type: "field",
+            value: "",
+          },
+        ],
+      });
+    }
+
+    const isCorrectPassword = await bcrypt.compare(
+      req.body.password,
+      foundUser.password
+    );
+    if (!isCorrectPassword) {
+      res.json({
+        message: "Validation error",
+        errors: [
+          {
+            location: "body",
+            msg: "Incorrect password",
+            path: "password",
+            type: "field",
+            value: "",
+          },
+        ],
+      });
+    } else {
+      // all checks pass, send jwt and update page
+    }
+  }),
 ];
 
 exports.sign_up_post = [
