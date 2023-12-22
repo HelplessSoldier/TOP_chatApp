@@ -3,9 +3,28 @@ const { body, validationResult } = require("express-validator");
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 
-exports.log_in_post = (req, res, next) => {
-  res.json({ message: 'hi' })
-};
+exports.log_in_post = [
+  body("email")
+    .trim()
+    .notEmpty()
+    .withMessage("E-mail required")
+    .isEmail()
+    .withMessage("Invalid E-mail format")
+    .escape(),
+
+  body('password')
+    .trim()
+    .notEmpty()
+    .withMessage('Password required')
+    .escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const val = validationResult(req);
+    if (val.errors.length > 0) {
+      res.json({ message: 'Validation error', errors: val.errors })
+    }
+  })
+];
 
 exports.sign_up_post = [
   body("email")
