@@ -14,7 +14,6 @@ if (process.env.NODE_ENV !== "production") {
 const app = express();
 
 connectToMongo("mongodb://localhost:27017/chatApp", mongoose);
-initializePassport(passport);
 
 app.use(morgan("dev"));
 app.use(cors());
