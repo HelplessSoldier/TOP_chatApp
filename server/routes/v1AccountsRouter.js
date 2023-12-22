@@ -5,6 +5,7 @@ const passport = require("passport");
 const asyncHandler = require("express-async-handler");
 
 router.post("/signup", v1AccountsController.sign_up_post);
-router.post('/login', v1AccountsController.log_in_post);
+router.post("/login", v1AccountsController.log_in_post);
+router.get("/logout", v1AccountsController.log_out_get);
 
 module.exports = router;

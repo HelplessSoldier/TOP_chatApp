@@ -4,6 +4,13 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
+exports.log_out_get = (req, res, next) => {
+  req.logout(function(err) {
+    if (err) { return next(err); }
+    res.json({ message: 'Logout success' })
+  });
+}
+
 exports.log_in_post = (req, res, next) => {
   try {
     passport.authenticate("local", (err, user, info) => {

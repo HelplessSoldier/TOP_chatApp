@@ -5,10 +5,25 @@ import { useState } from "react";
 const apiUri =
   globals.serverUri + ":" + globals.serverPort + globals.apiVersion;
 const loginUri = apiUri + "/accounts/login";
+const logoutUri = apiUri + "/accounts/logout";
 
 export default function LogIn({ setPageState }) {
   const [validationErrors, setValidationErrors] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  function handleProtectedBtn(e) {
+    e.preventDefault();
+    setPageState("ProtectedRoutes")
+  }
+
+  function handleLogout(e) {
+    e.preventDefault();
+    try {
+      fetch(logoutUri);
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -69,6 +84,8 @@ export default function LogIn({ setPageState }) {
           <p>Incorrect credentials</p>
         )}
       </div>
+      <button onClick={handleProtectedBtn}>Protected</button>
+      <button onClick={handleLogout}>logout</button>
     </div >
   );
 }
