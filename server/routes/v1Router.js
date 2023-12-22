@@ -6,10 +6,8 @@ const ensureAuthenticated = require("../middleware/ensureAuthenticated");
 const router = express.Router();
 
 router.get("/", v1Controller.root_get);
-router.get(
-  "/protectedRoute",
-  ensureAuthenticated,
-  res.json({ message: "got into protectedRoute!" })
-);
+router.get("/protectedRoute", ensureAuthenticated, (req, res, next) => {
+  res.json({ message: "got into protectedRoute!" });
+});
 
 module.exports = router;
