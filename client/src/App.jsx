@@ -25,7 +25,7 @@ function getPage(pageState, setPageState) {
     case "SignUp":
       return <SignUp setPageState={setPageState} />;
     case "ProtectedRoutes":
-      return <ProtectedRoutes />
+      return <ProtectedRoutes setPageState={setPageState} />
     default:
       return null;
   }

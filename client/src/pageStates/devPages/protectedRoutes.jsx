@@ -5,7 +5,12 @@ const apiUri =
   globals.serverUri + ":" + globals.serverPort + globals.apiVersion;
 const protectedUri = apiUri + "/protectedRoute";
 
-export default function ProtectedRoutes() {
+export default function ProtectedRoutes({ setPageState }) {
+
+  const handleLoginPageClick = (e) => {
+    e.preventDefault();
+    setPageState('LogIn')
+  }
 
   const handleProtectedButtonClick = async (e) => {
     e.preventDefault();
@@ -28,6 +33,7 @@ export default function ProtectedRoutes() {
         gone wrong lol
       </p>
       <button className="formButton" onClick={handleProtectedButtonClick}>Protected!</button>
+      <button className="formButton" onClick={handleLoginPageClick}>login</button>
     </div>
   );
 }

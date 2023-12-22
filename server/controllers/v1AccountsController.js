@@ -4,7 +4,7 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
-exports.log_out_get = (req, res, next) => {
+exports.log_out_post = (req, res, next) => {
   req.logout(function(err) {
     if (err) { return next(err); }
     res.json({ message: 'Logout success' })
@@ -20,6 +20,7 @@ exports.log_in_post = (req, res, next) => {
       } else {
         const validationErrors = info && info.message ? [info.message] : [];
         res.json({
+          // these aren't actually used yet
           message: 'validationError',
           errors: validationErrors
         });

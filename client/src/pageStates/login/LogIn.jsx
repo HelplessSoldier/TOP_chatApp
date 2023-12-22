@@ -16,10 +16,13 @@ export default function LogIn({ setPageState }) {
     setPageState("ProtectedRoutes")
   }
 
-  function handleLogout(e) {
+  async function handleLogout(e) {
     e.preventDefault();
     try {
-      fetch(logoutUri);
+      const response = await fetch(logoutUri, {
+        method: "POST",
+        credentials: 'include',
+      });
     } catch (err) {
       console.error(err);
     }
