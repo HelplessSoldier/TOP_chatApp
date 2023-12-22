@@ -3,7 +3,7 @@ import globals from '../../../../publicGlobals/apiGlobals.json';
 
 const apiUri =
   globals.serverUri + ":" + globals.serverPort + globals.apiVersion;
-const protectedUri = apiUri + "/";
+const protectedUri = apiUri + "/protectedRoute";
 
 export default function ProtectedRoutes() {
 
