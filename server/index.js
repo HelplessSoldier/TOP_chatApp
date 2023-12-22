@@ -9,6 +9,7 @@ const passport = require("passport");
 const initializePassport = require("./helpers/passportConfig");
 const flash = require("express-flash");
 const session = require("express-session");
+const connectToMongo = require('./helpers/connectToMongo');
 
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
@@ -16,7 +17,7 @@ if (process.env.NODE_ENV !== "production") {
 
 const app = express();
 
-connectToMongo("mongodb://localhost:27017/chatApp");
+connectToMongo("mongodb://localhost:27017/chatApp", mongoose);
 initializePassport(passport);
 
 app.use(morgan("dev"));
@@ -42,11 +43,3 @@ app.listen(apiPublicGlobals.serverPort || 3000, () =>
   )
 );
 
-async function connectToMongo(uri) {
-  try {
-    mongoose.connect(uri);
-    console.log(`Connected to DB: ${uri}`);
-  } catch (err) {
-    console.error(`Could not connect to DB: ${uri}`);
-  }
-}
