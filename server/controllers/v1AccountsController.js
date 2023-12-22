@@ -6,19 +6,18 @@ const passport = require("passport");
 
 exports.log_in_post = (req, res, next) => {
   try {
-    passport.authenticate('local', (err, user, info) => {
-      console.log(`err: ${err}\nuser: ${user}\ninfo: ${info}`)
-      if (!err) {
-        res.json({ message: 'login success' })
+    passport.authenticate("local", (err, user, info) => {
+      console.log(`err: ${err}\nuser: ${user}\ninfo: ${info}`);
+      if (user) {
+        res.json({ message: "login success" });
       } else {
-        res.json({ message: 'login failure' })
+        res.json({ message: "login failure" });
       }
     })(req, res, next);
   } catch (err) {
-    console.error(err);
-    next(err)
+    next(err);
   }
-}
+};
 
 exports.sign_up_post = [
   body("email")
