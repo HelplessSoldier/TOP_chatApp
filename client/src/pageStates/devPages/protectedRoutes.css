@@ -1,0 +1,17 @@
+.protectedRoutesContiner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.formButton {
+  font-size: 1vw;
+  font-weight: bold;
+  background-color: var(--accent-color);
+  border: none;
+  border-radius: 1vh;
+  transition: background-color .34s, color .34s;
+  margin-top: 2vh;
+}
+
