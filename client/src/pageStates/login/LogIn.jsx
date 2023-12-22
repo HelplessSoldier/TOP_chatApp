@@ -31,7 +31,7 @@ export default function LogIn({ setPageState }) {
       if (response.ok) {
         console.log(responseData);
         setValidationErrors([]);
-        // finish login and redirect to home
+        // TODO: finish login and set pagestate to home
 
       } else {
         console.log(responseData);

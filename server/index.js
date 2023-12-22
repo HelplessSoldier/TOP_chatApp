@@ -9,7 +9,7 @@ const passport = require("passport");
 const initializePassport = require("./helpers/passportConfig");
 const flash = require("express-flash");
 const session = require("express-session");
-const connectToMongo = require('./helpers/connectToMongo');
+const connectToMongo = require("./helpers/connectToMongo");
 
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
@@ -31,8 +31,8 @@ app.use(
     saveUninitialized: false,
   })
 );
-app.use(passport.initialize())
-app.use(passport.session())
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/v1", v1Router);
 app.use("/v1/accounts", v1AccountsRouter);
@@ -42,4 +42,3 @@ app.listen(apiPublicGlobals.serverPort || 3000, () =>
     `Server listening at: ${apiPublicGlobals.serverUri}:${apiPublicGlobals.serverPort}`
   )
 );
-

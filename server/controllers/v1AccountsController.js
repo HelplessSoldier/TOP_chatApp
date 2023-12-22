@@ -2,61 +2,23 @@ const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
+const passport = require("passport");
 
-exports.log_in_post = [
-  body("email")
-    .trim()
-    .notEmpty()
-    .withMessage("E-mail required")
-    .isEmail()
-    .withMessage("Invalid email")
-    .escape(),
-
-  body("password").trim().notEmpty().withMessage("Password required").escape(),
-
-  asyncHandler(async (req, res, next) => {
-    const val = validationResult(req);
-    const email = req.body.email;
-    const password = req.body.password;
-    const foundUser = await User.findOne({ email: email });
-
-    if (!foundUser) {
-      val.errors.push({
-        type: "field",
-        value: "",
-        msg: "User not found",
-        path: "email",
-        location: "body",
-      });
-    }
-
-    let isCorrectPassword = false;
-    if (foundUser && password) {
-      isCorrectPassword = await bcrypt.compare(
-        password,
-        foundUser.password
-      );
-    }
-
-    if (!isCorrectPassword) {
-      val.errors.push({
-        type: "field",
-        value: "",
-        msg: "Incorrect password",
-        path: "password",
-        location: "body"
-      })
-    }
-
-    if (val.errors.length > 0) {
-      res.status(400)
-      res.json({ message: "Invalid inputs", errors: val.errors })
-    } else {
-      res.status(200);
-      res.json({ message: "Log in successful" })
-    }
-  }),
-];
+exports.log_in_post = (req, res, next) => {
+  try {
+    passport.authenticate('local', (err, user, info) => {
+      console.log(`err: ${err}\nuser: ${user}\ninfo: ${info}`)
+      if (!err) {
+        res.json({ message: 'login success' })
+      } else {
+        res.json({ message: 'login failure' })
+      }
+    })(req, res, next);
+  } catch (err) {
+    console.error(err);
+    next(err)
+  }
+}
 
 exports.sign_up_post = [
   body("email")
