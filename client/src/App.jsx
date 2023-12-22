@@ -4,7 +4,6 @@ import Header from "./globalPartials/Header";
 import SignUp from "./pageStates/signup/SignUp";
 import SideBar from "./globalPartials/SideBar";
 import LogIn from "./pageStates/login/LogIn";
-import ProtectedRoutes from "./pageStates/devPages/protectedRoutes";
 
 function App() {
   const [pageState, setPageState] = useState("LogIn");
@@ -24,8 +23,6 @@ function getPage(pageState, setPageState) {
       return <LogIn setPageState={setPageState} />;
     case "SignUp":
       return <SignUp setPageState={setPageState} />;
-    case "ProtectedRoutes":
-      return <ProtectedRoutes setPageState={setPageState} />
     default:
       return null;
   }

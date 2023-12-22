@@ -11,23 +11,6 @@ export default function LogIn({ setPageState }) {
   const [validationErrors, setValidationErrors] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  function handleProtectedBtn(e) {
-    e.preventDefault();
-    setPageState("ProtectedRoutes")
-  }
-
-  async function handleLogout(e) {
-    e.preventDefault();
-    try {
-      const response = await fetch(logoutUri, {
-        method: "POST",
-        credentials: 'include',
-      });
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
   async function handleSubmit(e) {
     e.preventDefault();
     setLoading(true);
@@ -87,8 +70,6 @@ export default function LogIn({ setPageState }) {
           <p>Incorrect credentials</p>
         )}
       </div>
-      <button onClick={handleProtectedBtn}>Protected</button>
-      <button onClick={handleLogout}>logout</button>
     </div >
   );
 }
