@@ -7,6 +7,8 @@ const router = express.Router();
 
 router.get("/", v1Controller.root_get);
 router.get("/protectedRoute", ensureAuthenticated, (req, res, next) => {
+  console.log('got into protectedRoute')
+  res.setHeader('Content-Type', 'application/json')
   res.json({ message: "got into protectedRoute!" });
 });
 

@@ -11,7 +11,11 @@ exports.log_in_post = (req, res, next) => {
       if (user) {
         res.json({ message: "login success" });
       } else {
-        res.json({ message: "login failure" });
+        const validationErrors = info && info.message ? [info.message] : [];
+        res.json({
+          message: 'validationError',
+          errors: validationErrors
+        });
       }
     })(req, res, next);
   } catch (err) {

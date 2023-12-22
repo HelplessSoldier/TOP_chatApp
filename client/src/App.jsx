@@ -7,7 +7,7 @@ import LogIn from "./pageStates/login/LogIn";
 import ProtectedRoutes from "./pageStates/devPages/protectedRoutes";
 
 function App() {
-  const [pageState, setPageState] = useState("SignUp");
+  const [pageState, setPageState] = useState("LogIn");
 
   return (
     <div className="mainRoot">

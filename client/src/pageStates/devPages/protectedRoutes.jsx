@@ -1,4 +1,5 @@
 import "./protectedRoutes.css";
+import globals from '../../../../publicGlobals/apiGlobals.json';
 
 const apiUri =
   globals.serverUri + ":" + globals.serverPort + globals.apiVersion;
@@ -13,7 +14,6 @@ export default function ProtectedRoutes() {
         method: 'GET',
         headers: { "Content-Type": "application/json" },
       });
-      console.log(response);
     } catch (err) {
       console.error(err);
     }

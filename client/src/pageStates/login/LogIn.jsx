@@ -27,14 +27,12 @@ export default function LogIn({ setPageState }) {
       });
 
       const responseData = await response.json();
+      console.log(responseData)
 
-      if (response.ok) {
-        console.log(responseData);
+      if (response.ok && responseData.message === 'login success') {
         setValidationErrors([]);
-        // TODO: finish login and set pagestate to home
-
+        setPageState('ProtectedRoutes')
       } else {
-        console.log(responseData);
         setValidationErrors(responseData.errors);
       }
     } catch (err) {
