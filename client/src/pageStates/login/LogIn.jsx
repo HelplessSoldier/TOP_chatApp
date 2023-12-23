@@ -28,7 +28,7 @@ export default function LogIn({ setPageState }) {
       });
 
       const responseData = await response.json();
-      console.log(responseData.errors);
+      console.log(responseData);
 
       if (response.ok && responseData.message !== "Validation error") {
         setValidationErrors([]);

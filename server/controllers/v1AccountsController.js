@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 exports.log_in_post = [
   body("email")
@@ -54,7 +55,15 @@ exports.log_in_post = [
         ],
       });
     } else {
-      // all checks pass, send jwt and update page
+      const userId = foundUser._id;
+      const token = jwt.sign({ userId }, process.env.secret, {
+        expiresIn: "7d",
+      });
+      res.cookie("jwt", token, {
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+      });
+      res.json({ message: 'Verification successful' })
     }
   }),
 ];
