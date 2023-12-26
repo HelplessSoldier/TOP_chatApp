@@ -10,6 +10,7 @@ const server = new WebSocket.Server({ port: 8888 });
 server.on(
   "connection",
   asyncHandler(async (ws, req) => {
+    console.log('client connected')
     let currentUser = null;
     try {
       const cookies = req.headers.cookie;
