@@ -28,7 +28,8 @@ export default function LogIn({ setPageState }) {
       });
 
       const responseData = await response.json();
-      console.log(responseData);
+      const { token } = responseData;
+      document.cookie = `jwt=${token}; max-age=${7 * 24 * 60 * 60}; path=/; SameSite=None`;
 
       if (response.ok && responseData.message !== "Validation error") {
         setValidationErrors([]);

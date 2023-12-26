@@ -61,11 +61,7 @@ exports.log_in_post = [
       });
       res
         .status(200)
-        .cookie("jwt", token, {
-          maxAge: 7 * 24 * 60 * 60 * 1000,
-          httpOnly: false,
-        })
-        .json({ message: "Verification successful" });
+        .json({ message: "Verification successful", token: token });
     }
   }),
 ];
