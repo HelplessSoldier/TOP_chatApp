@@ -33,6 +33,7 @@ export default function LogIn({ setPageState }) {
 
       if (response.ok && responseData.message !== "Validation error") {
         setValidationErrors([]);
+        setPageState('Chat')
       } else {
         setValidationErrors(responseData.errors);
       }

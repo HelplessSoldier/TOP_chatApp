@@ -2,7 +2,7 @@ import './Chat.css';
 import globals from '../../../../publicGlobals/apiGlobals.json';
 import { useEffect } from 'react';
 
-export default function Chat() {
+export default function Chat({ setPageState }) {
 
   const wsUri = globals.webSocketUri;
   const socket = new WebSocket(wsUri);
@@ -12,8 +12,11 @@ export default function Chat() {
       console.log(`Websocket open!`)
 
       socket.onmessage = (event) => {
-        const message = JSON.parse(event.data);
-        console.log(message);
+        const responseJson = JSON.parse(event.data);
+        console.log(responseJson);
+        if (responseJson.message === 'No user') {
+          setPageState('LogIn');
+        }
       }
     }
   })

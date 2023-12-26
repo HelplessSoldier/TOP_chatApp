@@ -29,6 +29,8 @@ server.on(
         JSON.stringify({
           message: "User successfully verified",
           username: currentUser.username,
+          friends: currentUser.friends,
+          chats: currentUser.chats
         })
       );
     }
