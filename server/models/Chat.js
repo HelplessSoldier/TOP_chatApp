@@ -10,8 +10,14 @@ const chatSchema = new Schema({
     enum: ["public", "friends", "friendsPlus", "invite", "invitePlus"],
     required: true,
   },
+  messages: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "Message",
+    },
+  ],
 });
 
-const Chat = mongoose.model('Chat', chatSchema);
+const Chat = mongoose.model("Chat", chatSchema);
 
 module.exports = Chat;
