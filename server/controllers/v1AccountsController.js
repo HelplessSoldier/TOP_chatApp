@@ -59,11 +59,13 @@ exports.log_in_post = [
       const token = jwt.sign({ userId }, process.env.secret, {
         expiresIn: "7d",
       });
-      res.cookie("jwt", token, {
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-        httpOnly: true,
-      });
-      res.json({ message: 'Verification successful' })
+      res
+        .status(200)
+        .cookie("jwt", token, {
+          maxAge: 7 * 24 * 60 * 60 * 1000,
+          httpOnly: false,
+        })
+        .json({ message: "Verification successful" });
     }
   }),
 ];

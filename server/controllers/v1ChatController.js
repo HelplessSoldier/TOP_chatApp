@@ -1,5 +1,7 @@
 const WebSocket = require("ws");
 const getCookieFromString = require("../helpers/getCookieFromString");
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 const server = new WebSocket.Server({ port: 8888 });
 
@@ -7,8 +9,8 @@ server.on("connection", (ws, req) => {
   console.log("Client connected!");
 
   const cookies = req.headers.cookie
-  const jwt = getCookieFromString(cookies, 'connect.sid')
-  console.log(jwt)
+  console.log(req.headers)
+  const secret = process.env.secret;
 
   ws.on("message", (message) => {
     console.log(`Got message: ${message}`);
