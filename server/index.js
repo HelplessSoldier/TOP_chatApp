@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const v1Router = require("./routes/v1Router");
 const v1AccountsRouter = require("./routes/v1AccountsRouter");
+const v1ChatRouter = require('./routes/v1ChatRouter');
 const apiPublicGlobals = require("../publicGlobals/apiGlobals.json");
 const connectToMongo = require("./helpers/connectToMongo");
 const cookieParser = require('cookie-parser');
@@ -23,6 +24,7 @@ app.use(express.json());
 
 app.use("/v1", v1Router);
 app.use("/v1/accounts", v1AccountsRouter);
+app.use("/v1/chat", v1ChatRouter);
 
 app.listen(apiPublicGlobals.serverPort || 3000, () =>
   console.log(
