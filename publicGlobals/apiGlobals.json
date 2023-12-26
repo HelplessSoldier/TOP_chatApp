@@ -2,5 +2,6 @@
   "serverUri": "http://localhost",
   "serverPort": "3000",
   "dbRoute": "/chatApp",
-  "apiVersion": "/v1"
+  "apiVersion": "/v1",
+  "webSocketUri": "ws://localhost:8888"
 }
