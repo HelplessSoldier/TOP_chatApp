@@ -1,4 +1,5 @@
 import "./Header.css";
+import SearchBar from "./headerComps/SearchBar";
 
 export default function Header({ setPageState, userObject, setUserObject }) {
   const isLoggedIn = hasCookieByName(document.cookie, "jwt");
@@ -28,9 +29,14 @@ export default function Header({ setPageState, userObject, setUserObject }) {
   return (
     <div className="headerContainer">
       <h1 className="headerLogo">SPRK</h1>
+      {isLoggedIn && (
+        <SearchBar />
+      )}
       <div className="headerButtonsAndGreetingContainer">
         {userObject !== null && (
-          <p className="headerGreeting">Logged in as: {userObject.username}</p>
+          <>
+            <p className="headerGreeting">Logged in as: {userObject.username}</p>
+          </>
         )}
         {isLoggedIn && (
           <>
