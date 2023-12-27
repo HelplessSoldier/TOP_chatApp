@@ -10,6 +10,7 @@ function App() {
   const [pageState, setPageState] = useState("Chat");
   const [userObject, setUserObject] = useState(null);
   const [socket, setSocket] = useState(null);
+  const [searchResults, setSearchResults] = useState(null);
 
   return (
     <div className="mainRoot">
@@ -18,6 +19,7 @@ function App() {
         userObject={userObject}
         setUserObject={setUserObject}
         socket={socket}
+        setSearchResults={setSearchResults}
       />
       <SideBar />
       {getPage(pageState, setPageState, setUserObject, setSocket)}
@@ -25,7 +27,7 @@ function App() {
   );
 }
 
-function getPage(pageState, setPageState, setUserObject, setSocket) {
+function getPage(pageState, setPageState, setUserObject, setSocket, setSearchResults) {
   switch (pageState) {
     case "LogIn":
       return <LogIn setPageState={setPageState} />;
