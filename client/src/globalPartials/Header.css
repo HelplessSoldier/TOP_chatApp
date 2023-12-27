@@ -16,9 +16,13 @@
 }
 
 .headerButton {
-  font-size: 1.3vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1vw;
   font-weight: bold;
-  background-color: var(--accent-color);
+  background-color: var(--secondary-color);
+  color: var(--text-color);
   border: none;
   width: 8vw;
   height: 4vh;

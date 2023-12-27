@@ -11,11 +11,6 @@ export default function Header({ setPageState, userObject, setUserObject, socket
     setUserObject(null);
   };
 
-  const handleChatButtonClick = (e) => {
-    e.preventDefault();
-    setPageState("Chat");
-  };
-
   const handleLogInButtonClick = (e) => {
     e.preventDefault();
     setPageState("LogIn");
