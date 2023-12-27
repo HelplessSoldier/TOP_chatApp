@@ -7,11 +7,11 @@ import LogIn from "./pageStates/login/LogIn";
 import Chat from "./pageStates/chat/Chat";
 
 function App() {
-  const [pageState, setPageState] = useState("Chat");
+  const [pageState, setPageState] = useState("LogIn");
 
   return (
     <div className="mainRoot">
-      <Header />
+      <Header setPageState={setPageState} />
       <SideBar />
       {getPage(pageState, setPageState)}
     </div>

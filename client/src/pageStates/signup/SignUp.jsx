@@ -35,11 +35,6 @@ export default function SignUp({ setPageState }) {
     }
   }
 
-  function handleHasAccButton(e) {
-    e.preventDefault();
-    setPageState("LogIn")
-  }
-
   return (
     <div className="signUpContainer">
       <h1>Sign Up</h1>
@@ -54,10 +49,6 @@ export default function SignUp({ setPageState }) {
         <input type='password' name='confirmPassword' />
         <button className='formButton'>Submit</button>
       </form>
-      <div className="noAccContainer">
-        <p>Already have an account?</p>
-        <button className="noAccBtn" onClick={handleHasAccButton}> Log in here!</button>
-      </div>
       <div className='signUpSuccessAndErrorContainer'>
         {showSuccess ? <p>User successfully saved!</p> : null}
         {validationErrors.length > 0 && (

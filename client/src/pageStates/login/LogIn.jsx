@@ -44,11 +44,6 @@ export default function LogIn({ setPageState }) {
     }
   }
 
-  function handleNoAccButton(e) {
-    e.preventDefault();
-    setPageState("SignUp");
-  }
-
   return (
     <div className={`logInContainer ${loading ? "loading-cursor" : ""}`}>
       <h1>Log In</h1>
@@ -61,13 +56,6 @@ export default function LogIn({ setPageState }) {
           Submit
         </button>
       </form>
-      <div className="noAccContainer">
-        <p>Don&apos;t have an account?</p>
-        <button className="noAccBtn" onClick={handleNoAccButton}>
-          {" "}
-          Create one here!
-        </button>
-      </div>
       <div className="validationErrorContainer">
         {validationErrors.length > 0 &&
           validationErrors.map((error) => <p key={error.msg}>{error.msg}</p>)}
