@@ -3,6 +3,7 @@ const getCookieFromString = require("../helpers/getCookieFromString");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const asyncHandler = require("express-async-handler");
+const handleMessage = require("./chatSubModules/handleMessage");
 require("dotenv").config();
 
 const server = new WebSocket.Server({ port: 8888 });
@@ -38,7 +39,8 @@ server.on(
 
     ws.on("message", (message) => {
       console.log(`Got message: ${message}`);
-      ws.send(JSON.stringify({ message: "Hello from the server!" }));
+      const parsedMessage = JSON.parse(message);
+      handleMessage(parsedMessage, ws)
     });
 
     ws.on('close', () => console.log('Client disconnected'))

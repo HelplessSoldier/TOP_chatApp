@@ -7,7 +7,7 @@ export default function SearchBar({ socket }) {
     const searchTerm = e.target.searchInput.value;
 
     socket.send(
-      JSON.stringify({ message: "hello c:", searchTerm: searchTerm })
+      JSON.stringify({ message: "Search request", searchTerm: searchTerm })
     );
 
     socket.addEventListener("message", (e) => {
