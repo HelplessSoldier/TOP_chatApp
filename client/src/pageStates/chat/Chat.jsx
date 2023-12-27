@@ -2,7 +2,7 @@ import "./Chat.css";
 import globals from "../../../../publicGlobals/apiGlobals.json";
 import { useEffect, useState } from "react";
 
-export default function Chat({ setPageState }) {
+export default function Chat({ setPageState, setUserObject }) {
   const [responseObject, setResponseObject] = useState(null)
 
   useEffect(() => {
@@ -12,17 +12,17 @@ export default function Chat({ setPageState }) {
     socket.onopen = () => {
       socket.onmessage = (event) => {
         const responseJson = JSON.parse(event.data);
-        console.log(responseJson);
         if (responseJson.message === "No user") {
           setPageState("LogIn");
         } else {
           setResponseObject(responseJson);
+          setUserObject(responseJson)
         }
       };
     };
 
     return () => socket.close();
-  }, [setPageState]);
+  }, [setPageState, setUserObject]);
 
   return (
     <div>

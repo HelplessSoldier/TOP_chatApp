@@ -1,12 +1,13 @@
 import "./Header.css";
 
-export default function Header({ setPageState }) {
+export default function Header({ setPageState, userObject, setUserObject }) {
   const isLoggedIn = hasCookieByName(document.cookie, "jwt");
 
   const handleSignOutClick = (e) => {
     e.preventDefault();
     document.cookie = `jwt=; expires=0; path=/`;
-    setPageState('LogIn')
+    setPageState("LogIn");
+    setUserObject(null);
   };
 
   const handleChatButtonClick = (e) => {
@@ -27,7 +28,10 @@ export default function Header({ setPageState }) {
   return (
     <div className="headerContainer">
       <h1 className="headerLogo">SPRK</h1>
-      <div className="headerButtonsContainer">
+      <div className="headerButtonsAndGreetingContainer">
+        {userObject !== null && (
+          <p className="headerGreeting">Welcome {userObject.username}!</p>
+        )}
         {isLoggedIn && (
           <>
             <button className="headerButton" onClick={handleChatButtonClick}>
