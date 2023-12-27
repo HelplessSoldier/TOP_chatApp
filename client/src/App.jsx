@@ -9,6 +9,7 @@ import Chat from "./pageStates/chat/Chat";
 function App() {
   const [pageState, setPageState] = useState("Chat");
   const [userObject, setUserObject] = useState(null);
+  const [socket, setSocket] = useState(null);
 
   return (
     <div className="mainRoot">
@@ -16,21 +17,28 @@ function App() {
         setPageState={setPageState}
         userObject={userObject}
         setUserObject={setUserObject}
+        socket={socket}
       />
       <SideBar />
-      {getPage(pageState, setPageState, setUserObject)}
+      {getPage(pageState, setPageState, setUserObject, setSocket)}
     </div>
   );
 }
 
-function getPage(pageState, setPageState, setUserObject) {
+function getPage(pageState, setPageState, setUserObject, setSocket) {
   switch (pageState) {
     case "LogIn":
       return <LogIn setPageState={setPageState} />;
     case "SignUp":
       return <SignUp setPageState={setPageState} />;
     case "Chat":
-      return <Chat setPageState={setPageState} setUserObject={setUserObject} />;
+      return (
+        <Chat
+          setPageState={setPageState}
+          setUserObject={setUserObject}
+          setSocket={setSocket}
+        />
+      );
     default:
       return null;
   }

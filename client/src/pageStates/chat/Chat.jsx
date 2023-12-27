@@ -2,12 +2,13 @@ import "./Chat.css";
 import globals from "../../../../publicGlobals/apiGlobals.json";
 import { useEffect, useState } from "react";
 
-export default function Chat({ setPageState, setUserObject }) {
+export default function Chat({ setPageState, setUserObject, setSocket }) {
   const [responseObject, setResponseObject] = useState(null);
 
   useEffect(() => {
     const wsUri = globals.webSocketUri;
     const socket = new WebSocket(wsUri);
+    setSocket(socket);
 
     socket.onopen = () => {
       socket.onmessage = (event) => {
@@ -22,7 +23,7 @@ export default function Chat({ setPageState, setUserObject }) {
       };
     };
     return () => socket.close();
-  }, [setPageState, setUserObject]);
+  }, [setPageState, setUserObject, setSocket]);
 
   const handleSendMessage = (e) => {
     e.preventDefault();
