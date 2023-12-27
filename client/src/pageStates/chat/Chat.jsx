@@ -27,6 +27,12 @@ export default function Chat({ setPageState, setUserObject }) {
   return (
     <div className="chatRoot">
       <div className="chatContainer">
+        <div className="messagesContainer">
+        </div>
+        <div className="messageInputContainer">
+          <textarea className="chatInput" />
+          <button className="messageSubmitButton" >Send</button>
+        </div>
       </div>
     </div>
   );
