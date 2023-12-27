@@ -17,12 +17,14 @@ export default function SearchBar({ socket, setSearchResults }) {
     if (socket) {
       socket.addEventListener("message", (e) => {
         const message = JSON.parse(e.data);
+        console.log(message);
         if (message.message === "Found items") {
           setSearchResults({
             users: message.users,
             chats: message.chats,
           });
         } else if (message.message === "No items found") {
+          console.log('got into warning')
           setSearchResults(null);
           handleShowNoResults(3000);
         }
@@ -46,7 +48,10 @@ export default function SearchBar({ socket, setSearchResults }) {
       <button type="submit" className="searchButton">
         <img src="./icons/search-svgrepo-com.svg" className="searchIcon"></img>
       </button>
-      {noResults && <p className="noResultsWarning">No results</p>}
+      <img
+        src="./icons/folder-no-access-svgrepo-com.svg"
+        className={`noResultsIcon ${noResults ? "show" : ""}`}
+      />
     </form>
   );
 }

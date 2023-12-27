@@ -37,3 +37,16 @@
   height: 55%;
   width: auto;
 }
+
+.noResultsIcon {
+  height: 5vh;
+  width: auto;
+  margin-left: 1vw;
+  display: hidden;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.noResultsIcon.show {
+  opacity: 1;
+}
