@@ -30,13 +30,10 @@ export default function Header({ setPageState, userObject, setUserObject }) {
       <h1 className="headerLogo">SPRK</h1>
       <div className="headerButtonsAndGreetingContainer">
         {userObject !== null && (
-          <p className="headerGreeting">Welcome {userObject.username}!</p>
+          <p className="headerGreeting">Logged in as: {userObject.username}</p>
         )}
         {isLoggedIn && (
           <>
-            <button className="headerButton" onClick={handleChatButtonClick}>
-              Chat
-            </button>
             <button className="headerButton" onClick={handleSignOutClick}>
               Sign out
             </button>

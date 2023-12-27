@@ -25,7 +25,9 @@ export default function Chat({ setPageState, setUserObject }) {
   }, [setPageState, setUserObject]);
 
   return (
-    <div>
+    <div className="chatRoot">
+      <div className="chatContainer">
+      </div>
     </div>
   );
 }

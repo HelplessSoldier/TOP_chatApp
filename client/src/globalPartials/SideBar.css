@@ -1,3 +1,13 @@
 .sideBarContainer {
-  border-right: 1px solid var(--secondary-color);
+  background-color: var(--darker-background-color);
+  border-top: 1px solid var(--secondary-color);
+}
+
+.sidebarHeader {
+  margin: 1vh;
+}
+
+hr {
+  margin-left: 1vw;
+  margin-right: 1vw;
 }
