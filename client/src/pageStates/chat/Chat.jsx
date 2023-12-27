@@ -26,7 +26,6 @@ export default function Chat({ setPageState, setUserObject }) {
 
   return (
     <div>
-      <h1>hi from the chat comp!</h1>
     </div>
   );
 }

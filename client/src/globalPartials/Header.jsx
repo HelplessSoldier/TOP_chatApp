@@ -61,7 +61,6 @@ function hasCookieByName(cookiesString, name) {
   const cookies = cookiesString.split(";");
   for (let cookie of cookies) {
     const [cookieName, cookieValue] = cookie.split("=");
-    console.log(cookieValue);
     if (cookieName === name && cookieValue !== "") {
       return true;
     }
