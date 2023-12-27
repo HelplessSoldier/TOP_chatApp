@@ -10,7 +10,6 @@ const server = new WebSocket.Server({ port: 8888 });
 server.on(
   "connection",
   asyncHandler(async (ws, req) => {
-    console.log('client connected')
     let currentUser = null;
     try {
       const cookies = req.headers.cookie;
@@ -31,7 +30,7 @@ server.on(
           message: "User successfully verified",
           username: currentUser.username,
           friends: currentUser.friends,
-          chats: currentUser.chats
+          chats: currentUser.chats,
         })
       );
     }
@@ -39,10 +38,6 @@ server.on(
     ws.on("message", (message) => {
       console.log(`Got message: ${message}`);
       ws.send({ message: "Hello from the server!" });
-    });
-
-    ws.on("close", () => {
-      console.log("Client disconnected");
     });
   })
 );

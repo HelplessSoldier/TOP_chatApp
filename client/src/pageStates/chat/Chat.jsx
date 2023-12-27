@@ -3,7 +3,7 @@ import globals from "../../../../publicGlobals/apiGlobals.json";
 import { useEffect, useState } from "react";
 
 export default function Chat({ setPageState, setUserObject }) {
-  const [responseObject, setResponseObject] = useState(null)
+  const [responseObject, setResponseObject] = useState(null);
 
   useEffect(() => {
     const wsUri = globals.webSocketUri;
@@ -14,25 +14,29 @@ export default function Chat({ setPageState, setUserObject }) {
         const responseJson = JSON.parse(event.data);
         if (responseJson.message === "No user") {
           setPageState("LogIn");
-        } else {
+        } else if (responseJson.message === "User successfully verified") {
+          console.log(responseJson);
           setResponseObject(responseJson);
-          setUserObject(responseJson)
+          setUserObject(responseJson);
         }
       };
     };
-
     return () => socket.close();
   }, [setPageState, setUserObject]);
+
+  const handleSendMessage = (e) => {
+    e.preventDefault();
+    const message = e.target.chatInput.value;
+    console.log(message);
+  }
 
   return (
     <div className="chatRoot">
       <div className="chatContainer">
-        <div className="messagesContainer">
-        </div>
-        <div className="messageInputContainer">
-          <textarea className="chatInput" />
-          <button className="messageSubmitButton" >Send</button>
-        </div>
+        <div className="messagesContainer"></div>
+        <form className="messageInputContainer" onSubmit={handleSendMessage}>
+          <input type="text" className="chatInput" name="chatInput" />
+        </form>
       </div>
     </div>
   );
