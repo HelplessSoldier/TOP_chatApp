@@ -12,11 +12,16 @@ async function handleSearch(message, socket) {
     returnObject.message = 'No items found'
   } else {
     returnObject.message = 'Found items';
-    returnObject.users = foundUsers;
+
+    const strippedUsers = foundUsers.map((user) => {
+      const { _id, username } = user.toObject();
+      return { _id, username };
+    })
+
+    returnObject.users = strippedUsers;
     returnObject.chats = foundChats;
   }
   const returnMessage = JSON.stringify(returnObject);
-  console.log(socket)
   socket.send(returnMessage);
 }
 
