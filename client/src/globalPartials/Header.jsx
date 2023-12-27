@@ -2,11 +2,11 @@ import "./Header.css";
 
 export default function Header({ setPageState }) {
   const isLoggedIn = hasCookieByName(document.cookie, "jwt");
-  console.log(isLoggedIn);
 
   const handleSignOutClick = (e) => {
     e.preventDefault();
     document.cookie = `jwt=; expires=0; path=/`;
+    setPageState('LogIn')
   };
 
   const handleChatButtonClick = (e) => {
@@ -27,26 +27,28 @@ export default function Header({ setPageState }) {
   return (
     <div className="headerContainer">
       <h1 className="headerLogo">SPRK</h1>
-      {isLoggedIn && (
-        <>
-          <button className="headerButton" onClick={handleChatButtonClick}>
-            Chat
-          </button>
-          <button className="headerButton" onClick={handleSignOutClick}>
-            Sign out
-          </button>
-        </>
-      )}
-      {!isLoggedIn && (
-        <>
-          <button className="headerButton" onClick={handleLogInButtonClick}>
-            Log In
-          </button>
-          <button className="headerButton" onClick={handleSignUpButtonClick}>
-            Sign Up
-          </button>
-        </>
-      )}
+      <div className="headerButtonsContainer">
+        {isLoggedIn && (
+          <>
+            <button className="headerButton" onClick={handleChatButtonClick}>
+              Chat
+            </button>
+            <button className="headerButton" onClick={handleSignOutClick}>
+              Sign out
+            </button>
+          </>
+        )}
+        {!isLoggedIn && (
+          <>
+            <button className="headerButton" onClick={handleLogInButtonClick}>
+              Log In
+            </button>
+            <button className="headerButton" onClick={handleSignUpButtonClick}>
+              Sign Up
+            </button>
+          </>
+        )}
+      </div>
     </div>
   );
 }

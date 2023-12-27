@@ -21,6 +21,14 @@
   background-color: var(--accent-color);
   border: none;
   width: 8vw;
-  height: 5vh;
+  height: 4vh;
   border-radius: 1vh;
+  margin-left: 1.34vw;
+  transition: background-color .34s, color .34s;
+}
+
+.headerButton:hover {
+  background-color: var(--background-color);
+  color: white;
+  border: 1px solid var(--text-color);
 }
