@@ -25,9 +25,11 @@ async function handleSearch(message, socket) {
       return { _id, username };
     })
 
+    returnObject.searchTerm = searchTerm;
     returnObject.users = strippedUsers;
     returnObject.chats = foundChats;
   }
+
   const returnMessage = JSON.stringify(returnObject);
   socket.send(returnMessage);
 }

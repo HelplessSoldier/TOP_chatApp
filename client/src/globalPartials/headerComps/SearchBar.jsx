@@ -20,6 +20,7 @@ export default function SearchBar({ socket, setSearchResults }) {
         console.log(message);
         if (message.message === "Found items") {
           setSearchResults({
+            searchTerm: message.searchTerm,
             users: message.users,
             chats: message.chats,
           });
