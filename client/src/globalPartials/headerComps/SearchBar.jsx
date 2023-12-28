@@ -17,7 +17,6 @@ export default function SearchBar({ socket, setSearchResults }) {
     if (socket) {
       socket.addEventListener("message", (e) => {
         const message = JSON.parse(e.data);
-        console.log(message);
         if (message.message === "Found items") {
           setSearchResults({
             searchTerm: message.searchTerm,

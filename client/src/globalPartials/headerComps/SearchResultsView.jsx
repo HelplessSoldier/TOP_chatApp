@@ -1,12 +1,12 @@
 import "./SearchResultsView.css";
 import SearchElementUser from "./SearchElementUser";
+import SearchElementChat from "./SearchElementChat";
 
 export default function SearchResultsView({ searchResults, setSearchResults }) {
   const handleCloseButton = () => {
     setSearchResults(null);
   };
 
-  console.log(searchResults);
   const hasUsers = searchResults.users.length > 0;
   const hasChats = searchResults.chats.length > 0;
 
@@ -26,7 +26,12 @@ export default function SearchResultsView({ searchResults, setSearchResults }) {
       <div className="usersAndChatsContainer">
         {hasUsers && <h2>Users: </h2>}
         {searchResults.users.map((user) => {
-          return <SearchElementUser key={user.username} />;
+          return <SearchElementUser key={user._id} user={user} />;
+        })}
+
+        {hasChats && <h2>Chats: </h2>}
+        {searchResults.chats.map((chat) => {
+          return <SearchElementChat key={chat._id} chat={chat} />;
         })}
       </div>
     </div>
