@@ -21,8 +21,6 @@ export default function Header({ setPageState, userObject, setUserObject, socket
     setPageState("SignUp");
   };
 
-  console.log(`userobj: `, userObject);
-
   return (
     <div className="headerContainer">
       <h1 className="headerLogo">SPRK</h1>

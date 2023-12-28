@@ -26,6 +26,8 @@ function App() {
         <SearchResultsView
           searchResults={searchResults}
           setSearchResults={setSearchResults}
+          userObject={userObject}
+          socket={socket}
         />
       )}
       <SideBar />

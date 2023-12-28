@@ -2,7 +2,14 @@ import "./SearchResultsView.css";
 import SearchElementUser from "./SearchElementUser";
 import SearchElementChat from "./SearchElementChat";
 
-export default function SearchResultsView({ searchResults, setSearchResults }) {
+export default function SearchResultsView({
+  searchResults,
+  setSearchResults,
+  userObject,
+  socket
+}) {
+  console.log('search res socket: ', socket) // logs the socket object
+  console.log('search res userob: ', userObject); // logs the verified obj from server
   const handleCloseButton = () => {
     setSearchResults(null);
   };
@@ -12,7 +19,6 @@ export default function SearchResultsView({ searchResults, setSearchResults }) {
 
   return (
     <div className="searchResultsContainer">
-
       <div className="searchResultsHeader">
         <h1>{`Searching for: ${searchResults.searchTerm}`}</h1>
         <button className="hiddenButton" onClick={handleCloseButton}>
@@ -27,7 +33,10 @@ export default function SearchResultsView({ searchResults, setSearchResults }) {
       <div className="usersAndChatsContainer">
         {hasUsers && <h2>Users: </h2>}
         {searchResults.users.map((user) => {
-          return <SearchElementUser key={user._id} user={user} />;
+          if (user._id === userObject._id) {
+            return null;
+          }
+          return <SearchElementUser key={user._id} user={user} userObject={userObject} socket={socket} />;
         })}
 
         {hasChats && <h2>Chats: </h2>}
@@ -35,7 +44,6 @@ export default function SearchResultsView({ searchResults, setSearchResults }) {
           return <SearchElementChat key={chat._id} chat={chat} />;
         })}
       </div>
-
     </div>
   );
 }
