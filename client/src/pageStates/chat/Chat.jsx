@@ -16,7 +16,6 @@ export default function Chat({ setPageState, setUserObject, setSocket }) {
         if (responseJson.message === "No user") {
           setPageState("LogIn");
         } else if (responseJson.message === "User successfully verified") {
-          console.log(responseJson);
           setResponseObject(responseJson);
           setUserObject(responseJson);
         }

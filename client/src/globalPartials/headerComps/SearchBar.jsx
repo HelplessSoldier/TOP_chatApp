@@ -24,7 +24,6 @@ export default function SearchBar({ socket, setSearchResults }) {
             chats: message.chats,
           });
         } else if (message.message === "No items found") {
-          console.log('got into warning')
           setSearchResults(null);
           handleShowNoResults(3000);
         }

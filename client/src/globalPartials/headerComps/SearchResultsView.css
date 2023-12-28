@@ -1,0 +1,23 @@
+.searchResultsContainer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-30%, -45%);
+  border: 1px solid var(--secondary-color);
+  padding: 1vh;
+  height: 80vh;
+  width: 55vw;
+  border-radius: 2vh;
+  background-color: var(--darker-background-color);
+}
+
+.hiddenButton {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.searchResultsCloseIcon {
+  opacity: 1;
+  width: 2vw;
+}

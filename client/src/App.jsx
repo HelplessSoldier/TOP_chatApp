@@ -5,6 +5,7 @@ import SignUp from "./pageStates/signup/SignUp";
 import SideBar from "./globalPartials/SideBar";
 import LogIn from "./pageStates/login/LogIn";
 import Chat from "./pageStates/chat/Chat";
+import SearchResultsView from "./globalPartials/headerComps/SearchResultsView";
 
 function App() {
   const [pageState, setPageState] = useState("Chat");
@@ -21,13 +22,25 @@ function App() {
         socket={socket}
         setSearchResults={setSearchResults}
       />
+      {searchResults && (
+        <SearchResultsView
+          searchResults={searchResults}
+          setSearchResults={setSearchResults}
+        />
+      )}
       <SideBar />
       {getPage(pageState, setPageState, setUserObject, setSocket)}
     </div>
   );
 }
 
-function getPage(pageState, setPageState, setUserObject, setSocket, setSearchResults) {
+function getPage(
+  pageState,
+  setPageState,
+  setUserObject,
+  setSocket,
+  setSearchResults
+) {
   switch (pageState) {
     case "LogIn":
       return <LogIn setPageState={setPageState} />;
