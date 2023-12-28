@@ -39,7 +39,6 @@ function getPage(
   setPageState,
   setUserObject,
   setSocket,
-  setSearchResults
 ) {
   switch (pageState) {
     case "LogIn":

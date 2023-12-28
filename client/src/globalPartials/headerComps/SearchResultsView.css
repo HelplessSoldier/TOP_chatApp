@@ -21,3 +21,10 @@
   opacity: 1;
   width: 2vw;
 }
+
+.searchResultsHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1vh;
+}
