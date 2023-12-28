@@ -1,9 +1,9 @@
 const getCookieFromString = require("../../helpers/getCookieFromString");
-const User = require('../../models/User');
-const jwt = require('jsonwebtoken');
+const User = require("../../models/User");
+const jwt = require("jsonwebtoken");
 
 async function handleConnect(socket, req) {
-  console.log('Client connected')
+  console.log("Client connected");
   let currentUser = null;
   try {
     const cookies = req.headers.cookie;
@@ -25,10 +25,12 @@ async function handleConnect(socket, req) {
         _id: currentUser._id,
         username: currentUser.username,
         friends: currentUser.friends,
+        friendRequests: currentUser.friendRequests,
         chats: currentUser.chats,
+        chatInvites: currentUser.chatInvites,
       })
     );
   }
 }
 
-module.exports = handleConnect
+module.exports = handleConnect;

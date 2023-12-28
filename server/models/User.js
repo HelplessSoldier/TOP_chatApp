@@ -16,9 +16,11 @@ const userSchema = new Schema({
 
 userSchema.pre("save", async function(next) {
   try {
-    const salt = await bcrypt.genSalt(Number(process.env.saltRounds));
-    const hashedPassword = await bcrypt.hash(this.password, salt);
-    this.password = hashedPassword;
+    if (this.isModified("password") || this.isNew) {
+      const salt = await bcrypt.genSalt(Number(process.env.saltRounds));
+      const hashedPassword = await bcrypt.hash(this.password, salt);
+      this.password = hashedPassword;
+    }
   } catch (err) {
     next(err);
   }

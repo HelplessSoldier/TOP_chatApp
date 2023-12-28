@@ -7,8 +7,8 @@ export default function Header({ setPageState, userObject, setUserObject, socket
   const handleSignOutClick = (e) => {
     e.preventDefault();
     document.cookie = `jwt=; expires=0; path=/`;
-    setPageState("LogIn");
     setUserObject(null);
+    setPageState("LogIn");
   };
 
   const handleLogInButtonClick = (e) => {
