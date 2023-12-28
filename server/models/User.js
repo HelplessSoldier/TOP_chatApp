@@ -10,6 +10,8 @@ const userSchema = new Schema({
   currentChat: { type: Schema.Types.ObjectId, ref: "Chat" },
   friends: [{ type: Schema.Types.ObjectId, ref: "User" }],
   chats: [{ type: Schema.Types.ObjectId, ref: "Chat" }],
+  friendRequests: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  chatInvites: [{ type: Schema.Types.ObjectId, ref: "Chat" }],
 });
 
 userSchema.pre("save", async function(next) {

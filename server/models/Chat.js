@@ -5,6 +5,7 @@ const chatSchema = new Schema({
   name: { type: String, required: true },
   owner: { type: mongoose.Types.ObjectId, ref: "User" },
   participants: [{ type: mongoose.Types.ObjectId, ref: "User" }],
+  invitedUsers: [{ type: mongoose.Types.ObjectId, ref: "User" }],
   instanceType: {
     type: String,
     enum: ["public", "friends", "friendsPlus", "invite", "invitePlus"],

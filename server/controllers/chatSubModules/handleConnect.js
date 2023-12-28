@@ -22,6 +22,7 @@ async function handleConnect(socket, req) {
     socket.send(
       JSON.stringify({
         message: "User successfully verified",
+        uid: currentUser._id,
         username: currentUser.username,
         friends: currentUser.friends,
         chats: currentUser.chats,
