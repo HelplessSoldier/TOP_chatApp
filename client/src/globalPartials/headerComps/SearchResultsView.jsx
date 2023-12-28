@@ -12,6 +12,7 @@ export default function SearchResultsView({ searchResults, setSearchResults }) {
 
   return (
     <div className="searchResultsContainer">
+
       <div className="searchResultsHeader">
         <h1>{`Searching for: ${searchResults.searchTerm}`}</h1>
         <button className="hiddenButton" onClick={handleCloseButton}>
@@ -34,6 +35,7 @@ export default function SearchResultsView({ searchResults, setSearchResults }) {
           return <SearchElementChat key={chat._id} chat={chat} />;
         })}
       </div>
+
     </div>
   );
 }

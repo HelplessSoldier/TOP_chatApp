@@ -9,6 +9,7 @@
   padding-bottom: 1vh;
   background-color: var(--background-color);
   border-radius: 2vh;
+  margin-top: 1vh;
 }
 
 .searchResultButton {

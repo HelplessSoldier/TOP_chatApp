@@ -28,3 +28,13 @@
   justify-content: space-between;
   padding: 2vh;
 }
+
+.usersAndChatsContainer {
+  margin-left: 1vw;
+  margin-right: 1vw;
+  overflow: scroll;
+}
+
+.usersAndChatsContainer > h2 {
+  margin-top: 1vh;
+}
