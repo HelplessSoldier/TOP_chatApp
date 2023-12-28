@@ -1,7 +1,9 @@
-export default function SearchElementUser(user, { userObject, socket }) {
+export default function SearchElementUser(inputs) {
 
-  console.log('userObj: ', userObject); // undefined
-  console.log('socket: ', socket); // undefined
+  console.log(inputs);
+  const user = inputs.user;
+  const socket = inputs.socket;
+  const userObject = inputs.userObject;
 
   const handleFriendRequest = () => {
     const responseObject = {
@@ -9,10 +11,9 @@ export default function SearchElementUser(user, { userObject, socket }) {
       sendById: userObject._id,
       targetId: user._id,
     }
-    socket.emit(responseObject.message, responseObject);
+    socket.send(JSON.stringify(responseObject))
   }
 
-  user = user.user; // goofy aah object formatting
   return (
     <div className="searchElementContainer">
       <h2 className="usernameHeader">{user.username}</h2>

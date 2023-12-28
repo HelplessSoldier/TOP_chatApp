@@ -9,10 +9,14 @@ const server = new WebSocket.Server({ port: 8888 });
 server.on("connection", (ws, req) => {
   handleConnect(ws, req);
 
-  ws.on("message", (message) => {
-    const parsedMessage = JSON.parse(message);
-    handleMessage(parsedMessage, ws);
-  });
+  try {
+    ws.on("message", (message) => {
+      const parsedMessage = JSON.parse(message);
+      handleMessage(parsedMessage, ws);
+    });
+  } catch (err) {
+    console.error(err);
+  }
 
   ws.on("close", () => console.log("Client disconnected"));
 });
