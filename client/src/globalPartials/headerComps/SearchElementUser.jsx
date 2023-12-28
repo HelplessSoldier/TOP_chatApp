@@ -8,7 +8,7 @@ export default function SearchElementUser(inputs) {
   const handleFriendRequest = () => {
     const responseObject = {
       message: 'Friend request sent',
-      sendById: userObject._id,
+      sentById: userObject._id,
       targetId: user._id,
     }
     socket.send(JSON.stringify(responseObject))

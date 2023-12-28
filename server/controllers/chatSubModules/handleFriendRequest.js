@@ -1,8 +1,11 @@
-const User = require('../../models/User');
+const User = require("../../models/User");
 
-function handleFriendRequest(message, socket) {
-  console.log('hi from handleFriendRequest!');
-  console.log(message);
+async function handleFriendRequest(message, socket) {
+  const sentByUser = await User.findById(message.sentById);
+  const targetUser = await User.findById(message.targetId);
+
+  console.log(sentByUser, targetUser);
+
   return;
 }
 
