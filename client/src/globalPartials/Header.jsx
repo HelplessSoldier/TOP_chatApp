@@ -38,6 +38,7 @@ export default function Header({
 
   const handleAccountButtonClick = (e) => {
     e.preventDefault();
+    setPageState('Account')
   };
 
   return (

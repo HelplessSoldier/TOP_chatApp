@@ -5,6 +5,7 @@ import SignUp from "./pageStates/signup/SignUp";
 import SideBar from "./globalPartials/SideBar";
 import LogIn from "./pageStates/login/LogIn";
 import Chat from "./pageStates/chat/Chat";
+import Account from "./pageStates/account/Account";
 import SearchResultsView from "./globalPartials/headerComps/SearchResultsView";
 
 function App() {
@@ -55,6 +56,8 @@ function getPage(
           setSocket={setSocket}
         />
       );
+    case 'Account':
+      return <Account />
     default:
       return null;
   }
