@@ -57,7 +57,7 @@ function getPage(
         />
       );
     case 'Account':
-      return <Account />
+      return <Account setPageState={setPageState} />
     default:
       return null;
   }

@@ -14,7 +14,6 @@ const userGetUri =
 // 6- delete account
 
 export default function Account() {
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -23,9 +22,9 @@ export default function Account() {
       } catch (err) {
         console.error(err);
       }
-    }
+    };
     fetchData();
-  }, [])
+  }, []);
 
   return (
     <div className="accountRoot">

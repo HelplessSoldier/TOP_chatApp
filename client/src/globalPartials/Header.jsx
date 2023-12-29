@@ -19,7 +19,7 @@ export default function Header({
     if (userObject) {
       setShowAccountAlert(hasAlerts(userObject));
     }
-  }, [userObject])
+  }, [userObject]);
 
   const handleSignOutClick = (e) => {
     e.preventDefault();
@@ -38,7 +38,12 @@ export default function Header({
 
   const handleAccountButtonClick = (e) => {
     e.preventDefault();
-    setPageState('Account')
+    setPageState("Account");
+  };
+
+  const handleChatButtonClick = (e) => {
+    e.preventDefault();
+    setPageState("Chat");
   };
 
   return (
@@ -58,6 +63,15 @@ export default function Header({
           )}
           {isLoggedIn && (
             <>
+              <button
+                className="hiddenHeaderButton"
+                onClick={handleChatButtonClick}
+              >
+                <img
+                  src="./icons/chat-round-line-svgrepo-com.svg"
+                  className="headerIcon"
+                />
+              </button>
               <button
                 className="hiddenHeaderButton"
                 onClick={handleAccountButtonClick}
