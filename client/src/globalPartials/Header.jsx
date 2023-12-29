@@ -18,7 +18,6 @@ export default function Header({
     setShowSignoutConfirm(true);
   };
 
-
   const handleLogInButtonClick = (e) => {
     e.preventDefault();
     setPageState("LogIn");
@@ -27,6 +26,10 @@ export default function Header({
   const handleSignUpButtonClick = (e) => {
     e.preventDefault();
     setPageState("SignUp");
+  };
+
+  const handleAccountButtonClick = (e) => {
+    e.preventDefault();
   };
 
   return (
@@ -48,11 +51,21 @@ export default function Header({
             <>
               <button
                 className="hiddenHeaderButton"
+                onClick={handleAccountButtonClick}
+              >
+                <img
+                  src="./icons/user-svgrepo-com.svg"
+                  className="headerIcon"
+                />
+                <div className="alertCircle"></div>
+              </button>
+              <button
+                className="hiddenHeaderButton"
                 onClick={handleSignOutClick}
               >
                 <img
                   src="./icons/signout-svgrepo-com.svg"
-                  className="signoutIcon"
+                  className="headerIcon"
                 />
               </button>
             </>
