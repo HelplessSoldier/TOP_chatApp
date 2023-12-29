@@ -1,0 +1,14 @@
+.accountRoot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.accountContainer {
+  background-color: var(--darker-background-color);
+  border-left: 5px solid var(--secondary-color);
+  border-radius: 2vh;
+  overflow: scroll;
+  width: 55%;
+  height: 89%;
+}

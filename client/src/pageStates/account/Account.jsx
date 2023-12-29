@@ -1,6 +1,6 @@
 import "./Account.css";
 import globals from "../../../../publicGlobals/apiGlobals.json";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const userGetUri =
   globals.serverUri + ":" + globals.serverPort + globals.apiVersion + "/user";
@@ -14,11 +14,12 @@ const userGetUri =
 // 6- delete account
 
 export default function Account() {
+  const [userObject, setUserObject] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const accountObject = await getAccountInfo(userGetUri);
-        console.log(accountObject);
+        setUserObject(accountObject.user)
       } catch (err) {
         console.error(err);
       }
@@ -26,9 +27,14 @@ export default function Account() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    console.log(userObject);
+  }, [userObject])
+
   return (
     <div className="accountRoot">
-      <h1>hello from the account comp!</h1>
+      <div className="accountContainer">
+      </div>
     </div>
   );
 }
