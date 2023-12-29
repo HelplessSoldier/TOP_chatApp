@@ -32,7 +32,12 @@ function App() {
         />
       )}
       <SideBar />
-      {getPage(pageState, setPageState, setUserObject, setSocket)}
+      {getPage(
+        pageState,
+        setPageState,
+        setUserObject,
+        setSocket,
+      )}
     </div>
   );
 }
@@ -56,8 +61,8 @@ function getPage(
           setSocket={setSocket}
         />
       );
-    case 'Account':
-      return <Account setPageState={setPageState} />
+    case "Account":
+      return <Account setPageState={setPageState} />;
     default:
       return null;
   }
