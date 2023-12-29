@@ -11,6 +11,7 @@
   padding: 3vh;
   background-color: var(--darker-background-color);
   border-radius: 2vh;
+  z-index: 1000;
 }
 
 .logoutButton {
