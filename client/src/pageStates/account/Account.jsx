@@ -5,6 +5,14 @@ import { useEffect } from "react";
 const userGetUri =
   globals.serverUri + ":" + globals.serverPort + globals.apiVersion + "/user";
 
+
+// TODO: get user account info for: 
+// 1- friend requests
+// 2- chat invites
+// 3- owned chats
+// 4- friends
+// 5- username and password change
+// 6- delete account
 export default function Account() {
   useEffect(() => {
     getAccountInfo(userGetUri);
@@ -22,6 +30,6 @@ async function getAccountInfo(url) {
     method: "GET",
     credentials: "include",
   });
-  console.log(response);
+  console.log(response.body);
   return;
 }
