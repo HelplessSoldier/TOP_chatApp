@@ -9,6 +9,7 @@
   width: 55vw;
   border-radius: 2vh;
   background-color: var(--darker-background-color);
+  z-index: 998;
 }
 
 .hiddenButton {

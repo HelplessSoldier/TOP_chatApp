@@ -27,6 +27,11 @@ export default function Account() {
     fetchData();
   }, []);
 
+  let hasFriends = false;
+  let hasFriendRequests = false;
+  let hasChats = false;
+  let hasOwnedChats = false;
+  let hasChatInvites = false;
   useEffect(() => {
     console.log(userObject);
   }, [userObject])

@@ -7,11 +7,12 @@ const userSchema = new Schema({
   email: { type: String, required: true },
   username: { type: String, required: true },
   password: { type: String, required: true },
-  currentChat: { type: Schema.Types.ObjectId, ref: "Chat" },
-  friends: [{ type: Schema.Types.ObjectId, ref: "User" }],
   chats: [{ type: Schema.Types.ObjectId, ref: "Chat" }],
-  friendRequests: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  ownedChats: [{ type: Schema.Types.ObjectId, ref: "Chat" }],
+  currentChat: { type: Schema.Types.ObjectId, ref: "Chat" },
   chatInvites: [{ type: Schema.Types.ObjectId, ref: "Chat" }],
+  friends: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  friendRequests: [{ type: Schema.Types.ObjectId, ref: "User" }],
 });
 
 userSchema.pre("save", async function(next) {
