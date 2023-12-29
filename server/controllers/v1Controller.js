@@ -13,6 +13,14 @@ exports.user_get = asyncHandler(async (req, res, next) => {
   const tokenPayload = jwt.verify(token, process.env.secret)
   const userId = tokenPayload.userId;
   const currentUser = await User.findById(userId)
-  console.log(currentUser);
-  res.json({ message: "sup" });
+
+  if (!currentUser) {
+    res.json({ message: "Error: User not found" })
+    return;
+  }
+
+  const userObject = currentUser.toObject();
+  delete userObject.password;
+
+  res.json({ message: "Successfully retrieved user", user: userObject });
 });
