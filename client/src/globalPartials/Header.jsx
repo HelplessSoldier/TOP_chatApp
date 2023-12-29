@@ -1,5 +1,7 @@
+import { useState } from "react";
 import "./Header.css";
 import SearchBar from "./headerComps/SearchBar";
+import SignOutAreYouSure from "./headerComps/SignOutAreYouSure";
 
 export default function Header({
   setPageState,
@@ -8,14 +10,14 @@ export default function Header({
   socket,
   setSearchResults,
 }) {
+  const [showSignoutConfirm, setShowSignoutConfirm] = useState(false);
   const isLoggedIn = hasCookieByName(document.cookie, "jwt");
 
   const handleSignOutClick = (e) => {
     e.preventDefault();
-    document.cookie = `jwt=; expires=0; path=/`;
-    setUserObject(null);
-    setPageState("LogIn");
+    setShowSignoutConfirm(true);
   };
+
 
   const handleLogInButtonClick = (e) => {
     e.preventDefault();
@@ -28,38 +30,56 @@ export default function Header({
   };
 
   return (
-    <div className="headerContainer">
-      <h1 className="headerLogo">SPRK</h1>
-      {isLoggedIn && (
-        <SearchBar socket={socket} setSearchResults={setSearchResults} />
-      )}
-      <div className="headerButtonsAndGreetingContainer">
-        {userObject !== null && (
-          <>
-            <p className="headerGreeting">
-              Logged in as: {userObject.username}
-            </p>
-          </>
-        )}
+    <>
+      <div className="headerContainer">
+        <h1 className="headerLogo">SPRK</h1>
         {isLoggedIn && (
-          <>
-            <button className="headerButton" onClick={handleSignOutClick}>
-              Sign out
-            </button>
-          </>
+          <SearchBar socket={socket} setSearchResults={setSearchResults} />
         )}
-        {!isLoggedIn && (
-          <>
-            <button className="headerButton" onClick={handleLogInButtonClick}>
-              Log In
-            </button>
-            <button className="headerButton" onClick={handleSignUpButtonClick}>
-              Sign Up
-            </button>
-          </>
-        )}
+        <div className="headerButtonsAndGreetingContainer">
+          {userObject !== null && (
+            <>
+              <p className="headerGreeting">
+                Logged in as: {userObject.username}
+              </p>
+            </>
+          )}
+          {isLoggedIn && (
+            <>
+              <button
+                className="hiddenHeaderButton"
+                onClick={handleSignOutClick}
+              >
+                <img
+                  src="./icons/signout-svgrepo-com.svg"
+                  className="signoutIcon"
+                />
+              </button>
+            </>
+          )}
+          {!isLoggedIn && (
+            <>
+              <button className="headerButton" onClick={handleLogInButtonClick}>
+                Log In
+              </button>
+              <button
+                className="headerButton"
+                onClick={handleSignUpButtonClick}
+              >
+                Sign Up
+              </button>
+            </>
+          )}
+        </div>
       </div>
-    </div>
+      {showSignoutConfirm && (
+        <SignOutAreYouSure
+          setPageState={setPageState}
+          setShowSignoutConfirm={setShowSignoutConfirm}
+          setUserObject={setUserObject}
+        />
+      )}
+    </>
   );
 }
 

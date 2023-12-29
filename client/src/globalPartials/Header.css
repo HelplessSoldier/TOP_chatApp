@@ -46,3 +46,19 @@
   flex-direction: row;
   align-items: center;
 }
+
+.hiddenHeaderButton {
+  height: 5vh;
+  background-color: transparent;
+  margin-left: 1vw;
+  border: none;
+  outline: none;
+}
+
+.hiddenHeaderButton:hover {
+  border: 3px solid var(--secondary-color);
+}
+
+.signoutIcon {
+  height: 100%;
+}
