@@ -8,9 +8,11 @@ exports.root_get = (req, res, next) => {
   res.send("hi! this is the controller");
 };
 
-exports.user_get = (req, res, next) => {
+exports.user_get = asyncHandler(async (req, res, next) => {
   const token = req.cookies.jwt;
   const tokenPayload = jwt.verify(token, process.env.secret)
-  console.log(tokenPayload);
+  const userId = tokenPayload.userId;
+  const currentUser = await User.findById(userId)
+  console.log(currentUser);
   res.json({ message: "sup" });
-};
+});
