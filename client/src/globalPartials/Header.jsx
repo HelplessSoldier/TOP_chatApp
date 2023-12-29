@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Header.css";
 import SearchBar from "./headerComps/SearchBar";
 import SignOutAreYouSure from "./headerComps/SignOutAreYouSure";
+import hasAlerts from "../helpers/hasAlerts";
 
 export default function Header({
   setPageState,
@@ -11,7 +12,14 @@ export default function Header({
   setSearchResults,
 }) {
   const [showSignoutConfirm, setShowSignoutConfirm] = useState(false);
+  const [showAccountAlert, setShowAccountAlert] = useState(false);
   const isLoggedIn = hasCookieByName(document.cookie, "jwt");
+
+  useEffect(() => {
+    if (userObject) {
+      setShowAccountAlert(hasAlerts(userObject));
+    }
+  }, [userObject])
 
   const handleSignOutClick = (e) => {
     e.preventDefault();
@@ -57,7 +65,7 @@ export default function Header({
                   src="./icons/user-svgrepo-com.svg"
                   className="headerIcon"
                 />
-                <div className="alertCircle"></div>
+                {showAccountAlert && <div className="alertCircle"></div>}
               </button>
               <button
                 className="hiddenHeaderButton"

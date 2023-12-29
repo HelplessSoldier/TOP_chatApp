@@ -48,6 +48,7 @@
 }
 
 .hiddenHeaderButton {
+  position: relative;
   height: 5vh;
   background-color: transparent;
   margin-left: .5vw;
@@ -64,6 +65,11 @@
 }
 
 .alertCircle {
+  position: absolute;
   background-color: red;
-  width: 1vw;
+  width: 25%;
+  height: 25%;
+  border-radius: .5vw;
+  top: 0;
+  right: 0;
 }
