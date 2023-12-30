@@ -1,0 +1,10 @@
+.friendRequestContainer {
+  border-left: 3px solid var(--accent-color);
+  margin: 2vh;
+  border-radius: 1vh 0 0 1vh;
+  padding: 1vh;
+}
+
+.friendRequestHeader {
+  margin-left: 2vw;
+}
