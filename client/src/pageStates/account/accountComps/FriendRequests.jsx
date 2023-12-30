@@ -3,12 +3,12 @@ import globals from "../../../../../publicGlobals/apiGlobals.json";
 import { useState, useEffect } from "react";
 
 export default function FriendRequests({ friendRequests }) {
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    setUsers(getUsers(friendRequests))
-    console.log('setusers called')
-  }, [friendRequests])
+    setUsers(getUsers(friendRequests));
+    console.log("setusers called"); // logs twice?
+  }, [friendRequests]);
 
   return <h1>this is the friendRequests block</h1>;
 }
@@ -16,7 +16,12 @@ export default function FriendRequests({ friendRequests }) {
 async function getUsers(friendRequests) {
   let usersArray = [];
   for (let friendRequestId of friendRequests) {
-    const user = await fetchUser(friendRequestId);
+    const res = await fetchUser(friendRequestId);
+    if (res.message === "User found") {
+      usersArray.push(res.user);
+    } else {
+      console.error(`User not found with id: ${friendRequestId}`);
+    }
   }
   return usersArray;
 }
