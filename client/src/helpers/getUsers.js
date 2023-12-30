@@ -1,4 +1,4 @@
-import globals from '../../.../../../../../../publicGlobals/apiGlobals.json';
+import globals from '../../../publicGlobals/apiGlobals.json';
 
 export default async function getUsers(userIds) {
   let usersArray = [];

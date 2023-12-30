@@ -1,6 +1,6 @@
 import "./FriendRequests.css";
 import { useState, useEffect } from "react";
-import getUsers from "./func/getUsers";
+import getUsers from '../../../helpers/getUsers';
 
 export default function FriendRequests({ friendRequests }) {
   const [users, setUsers] = useState([]);
