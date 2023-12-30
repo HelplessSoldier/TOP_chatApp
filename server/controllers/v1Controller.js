@@ -8,7 +8,7 @@ exports.root_get = (req, res, next) => {
   res.send("hi! this is the controller");
 };
 
-exports.user_get = asyncHandler(async (req, res, next) => {
+exports.currentUser_get = asyncHandler(async (req, res, next) => {
   const token = req.cookies.jwt;
   const tokenPayload = jwt.verify(token, process.env.secret)
   const userId = tokenPayload.userId;

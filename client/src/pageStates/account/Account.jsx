@@ -6,7 +6,7 @@ import ChatInvites from "./accountComps/ChatInvites";
 import OwnedChats from "./accountComps/OwnedChats";
 
 const userGetUri =
-  globals.serverUri + ":" + globals.serverPort + globals.apiVersion + "/user";
+  globals.serverUri + ":" + globals.serverPort + globals.apiVersion + "/current-user";
 
 export default function Account() {
   const [userObject, setUserObject] = useState(null);
