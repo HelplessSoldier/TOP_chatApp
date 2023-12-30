@@ -1,17 +1,12 @@
 import "./Account.css";
 import globals from "../../../../publicGlobals/apiGlobals.json";
 import { useEffect, useState } from "react";
+import FriendRequests from "./accountComps/FriendRequests";
+import ChatInvites from "./accountComps/ChatInvites";
+import OwnedChats from "./accountComps/OwnedChats";
 
 const userGetUri =
   globals.serverUri + ":" + globals.serverPort + globals.apiVersion + "/user";
-
-// TODO: get user account info for:
-// 1- friend requests
-// 2- chat invites
-// 3- owned chats
-// 4- friends
-// 5- username and password change
-// 6- delete account
 
 export default function Account() {
   const [userObject, setUserObject] = useState(null);
@@ -19,7 +14,7 @@ export default function Account() {
     const fetchData = async () => {
       try {
         const accountObject = await getAccountInfo(userGetUri);
-        setUserObject(accountObject.user)
+        setUserObject(accountObject.user);
       } catch (err) {
         console.error(err);
       }
@@ -27,18 +22,26 @@ export default function Account() {
     fetchData();
   }, []);
 
-  let hasFriends = false;
-  let hasFriendRequests = false;
-  let hasChats = false;
-  let hasOwnedChats = false;
-  let hasChatInvites = false;
   useEffect(() => {
     console.log(userObject);
-  }, [userObject])
+  }, [userObject]);
 
   return (
     <div className="accountRoot">
       <div className="accountContainer">
+        {userObject && (
+          <>
+            {userObject.friendRequests.length > 0 && (
+              <FriendRequests friendRequests={userObject.friendRequests} />
+            )}
+            {userObject.chatInvites.length > 0 && (
+              <ChatInvites chatInvites={userObject.chatInvites} />
+            )}
+            {userObject.ownedChats.length > 0 && (
+              <OwnedChats ownedChats={userObject.ownedChats} />
+            )}
+          </>
+        )}
       </div>
     </div>
   );
