@@ -24,3 +24,7 @@ exports.currentUser_get = asyncHandler(async (req, res, next) => {
 
   res.json({ message: "Successfully retrieved user", user: userObject });
 });
+
+exports.user_get = asyncHandler(async (req, res, next) => {
+  res.json({ message: 'Hi from the user_get controller!' })
+})
