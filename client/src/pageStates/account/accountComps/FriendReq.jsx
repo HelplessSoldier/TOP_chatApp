@@ -1,6 +1,15 @@
 import "./FriendReq.css";
 
 export default function FriendReq({ user }) {
+
+  const handleAccept = () => {
+    return;
+  }
+
+  const handleReject = () => {
+    return;
+  }
+
   return (
     <div className="friendReqBlock" key={user.username}>
       <p className="friendReqUsername">{user.username}</p>
