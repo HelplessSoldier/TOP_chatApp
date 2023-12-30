@@ -17,8 +17,12 @@ async function getUsers(friendRequests) {
 
 async function fetchUser(userId) {
   const userUri =
-    globals.serverUri + ":" + globals.serverPort + globals.apiVersion + "/user";
-
+    globals.serverUri +
+    ":" +
+    globals.serverPort +
+    globals.apiVersion +
+    "/user/" +
+    userId;
   try {
     const response = await fetch(userUri, {
       method: "GET",
