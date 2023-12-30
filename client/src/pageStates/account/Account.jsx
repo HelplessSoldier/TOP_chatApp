@@ -22,10 +22,6 @@ export default function Account() {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    console.log(userObject);
-  }, [userObject]);
-
   return (
     <div className="accountRoot">
       <div className="accountContainer">

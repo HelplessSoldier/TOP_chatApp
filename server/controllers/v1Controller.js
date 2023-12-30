@@ -26,6 +26,14 @@ exports.currentUser_get = asyncHandler(async (req, res, next) => {
 });
 
 exports.user_get = asyncHandler(async (req, res, next) => {
-  console.log(req.params)
-  res.json({ message: 'Hi from the user_get controller!' })
+  const foundUser = await User.findById(req.params.userid);
+
+  if (!foundUser) {
+    res.json({ message: 'User not found' });
+    return;
+  }
+
+  const userObject = foundUser.toObject();
+  delete userObject.password;
+  res.json({ message: 'User found', user: userObject })
 })

@@ -1,8 +1,15 @@
 import "./FriendRequests.css";
 import globals from "../../../../../publicGlobals/apiGlobals.json";
+import { useState, useEffect } from "react";
 
 export default function FriendRequests({ friendRequests }) {
-  const users = getUsers(friendRequests);
+  const [users, setUsers] = useState([])
+
+  useEffect(() => {
+    setUsers(getUsers(friendRequests))
+    console.log('setusers called')
+  }, [friendRequests])
+
   return <h1>this is the friendRequests block</h1>;
 }
 
@@ -10,7 +17,6 @@ async function getUsers(friendRequests) {
   let usersArray = [];
   for (let friendRequestId of friendRequests) {
     const user = await fetchUser(friendRequestId);
-    console.log(user);
   }
   return usersArray;
 }
@@ -23,6 +29,7 @@ async function fetchUser(userId) {
     globals.apiVersion +
     "/user/" +
     userId;
+
   try {
     const response = await fetch(userUri, {
       method: "GET",
