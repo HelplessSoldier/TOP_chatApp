@@ -1,14 +1,14 @@
 import globals from '../../.../../../../../../publicGlobals/apiGlobals.json';
 
-export default async function getUsers(friendRequests) {
+export default async function getUsers(userIds) {
   let usersArray = [];
-  for (let friendRequestId of friendRequests) {
-    const res = await fetchUser(friendRequestId);
+  for (let userId of userIds) {
+    const res = await fetchUser(userId);
     if (res.message === "User found") {
       console.log(res.user.username);
       usersArray.push(res.user);
     } else {
-      console.error(`User not found with id: ${friendRequestId}`);
+      console.error(`User not found with id: ${userId}`);
     }
   }
   return usersArray;
