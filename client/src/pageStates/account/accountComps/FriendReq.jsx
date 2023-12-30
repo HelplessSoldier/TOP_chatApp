@@ -5,10 +5,10 @@ export default function FriendReq({ user }) {
     <div className="friendReqBlock" key={user.username}>
       <p className="friendReqUsername">{user.username}</p>
       <div className="friendreqButtonContainer">
-        <button className="hiddenButton">
+        <button className="hiddenFriendButton">
           <img src="./icons/checkmark-svgrepo-com.svg" className="friendIcon" />
         </button>
-        <button className="hiddenButton">
+        <button className="hiddenFriendButton">
           <img src="./icons/cancel-svgrepo-com.svg" className="friendIcon" />
         </button>
       </div>

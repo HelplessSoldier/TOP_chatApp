@@ -13,4 +13,15 @@
 
 .friendIcon {
   height: 3vh;
+  width: 3vh;
+}
+
+.hiddenFriendButton {
+  background-color: transparent;
+  border: 2px solid transparent;
+  margin: 1vh;
+}
+
+.hiddenFriendButton:hover {
+  border: 2px solid var(--accent-color);
 }
