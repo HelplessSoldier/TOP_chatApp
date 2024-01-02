@@ -6,10 +6,16 @@ import ChatInvites from "./accountComps/ChatInvites";
 import OwnedChats from "./accountComps/OwnedChats";
 
 const userGetUri =
-  globals.serverUri + ":" + globals.serverPort + globals.apiVersion + "/current-user";
+  globals.serverUri +
+  ":" +
+  globals.serverPort +
+  globals.apiVersion +
+  "/current-user";
 
 export default function Account() {
   const [userObject, setUserObject] = useState(null);
+  const [hasInfo, setHasInfo] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -20,23 +26,45 @@ export default function Account() {
       }
     };
     fetchData();
-  }, []);
+  }, [setHasInfo]);
+
+  useEffect(() => {
+    if (
+      userObject &&
+      (userObject.friendRequests.length > 0 ||
+        userObject.chatInvites.length > 0 ||
+        userObject.ownedChats.length > 0)
+    ) {
+      setHasInfo(true);
+    } else {
+      setHasInfo(false);
+    }
+  }, [setHasInfo, userObject]);
 
   return (
     <div className="accountRoot">
       <div className="accountContainer">
-        {userObject && (
-          <>
-            {userObject.friendRequests.length > 0 && (
-              <FriendRequests friendRequests={userObject.friendRequests} currentUser={userObject} />
-            )}
-            {userObject.chatInvites.length > 0 && (
-              <ChatInvites chatInvites={userObject.chatInvites} />
-            )}
-            {userObject.ownedChats.length > 0 && (
-              <OwnedChats ownedChats={userObject.ownedChats} />
-            )}
-          </>
+        {hasInfo ? (
+          userObject ? (
+            <>
+              {userObject.friendRequests.length > 0 && (
+                <FriendRequests
+                  friendRequests={userObject.friendRequests}
+                  currentUser={userObject}
+                />
+              )}
+              {userObject.chatInvites.length > 0 && (
+                <ChatInvites chatInvites={userObject.chatInvites} />
+              )}
+              {userObject.ownedChats.length > 0 && (
+                <OwnedChats ownedChats={userObject.ownedChats} />
+              )}
+            </>
+          ) : (
+            <p>Nothing to show</p>
+          )
+        ) : (
+          <p></p>
         )}
       </div>
     </div>
