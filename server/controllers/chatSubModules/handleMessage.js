@@ -1,6 +1,6 @@
 const handleSearch = require("./handleSearch");
 const handleFriendRequest = require("./handleFriendRequest");
-const handleRejectFriendRequest = require("./handleRejectFriendRequest");
+const handleFriendRequestReject = require("./handleRejectFriendRequest");
 const handleFriendRequestAccept = require("./handleFriendRequestAccepted");
 
 function handleMessage(message, socket) {
@@ -12,7 +12,7 @@ function handleMessage(message, socket) {
       handleFriendRequest(message, socket);
       break;
     case "Friend request rejected":
-      handleRejectFriendRequest(message, socket);
+      handleFriendRequestReject(message, socket);
       break;
     case "Friend request accepted":
       handleFriendRequestAccept(message, socket);

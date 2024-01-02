@@ -15,6 +15,13 @@ async function handleRejectFriendRequest(message, socket) {
   );
 
   await Promise.all([currentUser.save(), targetUser.save()]);
+
+  socket.send(
+    JSON.stringify({
+      message: "Removed user from friendRequests",
+      targetId: targetUser._id,
+    })
+  );
 }
 
 module.exports = handleRejectFriendRequest;
