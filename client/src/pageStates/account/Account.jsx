@@ -28,7 +28,7 @@ export default function Account() {
         {userObject && (
           <>
             {userObject.friendRequests.length > 0 && (
-              <FriendRequests friendRequests={userObject.friendRequests} />
+              <FriendRequests friendRequests={userObject.friendRequests} currentUser={userObject} />
             )}
             {userObject.chatInvites.length > 0 && (
               <ChatInvites chatInvites={userObject.chatInvites} />

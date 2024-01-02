@@ -8,8 +8,6 @@ export default function SearchResultsView({
   userObject,
   socket
 }) {
-  console.log('search res socket: ', socket) // logs the socket object
-  console.log('search res userob: ', userObject); // logs the verified obj from server
   const handleCloseButton = () => {
     setSearchResults(null);
   };
