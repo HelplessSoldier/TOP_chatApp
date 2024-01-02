@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 export default function SearchElementUser(inputs) {
   const [alreadySent, setAlreadySent] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
 
   const user = inputs.user;
   const socket = inputs.socket;
@@ -20,13 +21,17 @@ export default function SearchElementUser(inputs) {
       targetId: user._id,
     };
     socket.send(JSON.stringify(responseObject));
+    setIsClicked(true);
   };
 
   return (
     <div className="searchElementContainer">
       <h2 className="usernameHeader">{user.username}</h2>
       {!alreadySent ? (
-        <button className="searchResultButton" onClick={handleFriendRequest}>
+        <button
+          className={"searchResultButton" + (isClicked ? " clicked" : "")}
+          onClick={handleFriendRequest}
+        >
           Send Friend Request
         </button>
       ) : (
