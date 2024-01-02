@@ -6,7 +6,9 @@ async function handleFriendRequest(message, socket) {
 
   if (!targetUser.friendRequests.includes(sentByUser._id)) {
     targetUser.friendRequests.push(sentByUser._id);
+    sentByUser.sentFriendRequests.push(targetUser._id);
     await targetUser.save();
+    await sentByUser.save();
     socket.send(
       JSON.stringify({
         message: "Friend request successfully sent",
@@ -14,7 +16,6 @@ async function handleFriendRequest(message, socket) {
       })
     );
   } else {
-    console.log(`Already has friend request by user: ${sentByUser.username}`);
     socket.send(
       JSON.stringify({
         message: "Already has friend request from user",

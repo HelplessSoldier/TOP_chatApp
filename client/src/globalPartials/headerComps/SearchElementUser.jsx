@@ -1,7 +1,17 @@
+import { useEffect, useState } from "react";
+
 export default function SearchElementUser(inputs) {
+  const [alreadySent, setAlreadySent] = useState(false);
+
   const user = inputs.user;
   const socket = inputs.socket;
   const userObject = inputs.userObject;
+
+  useEffect(() => {
+    if (userObject.sentFriendRequests.includes(user._id)) {
+      setAlreadySent(true);
+    }
+  }, [user, userObject]);
 
   const handleFriendRequest = () => {
     const responseObject = {
@@ -15,9 +25,13 @@ export default function SearchElementUser(inputs) {
   return (
     <div className="searchElementContainer">
       <h2 className="usernameHeader">{user.username}</h2>
-      <button className="searchResultButton" onClick={handleFriendRequest}>
-        Send Friend Request
-      </button>
+      {!alreadySent ? (
+        <button className="searchResultButton" onClick={handleFriendRequest}>
+          Send Friend Request
+        </button>
+      ) : (
+        <p>Already Sent!</p>
+      )}
     </div>
   );
 }

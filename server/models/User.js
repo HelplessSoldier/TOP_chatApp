@@ -13,6 +13,7 @@ const userSchema = new Schema({
   chatInvites: [{ type: Schema.Types.ObjectId, ref: "Chat" }],
   friends: [{ type: Schema.Types.ObjectId, ref: "User" }],
   friendRequests: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  sentFriendRequests: [{ type: Schema.Types.ObjectId, ref: "User" }],
 });
 
 userSchema.pre("save", async function(next) {

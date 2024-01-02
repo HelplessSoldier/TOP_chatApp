@@ -26,6 +26,7 @@ async function handleConnect(socket, req) {
         username: currentUser.username,
         friends: currentUser.friends,
         friendRequests: currentUser.friendRequests,
+        sentFriendRequests: currentUser.sentFriendRequests,
         chats: currentUser.chats,
         chatInvites: currentUser.chatInvites,
       })
