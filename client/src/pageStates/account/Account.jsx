@@ -15,6 +15,14 @@ const userGetUri =
 export default function Account() {
   const [userObject, setUserObject] = useState(null);
   const [hasInfo, setHasInfo] = useState(false);
+  const [socket, setSocket] = useState(null);
+
+  useEffect(() => {
+    const wsUri = globals.webSocketUri;
+    const socket = new WebSocket(wsUri);
+    setSocket(socket);
+    return () => socket.close();
+  }, [setSocket]);
 
   useEffect(() => {
     const fetchData = async () => {

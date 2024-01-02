@@ -37,3 +37,4 @@ exports.user_get = asyncHandler(async (req, res, next) => {
   delete userObject.password;
   res.json({ message: 'User found', user: userObject })
 })
+
