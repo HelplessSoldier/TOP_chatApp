@@ -1,9 +1,10 @@
 import "./FriendReq.css";
 
-export default function FriendReq({ requestingUser, currentUser }) {
+export default function FriendReq({ requestingUser, currentUser, socket }) {
 
   const handleAccept = () => {
     console.log(`currentUser: ${JSON.stringify(currentUser)}\nrequestingUser: ${JSON.stringify(requestingUser)}`)
+    console.log(socket);
     return;
   }
 

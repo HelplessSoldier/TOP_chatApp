@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import getUsers from "../../../helpers/getUsers";
 import FriendReq from "./FriendReq";
 
-export default function FriendRequests({ friendRequests, currentUser }) {
+export default function FriendRequests({ friendRequests, currentUser, socket }) {
   const [requestingUsers, setRequestingUsers] = useState([]);
 
   useEffect(() => {
@@ -23,6 +23,7 @@ export default function FriendRequests({ friendRequests, currentUser }) {
           <FriendReq
             requestingUser={requestingUser}
             currentUser={currentUser}
+            socket={socket}
             key={requestingUser.username}
           />
         );

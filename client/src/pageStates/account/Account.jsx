@@ -58,6 +58,7 @@ export default function Account() {
               <FriendRequests
                 friendRequests={userObject.friendRequests}
                 currentUser={userObject}
+                socket={socket}
               />
             )}
             {userObject.chatInvites.length > 0 && (
