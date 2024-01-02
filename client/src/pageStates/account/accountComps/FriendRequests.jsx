@@ -1,6 +1,6 @@
 import "./FriendRequests.css";
 import { useState, useEffect } from "react";
-import getUsers from '../../../helpers/getUsers';
+import getUsers from "../../../helpers/getUsers";
 import FriendReq from "./FriendReq";
 
 export default function FriendRequests({ friendRequests }) {
@@ -8,9 +8,9 @@ export default function FriendRequests({ friendRequests }) {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const usersArray = await getUsers(friendRequests)
+      const usersArray = await getUsers(friendRequests);
       setUsers(usersArray);
-    }
+    };
     fetchUsers();
   }, [friendRequests]);
 
@@ -18,13 +18,14 @@ export default function FriendRequests({ friendRequests }) {
     <div className="friendRequestContainer">
       <h2 className="friendRequestHeader">Friend Requests:</h2>
       <hr />
-      {
-        users.map((user) => {
-          return (
-            <FriendReq user={user} key={user.username} />
-          )
-        })
-      }
+      {users.map((requestingUser) => {
+        return (
+          <FriendReq
+            requestingUser={requestingUser}
+            key={requestingUser.username}
+          />
+        );
+      })}
     </div>
-  )
+  );
 }

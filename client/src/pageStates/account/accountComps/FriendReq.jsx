@@ -1,6 +1,6 @@
 import "./FriendReq.css";
 
-export default function FriendReq({ user }) {
+export default function FriendReq({ requestingUser }) {
 
   const handleAccept = () => {
     return;
@@ -11,8 +11,8 @@ export default function FriendReq({ user }) {
   }
 
   return (
-    <div className="friendReqBlock" key={user.username}>
-      <p className="friendReqUsername">{user.username}</p>
+    <div className="friendReqBlock" key={requestingUser.username}>
+      <p className="friendReqUsername">{requestingUser.username}</p>
       <div className="friendreqButtonContainer">
         <button className="hiddenFriendButton">
           <img src="./icons/checkmark-svgrepo-com.svg" className="friendIcon" />
