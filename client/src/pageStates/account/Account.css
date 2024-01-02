@@ -11,3 +11,9 @@
   width: 55%;
   height: 89%;
 }
+
+.noDataMessage {
+  font-size: 3vh;
+  text-align: center;
+  margin-top: 5vh;
+}

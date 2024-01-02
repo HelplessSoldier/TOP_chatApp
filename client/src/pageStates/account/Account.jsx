@@ -26,7 +26,7 @@ export default function Account() {
       }
     };
     fetchData();
-  }, [setHasInfo]);
+  }, []);
 
   useEffect(() => {
     if (
@@ -45,26 +45,22 @@ export default function Account() {
     <div className="accountRoot">
       <div className="accountContainer">
         {hasInfo ? (
-          userObject ? (
-            <>
-              {userObject.friendRequests.length > 0 && (
-                <FriendRequests
-                  friendRequests={userObject.friendRequests}
-                  currentUser={userObject}
-                />
-              )}
-              {userObject.chatInvites.length > 0 && (
-                <ChatInvites chatInvites={userObject.chatInvites} />
-              )}
-              {userObject.ownedChats.length > 0 && (
-                <OwnedChats ownedChats={userObject.ownedChats} />
-              )}
-            </>
-          ) : (
-            <p>Nothing to show</p>
-          )
+          <>
+            {userObject.friendRequests.length > 0 && (
+              <FriendRequests
+                friendRequests={userObject.friendRequests}
+                currentUser={userObject}
+              />
+            )}
+            {userObject.chatInvites.length > 0 && (
+              <ChatInvites chatInvites={userObject.chatInvites} />
+            )}
+            {userObject.ownedChats.length > 0 && (
+              <OwnedChats ownedChats={userObject.ownedChats} />
+            )}
+          </>
         ) : (
-          <p></p>
+          <p className="noDataMessage">Nothing to show yet.</p>
         )}
       </div>
     </div>
