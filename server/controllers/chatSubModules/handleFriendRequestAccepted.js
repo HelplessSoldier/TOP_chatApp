@@ -1,7 +1,30 @@
 const User = require("../../models/User");
 
-function handleFriendRequestAccept(message, socket) {
-  console.log("hi from friend request accept!");
+async function handleFriendRequestAccept(message, socket) {
+  const currentUser = await User.findById(message.currentUser);
+  const targetUser = await User.findById(message.targetUser);
+
+  // add targetUser's id to currentUsers friend list.
+  currentUser.friends.push(targetUser._id);
+
+  // remove currentUser's id from targetUser's sentFriendRequests
+  targetUser.sentFriendRequests = targetUser.sentFriendRequests.filter(
+    (_id) => _id.toString() !== currentUser._id.toString()
+  );
+
+  // remove targetUser's id from currentUser's friendRequests
+  currentUser.friendRequests = currentUser.friendRequests.filter(
+    (_id) => _id.toString() !== targetUser._id.toString()
+  );
+
+  await Promise.all([currentUser.save(), targetUser.save()]);
+
+  socket.send(
+    JSON.stringify({
+      message: "Removed user from friendRequests",
+      targetId: targetUser._id,
+    })
+  );
 }
 
 module.exports = handleFriendRequestAccept;
