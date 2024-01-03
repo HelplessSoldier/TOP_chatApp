@@ -7,7 +7,7 @@ import Chats from "./sidebarComps/Chats";
 const userGetUri =
   globals.serverUri + ":" + globals.serverPort + globals.apiVersion + "/user";
 
-export default function SideBar({ userObject }) {
+export default function SideBar({ userObject, setPageState }) {
   const [friendsList, setFriendsList] = useState([]);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ export default function SideBar({ userObject }) {
 
   return (
     <div className="sideBarContainer">
-      <Chats />
+      <Chats setPageState={setPageState} />
       <Friends friendsList={friendsList} />
     </div>
   );

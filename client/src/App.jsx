@@ -32,7 +32,7 @@ function App() {
           socket={socket}
         />
       )}
-      <SideBar userObject={userObject} />
+      <SideBar userObject={userObject} setPageState={setPageState} />
       {getPage(pageState, setPageState, setUserObject, setSocket)}
     </div>
   );

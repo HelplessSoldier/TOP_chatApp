@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Chats.css";
 
-export default function Chats() {
+export default function Chats({ setPageState }) {
   const [expanded, setExpanded] = useState(true);
 
   const handleExpandButton = () => {
@@ -9,19 +9,16 @@ export default function Chats() {
   };
 
   const handleNewChatButton = () => {
-    return;
-  }
+    setPageState("NewChat");
+  };
 
   return (
     <div className="sideBarChats">
       <div className="sideBarChatsHeaderContainer">
         <h2 className="sidebarHeader">CHATS</h2>
-        <div className="chatButtonsContainer" >
-          <button className="addChatButton">
-            <img
-              src="./icons/plus-svgrepo-com.svg"
-              className="addChatIcon"
-            />
+        <div className="chatButtonsContainer">
+          <button className="addChatButton" onClick={handleNewChatButton}>
+            <img src="./icons/plus-svgrepo-com.svg" className="addChatIcon" />
           </button>
           <button
             className={"sideBarExpandButton" + (expanded ? "" : " rotate")}
