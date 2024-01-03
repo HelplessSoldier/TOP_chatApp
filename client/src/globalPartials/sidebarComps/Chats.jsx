@@ -12,13 +12,19 @@ export default function Chats() {
     <div className="sideBarChats">
       <div className="sideBarChatsHeaderContainer">
         <h2 className="sidebarHeader">CHATS</h2>
+        <button className="addChatButton">
+          <img
+            src="./icons/plus-svgrepo-com.svg"
+            className="addChatIcon"
+          />
+        </button>
         <button
           className={"sideBarExpandButton" + (expanded ? "" : " rotate")}
           onClick={handleExpandButton}
         >
           <img
             className="sideBarExpandIcon"
-            src="./icons/chevron-down-square-svgrepo-com.svg"
+            src="./icons/chevron-down-svgrepo-com.svg"
           />
         </button>
       </div>

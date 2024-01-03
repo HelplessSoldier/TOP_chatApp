@@ -19,7 +19,7 @@ export default function Friends({ friendsList }) {
         >
           <img
             className="sideBarExpandIcon"
-            src="./icons/chevron-down-square-svgrepo-com.svg"
+            src="./icons/chevron-down-svgrepo-com.svg"
           />
         </button>
       </div>

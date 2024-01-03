@@ -6,11 +6,13 @@
   padding-right: 2vh;
 }
 
-.sideBarExpandIcon {
+.sideBarExpandIcon,
+.addChatIcon {
   height: 3vh;
 }
 
-.sideBarExpandButton {
+.sideBarExpandButton,
+.addChatButton {
   background-color: transparent;
   border: none;
   outline: none;
