@@ -1,0 +1,17 @@
+.sideBarHeaderContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 2vh;
+}
+
+.sideBarExpandIcon {
+  height: 3vh;
+}
+
+.sideBarExpandButton {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}

@@ -1,3 +1,9 @@
+import './SingleFriend.css'
+
 export default function SingleFriend({ friendObject }) {
-  return <p>this is a single friend!</p>;
+  return (
+    <div className="singleFriendContainer">
+      <p className="friendName">{friendObject.username}</p>
+    </div>
+  )
 }

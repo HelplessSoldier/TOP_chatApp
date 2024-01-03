@@ -9,11 +9,11 @@ const userGetUri =
 export default function SideBar({ userObject }) {
   const [friendsList, setFriendsList] = useState([]);
 
-  useEffect(() => { // TODO: this doesn't populate the friends list on refresh, but does on save?
+  useEffect(() => {
     if (userObject && friendsList.length === 0) {
       getFriends(userObject.friends, setFriendsList);
     }
-  }, [setFriendsList]);
+  }, [friendsList, setFriendsList, userObject]);
 
   return (
     <div className="sideBarContainer">
@@ -21,11 +21,7 @@ export default function SideBar({ userObject }) {
         <h2 className="sidebarHeader">CHATS</h2>
         <hr />
       </div>
-      <div className="sideBarFriends">
-        <h2 className="sidebarHeader">FRIENDS</h2>
-        <hr />
-        <Friends friendsList={friendsList} />
-      </div>
+      <Friends friendsList={friendsList} />
     </div>
   );
 }
