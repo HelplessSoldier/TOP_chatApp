@@ -7,7 +7,6 @@ export default function Friends({ friendsList }) {
 
   const handleExpandButton = () => {
     setExpanded((prevExpanded) => !prevExpanded);
-    return;
   };
 
   return (

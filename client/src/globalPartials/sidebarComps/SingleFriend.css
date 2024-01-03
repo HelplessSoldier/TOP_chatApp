@@ -4,8 +4,32 @@
   padding: 1vh;
   border-radius: 1vh;
   border-bottom: 1px solid var(--accent-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 2vh;
 }
 
 .friendName {
   font-size: larger;
+}
+
+.friendOptionsButton {
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  outline: none;
+  height: 3vh;
+}
+
+.friendOptionsIcon {
+  height: 100%;
+  transition: height 0.21s ease;
+}
+
+.friendOptionsIcon:hover {
+  height: 89%;
 }
