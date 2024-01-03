@@ -5,3 +5,9 @@
   align-items: center;
   padding-right: 2vh;
 }
+
+.chatButtonsContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 2vh;
+}
