@@ -1,6 +1,9 @@
+import { useState } from "react";
 import "./NewChatForm.css";
 
 export default function NewChatForm({ setPageState }) {
+  const [instanceDescriptions, setInstanceDescriptions] = useState(false);
+
   const instanceTypes = [
     "public",
     "friends",
@@ -12,6 +15,11 @@ export default function NewChatForm({ setPageState }) {
   const handleChatSubmit = (e) => {
     e.preventDefault();
     console.log(e.target);
+  };
+
+  const handleInfoButton = (e) => {
+    e.preventDefault();
+    setInstanceDescriptions(true);
   };
 
   return (
@@ -33,11 +41,31 @@ export default function NewChatForm({ setPageState }) {
               );
             })}
           </select>
+          <button className="instanceInfoButton" onClick={handleInfoButton}>
+            <img
+              src="./icons/question-circle-svgrepo-com.svg"
+              className="instanceInfoIcon"
+            />
+          </button>
         </div>
         <button type="submit" className="formButton formButtonOverride">
           Create
         </button>
       </form>
+      {instanceDescriptions && (
+        <>
+          <h3 className="typeHeader">
+            Type determines who can join your chat.
+          </h3>
+          <ul className="typeList">
+            <li>Public: Anyone can join.</li>
+            <li>Friends: Instance owner's friends can join.</li>
+            <li>FriendsPlus: Participants friends can join.</li>
+            <li>Invite: Instance owner can invite people.</li>
+            <li>InvitePlus: Participants can invite people.</li>
+          </ul>
+        </>
+      )}
     </div>
   );
 }

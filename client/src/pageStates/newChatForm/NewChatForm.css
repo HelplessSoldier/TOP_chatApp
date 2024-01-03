@@ -17,6 +17,9 @@
 }
 
 .labelInputPairContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   margin-bottom: 2vh;
 }
 
@@ -42,10 +45,30 @@ select {
   color: white;
   font-size: larger;
   padding: 1vh;
-  width: 80%;
+  width: 69%;
   border-radius: 2vh;
 }
 
 .formButtonOverride {
   margin-top: 0;
+}
+
+.typeHeader {
+  margin: 1vh;
+}
+
+.typeList > li {
+  font-size: large;
+}
+
+.instanceInfoButton {
+  height: 3vh;
+  margin-left: 2vh;
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
+
+.instanceInfoIcon {
+  height: 100%;
 }
