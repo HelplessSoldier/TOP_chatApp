@@ -50,5 +50,6 @@ async function getFriends(friendIds, setFriendsList) {
       });
     }
   }
+
   setFriendsList(friendsListArr);
 }

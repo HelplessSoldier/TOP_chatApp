@@ -5,7 +5,6 @@ export default async function getUsers(userIds) {
   for (let userId of userIds) {
     const res = await fetchUser(userId);
     if (res.message === "User found") {
-      console.log(res.user.username);
       usersArray.push(res.user);
     } else {
       console.error(`User not found with id: ${userId}`);

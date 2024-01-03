@@ -12,12 +12,14 @@ export default function SignUp({ setPageState }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
     const formBody = {
       email: e.target.email.value,
       username: e.target.username.value,
       password: e.target.password.value,
       confirmPassword: e.target.confirmPassword.value,
     };
+
     try {
       const response = await fetch(signupUri, {
         method: "POST",
