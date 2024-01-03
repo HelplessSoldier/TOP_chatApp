@@ -11,14 +11,13 @@ const userGetUri =
 
 export default function SideBar({ userObject }) {
   const [friendsList, setFriendsList] = useState([]);
-  const [getAttemptCount, setAttemptCount] = useState(0);
 
   useEffect(() => {
-    if (userObject && friendsList.length === 0 && getAttemptCount < 3) {
-      console.log(userObject);
+    if (userObject && friendsList.length === 0) {
       getFriends(userObject.friends, setFriendsList)
+      console.log(friendsList);
     }
-  }, [userObject, friendsList, getAttemptCount])
+  }, [])
 
   return (
     <div className="sideBarContainer">
@@ -36,12 +35,27 @@ export default function SideBar({ userObject }) {
 
 async function getFriends(friendIds, setFriendsList) {
   const friendsListArr = [];
+
   for (let friendId of friendIds) {
-    const url = userGetUri + String(friendId);
+    const url = userGetUri + '/' + String(friendId);
     const response = await fetch(url);
+
+    let userData = null;
     if (response.ok) {
-      console.log(response.data)
+      const userData = await response.json();
+    } else {
+      continue;
+    }
+
+    if (userData && userData.message === 'User found') {
+      friendsListArr.push({
+        username: userData.user.username,
+        _id: userData.user._id
+      })
+    } else {
+      continue;
     }
   }
-  return;
+
+  setFriendsList(friendsListArr);
 }
