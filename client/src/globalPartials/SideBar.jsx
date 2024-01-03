@@ -2,6 +2,7 @@ import "./SideBar.css";
 import globals from "../../../publicGlobals/apiGlobals.json";
 import { useEffect, useState } from "react";
 import Friends from "./sidebarComps/Friends";
+import Chats from "./sidebarComps/Chats";
 
 const userGetUri =
   globals.serverUri + ":" + globals.serverPort + globals.apiVersion + "/user";
@@ -17,10 +18,7 @@ export default function SideBar({ userObject }) {
 
   return (
     <div className="sideBarContainer">
-      <div className="sideBarChats">
-        <h2 className="sidebarHeader">CHATS</h2>
-        <hr />
-      </div>
+      <Chats />
       <Friends friendsList={friendsList} />
     </div>
   );
