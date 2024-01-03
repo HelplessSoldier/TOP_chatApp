@@ -1,6 +1,7 @@
 import "./SideBar.css";
 import globals from "../../../publicGlobals/apiGlobals.json";
 import { useEffect, useState } from "react";
+import Friends from "./sidebarComps/Friends";
 
 const userGetUri =
   globals.serverUri + ":" + globals.serverPort + globals.apiVersion + "/user";
@@ -8,7 +9,7 @@ const userGetUri =
 export default function SideBar({ userObject }) {
   const [friendsList, setFriendsList] = useState([]);
 
-  useEffect(() => {
+  useEffect(() => { // TODO: this doesn't populate the friends list on refresh, but does on save?
     if (userObject && friendsList.length === 0) {
       getFriends(userObject.friends, setFriendsList);
     }
@@ -23,6 +24,7 @@ export default function SideBar({ userObject }) {
       <div className="sideBarFriends">
         <h2 className="sidebarHeader">FRIENDS</h2>
         <hr />
+        <Friends friendsList={friendsList} />
       </div>
     </div>
   );
