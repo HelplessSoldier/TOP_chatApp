@@ -14,4 +14,12 @@
   background-color: transparent;
   border: none;
   outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.34s ease;
+}
+
+.rotate {
+  transform: rotate(90deg);
 }

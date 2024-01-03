@@ -14,7 +14,10 @@ export default function Friends({ friendsList }) {
     <div className="sideBarFriends">
       <div className="sideBarHeaderContainer">
         <h2 className="sidebarHeader">FRIENDS</h2>
-        <button className="sideBarExpandButton" onClick={handleExpandButton}>
+        <button
+          className={"sideBarExpandButton" + (expanded ? "" : " rotate")}
+          onClick={handleExpandButton}
+        >
           <img
             className="sideBarExpandIcon"
             src="./icons/chevron-down-square-svgrepo-com.svg"
@@ -27,7 +30,8 @@ export default function Friends({ friendsList }) {
           {friendsList.map((friend) => {
             return <SingleFriend key={friend.username} friendObject={friend} />;
           })}
-        </div>)}
+        </div>
+      )}
     </div>
   );
 }
