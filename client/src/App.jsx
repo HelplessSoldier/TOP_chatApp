@@ -7,6 +7,7 @@ import LogIn from "./pageStates/login/LogIn";
 import Chat from "./pageStates/chat/Chat";
 import Account from "./pageStates/account/Account";
 import SearchResultsView from "./globalPartials/headerComps/SearchResultsView";
+import NewChatForm from "./pageStates/newChatForm/NewChatForm.jsx";
 
 function App() {
   const [pageState, setPageState] = useState("Chat");
@@ -32,22 +33,12 @@ function App() {
         />
       )}
       <SideBar userObject={userObject} />
-      {getPage(
-        pageState,
-        setPageState,
-        setUserObject,
-        setSocket,
-      )}
+      {getPage(pageState, setPageState, setUserObject, setSocket)}
     </div>
   );
 }
 
-function getPage(
-  pageState,
-  setPageState,
-  setUserObject,
-  setSocket,
-) {
+function getPage(pageState, setPageState, setUserObject, setSocket) {
   switch (pageState) {
     case "LogIn":
       return <LogIn setPageState={setPageState} />;
@@ -63,6 +54,8 @@ function getPage(
       );
     case "Account":
       return <Account setPageState={setPageState} />;
+    case "NewChat":
+      return <NewChatForm setPageState={setPageState} />;
     default:
       return null;
   }

@@ -8,6 +8,10 @@ export default function Chats() {
     setExpanded((prevExpanded) => !prevExpanded);
   };
 
+  const handleNewChatButton = () => {
+    return;
+  }
+
   return (
     <div className="sideBarChats">
       <div className="sideBarChatsHeaderContainer">
