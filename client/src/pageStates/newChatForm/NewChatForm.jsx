@@ -14,7 +14,8 @@ export default function NewChatForm({ setPageState }) {
 
   const handleChatSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target);
+    const data = new FormData(e.target);
+    console.log(data);
   };
 
   const handleInfoButton = (e) => {
@@ -32,7 +33,7 @@ export default function NewChatForm({ setPageState }) {
         </div>
         <div className="labelInputPairContainer">
           <label htmlFor="instanceType">Type: </label>
-          <select htmlFor="instanceType" id="instanceType">
+          <select htmlFor="instanceType" name="instanceType" id="instanceType">
             {instanceTypes.map((type) => {
               return (
                 <option key={type} value={type}>
