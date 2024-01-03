@@ -31,7 +31,7 @@ function App() {
           socket={socket}
         />
       )}
-      <SideBar />
+      <SideBar userObject={userObject} />
       {getPage(
         pageState,
         setPageState,
