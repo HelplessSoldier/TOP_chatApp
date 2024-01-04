@@ -30,20 +30,26 @@ exports.new_chat_post = asyncHandler(async (req, res, next) => {
     const body = req.body;
     const secret = process.env.secret;
     const token = getCookieFromString(body.token, "jwt");
-    const userInfo = jwt.verify(token, secret);
-    const user = await User.findById(userInfo.userId);
+    const { userId } = jwt.verify(token, secret);
+    const user = await User.findById(userId);
+
     if (!user) {
       res.json({ message: "User not found" });
     }
+
     const newChat = new Chat({
       name: body.chatName,
       owner: user._id,
       instanceType: body.chatType,
     });
+
     newChat.participants.push(user._id);
     user.chats.push(newChat._id);
     user.ownedChats.push(newChat._id);
-    await Promise.all([newChat.save(), user.save()])
+
+    await newChat.save();
+    await user.save();
+
   } catch (err) {
     console.error(err);
   }
