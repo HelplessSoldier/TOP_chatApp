@@ -1,8 +1,6 @@
-import { useState } from "react";
 import "./OwnedChat.css";
 
 export default function OwnedChat({ chatObject, setSelectedChat }) {
-
   const handleOptionsButton = (e) => {
     e.preventDefault();
     setSelectedChat(chatObject);

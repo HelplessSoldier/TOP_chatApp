@@ -73,7 +73,10 @@ export default function Account() {
               />
             )}
             {selectedChat && (
-              <ModerateChatWindow chatObject={selectedChat} />
+              <ModerateChatWindow
+                chatObject={selectedChat}
+                setSelectedChat={setSelectedChat}
+              />
             )}
           </>
         ) : (

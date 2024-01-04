@@ -1,0 +1,10 @@
+.closeModerationWindowButton {
+  height: 4vh;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.closeModerationWindowIcon {
+  height: 100%;
+}
