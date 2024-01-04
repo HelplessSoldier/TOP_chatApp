@@ -5,6 +5,7 @@
 }
 
 .accountContainer {
+  position: relative;
   background-color: var(--darker-background-color);
   border-radius: 2vh;
   overflow: scroll;

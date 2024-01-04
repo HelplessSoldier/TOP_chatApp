@@ -1,3 +1,12 @@
+.chatModerationRoot {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: var(--darker-background-color);
+}
+
 .closeModerationWindowButton {
   height: 4vh;
   background-color: transparent;
@@ -7,4 +16,16 @@
 
 .closeModerationWindowIcon {
   height: 100%;
+}
+
+.chatModerationName {
+  font-size: 3vh;
+}
+
+.chatModerationHeaderContainer {
+  display: flex;
+  justify-content: space-between;
+  margin: 2vh;
+  padding: 2vh;
+  border-bottom: 3px solid var(--accent-color);
 }
