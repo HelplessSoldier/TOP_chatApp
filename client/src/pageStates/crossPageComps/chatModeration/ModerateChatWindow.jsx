@@ -1,9 +1,10 @@
 import getUsers from "../../../helpers/getUsers";
 import { useEffect, useState } from "react";
 import "./ModerateChatWindow.css";
+import ParticipantView from "./ParticipantView";
 
 export default function ModerateChatWindow({ chatObject, setSelectedChat }) {
-  const [participants, setParticipants] = useState([])
+  const [participants, setParticipants] = useState([]);
 
   const handleCloseButton = () => {
     setSelectedChat(null);
@@ -32,6 +33,12 @@ export default function ModerateChatWindow({ chatObject, setSelectedChat }) {
         </button>
       </div>
       <div className="participantsContainer">
+        <h3 className="moderationSectionHeader">Participants</h3>
+        {participants.map((userObject) => {
+          return (
+            <ParticipantView userObject={userObject} key={userObject._id} />
+          );
+        })}
       </div>
     </div>
   );

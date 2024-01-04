@@ -1,0 +1,10 @@
+.participantViewContainer {
+  padding: 1vh;
+  margin: 0.55vh;
+  border-radius: 2vh;
+  background-color: var(--background-color);
+}
+
+.participantViewName {
+  font-size: larger;
+}
