@@ -1,8 +1,10 @@
 import { useState } from "react";
 import "./NewChatForm.css";
+import getCookie from "../../helpers/getCookie";
 
 export default function NewChatForm({ setPageState }) {
   const [instanceDescriptions, setInstanceDescriptions] = useState(false);
+  const [emptyField, setEmptyField] = useState(false);
 
   const instanceTypes = [
     "public",
@@ -14,7 +16,21 @@ export default function NewChatForm({ setPageState }) {
 
   const handleChatSubmit = (e) => {
     e.preventDefault();
+
     const data = new FormData(e.target);
+
+    if (data.name === "") {
+      setEmptyField(true);
+    }
+
+    const token = getCookie(document.cookie, "jwt");
+
+    const msg = {
+      message: "New chat request",
+      token,
+      data,
+    };
+
     console.log(data);
   };
 
@@ -60,7 +76,7 @@ export default function NewChatForm({ setPageState }) {
           </h3>
           <ul className="typeList">
             <li>Public: Anyone can join.</li>
-            <li>Friends: Instance owner's friends can join.</li>
+            <li>Friends: Instance owners friends can join.</li>
             <li>FriendsPlus: Participants friends can join.</li>
             <li>Invite: Instance owner can invite people.</li>
             <li>InvitePlus: Participants can invite people.</li>
