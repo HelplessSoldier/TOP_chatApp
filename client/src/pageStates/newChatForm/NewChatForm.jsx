@@ -38,7 +38,7 @@ export default function NewChatForm({ setPageState }) {
     };
     const success = sendNewChatRequest(msg, newChatUri);
     if (success) {
-      console.log('yeet!')
+      setPageState('Chat')
     }
   };
 

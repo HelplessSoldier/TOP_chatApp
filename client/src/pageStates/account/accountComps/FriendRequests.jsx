@@ -1,4 +1,4 @@
-import "./FriendRequests.css";
+import "./AccountSections.css";
 import { useState, useEffect } from "react";
 import getUsers from "../../../helpers/getUsers";
 import FriendReq from "./FriendReq";
@@ -15,8 +15,8 @@ export default function FriendRequests({ friendRequests, currentUser, socket }) 
   }, [friendRequests]);
 
   return (
-    <div className="friendRequestContainer">
-      <h2 className="friendRequestHeader">Friend Requests:</h2>
+    <div className="accountSectionContainer">
+      <h2 className="accountSectionHeader">Friend Requests:</h2>
       <hr />
       {requestingUsers.map((requestingUser) => {
         return (

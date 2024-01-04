@@ -1,9 +1,12 @@
+import './AccountSections.css';
 import './OwnedChats.css';
 
 export default function OwnedChats({ ownedChats }) {
+  console.log(ownedChats);
   return (
-    <>
-      <h1>hi from the ownedchats comp!</h1>
-    </>
+    <div className='accountSectionContainer'>
+      <h2 className='accountSectionHeader'>Owned Chats</h2>
+      <hr />
+    </div>
   )
 }

@@ -46,9 +46,12 @@ exports.new_chat_post = asyncHandler(async (req, res, next) => {
     newChat.participants.push(user._id);
     user.chats.push(newChat._id);
     user.ownedChats.push(newChat._id);
+    user.currentChat = newChat._id;
 
     await newChat.save();
     await user.save();
+
+    res.json({ message: "Chat created" })
 
   } catch (err) {
     console.error(err);

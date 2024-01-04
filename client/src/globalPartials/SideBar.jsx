@@ -9,12 +9,14 @@ const userGetUri =
 
 export default function SideBar({ userObject, setPageState }) {
   const [friendsList, setFriendsList] = useState([]);
+  const [updateCount, setUpdateCount] = useState(0);
 
   useEffect(() => {
-    if (userObject && friendsList.length === 0) {
+    if (userObject && friendsList.length === 0 && updateCount < 3) {
+      setUpdateCount((a) => a + 1);
       getFriends(userObject.friends, setFriendsList);
     }
-  }, [friendsList, setFriendsList, userObject]);
+  }, [friendsList, setFriendsList, userObject, updateCount, setUpdateCount]);
 
   return (
     <div className="sideBarContainer">
