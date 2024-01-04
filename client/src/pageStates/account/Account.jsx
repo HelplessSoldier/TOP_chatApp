@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import FriendRequests from "./accountComps/FriendRequests";
 import ChatInvites from "./accountComps/ChatInvites";
 import OwnedChats from "./accountComps/OwnedChats";
+import ModerateChatWindow from "../crossPageComps/chatModeration/ModerateChatWindow";
 
 const userGetUri =
   globals.serverUri +
@@ -16,6 +17,7 @@ export default function Account() {
   const [userObject, setUserObject] = useState(null);
   const [hasInfo, setHasInfo] = useState(false);
   const [socket, setSocket] = useState(null);
+  const [selectedChat, setSelectedChat] = useState(null);
 
   useEffect(() => {
     const wsUri = globals.webSocketUri;
@@ -65,7 +67,13 @@ export default function Account() {
               <ChatInvites chatInvites={userObject.chatInvites} />
             )}
             {userObject.ownedChats.length > 0 && (
-              <OwnedChats ownedChats={userObject.ownedChats} />
+              <OwnedChats
+                ownedChats={userObject.ownedChats}
+                setSelectedChat={setSelectedChat}
+              />
+            )}
+            {selectedChat && (
+              <ModerateChatWindow chatObject={selectedChat} />
             )}
           </>
         ) : (

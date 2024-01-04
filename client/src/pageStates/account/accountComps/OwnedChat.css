@@ -17,8 +17,16 @@
   border: none;
   outline: none;
   margin: 1vh;
+  border-radius: 1vh;
+  padding: 0.1vh;
+  border: 2px solid transparent; 
 }
 
 .ownedChatOptionsIcon {
-  height: 100%;
+  height: 3vh;
+  width: 3vh;
+}
+
+.ownedChatOptionsButton:hover {
+  border: 2px solid var(--accent-color);
 }

@@ -20,6 +20,8 @@
   background-color: transparent;
   border: 2px solid transparent;
   margin: 1vh;
+  border-radius: 1vh;
+  padding: 0.1vh;
 }
 
 .hiddenFriendButton:hover {

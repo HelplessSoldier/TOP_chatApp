@@ -4,7 +4,7 @@ import getChats from "../../../helpers/getChats";
 import { useEffect, useState } from "react";
 import OwnedChat from "./OwnedChat";
 
-export default function OwnedChats({ ownedChats }) {
+export default function OwnedChats({ ownedChats, setSelectedChat }) {
   const [ownedChatObjects, setOwnedChatObjects] = useState([]);
 
   useEffect(() => {
@@ -20,7 +20,13 @@ export default function OwnedChats({ ownedChats }) {
       <h2 className="accountSectionHeader">Owned Chats</h2>
       <hr />
       {ownedChatObjects.map((chatObject) => {
-        return <OwnedChat chatObject={chatObject} key={chatObject._id} />;
+        return (
+          <OwnedChat
+            chatObject={chatObject}
+            setSelectedChat={setSelectedChat}
+            key={chatObject._id}
+          />
+        );
       })}
     </div>
   );
