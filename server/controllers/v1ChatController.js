@@ -21,6 +21,11 @@ server.on("connection", (ws, req) => {
   ws.on("close", () => console.log("Client disconnected"));
 });
 
+exports.new_chat_post = asyncHandler(async (req, res, next) => {
+  console.log('got into new_chat_post')
+  res.send('hi c:')
+})
+
 exports.connect_get = (req, res) => {
   // idk why but the server crashes without this route.
   // it's not actually used for anything but don't delete

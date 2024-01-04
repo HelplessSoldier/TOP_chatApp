@@ -1,6 +1,14 @@
 import { useState } from "react";
 import "./NewChatForm.css";
 import getCookie from "../../helpers/getCookie";
+import {
+  serverUri,
+  serverPort,
+  apiVersion,
+} from "../../../../publicGlobals/apiGlobals.json";
+
+const newChatUri = serverUri + ":" + serverPort + apiVersion + '/chat/new-chat';
+console.log(newChatUri);
 
 export default function NewChatForm({ setPageState }) {
   const [instanceDescriptions, setInstanceDescriptions] = useState(false);
@@ -16,22 +24,22 @@ export default function NewChatForm({ setPageState }) {
 
   const handleChatSubmit = (e) => {
     e.preventDefault();
-
     const data = new FormData(e.target);
-
-    if (data.name === "") {
+    if (data.get("name") === "") {
       setEmptyField(true);
+      return;
     }
-
     const token = getCookie(document.cookie, "jwt");
-
     const msg = {
       message: "New chat request",
-      token,
-      data,
+      token: token,
+      chatName: data.get("name"),
+      chatType: data.get("instanceType"),
     };
-
-    console.log(data);
+    const success = sendNewChatRequest(msg, newChatUri);
+    if (success) {
+      console.log('yeet!')
+    }
   };
 
   const handleInfoButton = (e) => {
@@ -85,4 +93,20 @@ export default function NewChatForm({ setPageState }) {
       )}
     </div>
   );
+}
+
+async function sendNewChatRequest(msg, uri) {
+  const response = await fetch(uri, {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(msg)
+  })
+
+  if (response.ok) {
+    return true;
+  }
+  return false;
 }
