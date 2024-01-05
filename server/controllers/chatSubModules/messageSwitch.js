@@ -2,8 +2,9 @@ const handleSearch = require("./handleSearch");
 const handleFriendRequest = require("./handleFriendRequest");
 const handleFriendRequestReject = require("./handleRejectFriendRequest");
 const handleFriendRequestAccept = require("./handleFriendRequestAccepted");
+const handleSwitchChatRequest = require("./handleSwitchChatRequest");
 
-function handleMessage(message, socket) {
+function messageSwitch(message, socket) {
   switch (message.message) {
     case "Search request":
       handleSearch(message, socket);
@@ -17,9 +18,12 @@ function handleMessage(message, socket) {
     case "Friend request accepted":
       handleFriendRequestAccept(message, socket);
       break;
+    case "Switch chat request":
+      handleSwitchChatRequest(message, socket);
+      break;
     default:
       console.log(`Unknown message received: ${message.message}`);
   }
 }
 
-module.exports = handleMessage;
+module.exports = messageSwitch;

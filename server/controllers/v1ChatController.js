@@ -1,6 +1,6 @@
 const WebSocket = require("ws");
 const asyncHandler = require("express-async-handler");
-const handleMessage = require("./chatSubModules/handleMessage");
+const messageSwitch = require("./chatSubModules/messageSwitch");
 const handleConnect = require("./chatSubModules/handleConnect");
 const getCookieFromString = require("../helpers/getCookieFromString");
 const jwt = require("jsonwebtoken");
@@ -16,7 +16,7 @@ server.on("connection", (ws, req) => {
   try {
     ws.on("message", (message) => {
       const parsedMessage = JSON.parse(message);
-      handleMessage(parsedMessage, ws);
+      messageSwitch(parsedMessage, ws);
     });
   } catch (err) {
     console.error(err);
