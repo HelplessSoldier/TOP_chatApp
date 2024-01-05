@@ -32,7 +32,11 @@ function App() {
           socket={socket}
         />
       )}
-      <SideBar userObject={userObject} setPageState={setPageState} />
+      <SideBar
+        userObject={userObject}
+        setPageState={setPageState}
+        socket={socket}
+      />
       {getPage(pageState, setPageState, setUserObject, socket, setSocket)}
     </div>
   );
@@ -53,7 +57,13 @@ function getPage(pageState, setPageState, setUserObject, socket, setSocket) {
         />
       );
     case "Account":
-      return <Account setPageState={setPageState} socket={socket} setSocket={setSocket} />;
+      return (
+        <Account
+          setPageState={setPageState}
+          socket={socket}
+          setSocket={setSocket}
+        />
+      );
     case "NewChat":
       return <NewChatForm setPageState={setPageState} />;
     default:

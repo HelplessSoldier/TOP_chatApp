@@ -14,3 +14,23 @@
 .chatName {
   font-size: larger;
 }
+
+.chatSelectButton {
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  outline: none;
+  height: 3vh;
+}
+
+.chatSelectIcon {
+  height: 100%;
+  transition: height 0.21s ease;
+}
+
+.chatSelectIcon:hover {
+  height: 89%;
+}
+
