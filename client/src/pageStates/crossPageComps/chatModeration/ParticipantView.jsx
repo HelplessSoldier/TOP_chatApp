@@ -1,6 +1,10 @@
 import "./ParticipantView.css";
 
-export default function ParticipantView({ userObject, setUserToKick }) {
+export default function ParticipantView({
+  userObject,
+  setUserToKick,
+  chatObject,
+}) {
   const handleKickButton = (e) => {
     e.preventDefault();
     setUserToKick(userObject);
@@ -9,9 +13,11 @@ export default function ParticipantView({ userObject, setUserToKick }) {
   return (
     <div className="participantViewContainer">
       <p className="participantViewName">{userObject.username}</p>
-      <button className="participantKickButton" onClick={handleKickButton}>
-        Kick User
-      </button>
+      {chatObject.owner !== userObject._id && (
+        <button className="participantKickButton" onClick={handleKickButton}>
+          Kick User
+        </button>
+      )}
     </div>
   );
 }

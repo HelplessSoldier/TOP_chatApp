@@ -39,7 +39,7 @@ export default function ModerateChatWindow({ chatObject, setSelectedChat }) {
         <h3 className="moderationSectionHeader">Participants</h3>
         {participants.map((userObject) => {
           return (
-            <ParticipantView userObject={userObject} setUserToKick={setUserToKick} key={userObject._id} />
+            <ParticipantView userObject={userObject} setUserToKick={setUserToKick} chatObject={chatObject} key={userObject._id} />
           );
         })}
       </div>
