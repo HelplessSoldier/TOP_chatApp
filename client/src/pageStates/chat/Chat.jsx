@@ -18,6 +18,8 @@ export default function Chat({ setPageState, setUserObject, setSocket }) {
         } else if (responseJson.message === "User successfully verified") {
           setResponseObject(responseJson);
           setUserObject(responseJson);
+        } else {
+          console.log(responseJson.message);
         }
       };
     };
@@ -28,7 +30,7 @@ export default function Chat({ setPageState, setUserObject, setSocket }) {
     e.preventDefault();
     const message = e.target.chatInput.value;
     console.log(message);
-  }
+  };
 
   return (
     <div className="chatRoot">
