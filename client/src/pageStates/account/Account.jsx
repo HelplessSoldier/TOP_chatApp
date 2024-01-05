@@ -13,10 +13,9 @@ const userGetUri =
   globals.apiVersion +
   "/current-user";
 
-export default function Account() {
+export default function Account({ socket, setSocket }) {
   const [userObject, setUserObject] = useState(null);
   const [hasInfo, setHasInfo] = useState(false);
-  const [socket, setSocket] = useState(null);
   const [selectedChat, setSelectedChat] = useState(null);
 
   useEffect(() => {

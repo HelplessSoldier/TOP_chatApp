@@ -29,6 +29,7 @@ export default function SignUp({ setPageState }) {
       const responseData = await response.json();
       if (response.ok) {
         setShowSuccess(true);
+        setValidationErrors([]);
         setTimeout(() => {
           setPageState("LogIn");
         }, 3000);
