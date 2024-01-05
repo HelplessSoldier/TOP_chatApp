@@ -1,6 +1,6 @@
 .participantViewContainer {
-  padding: 1vh;
-  margin: 0.55vh;
+  padding: 2vh;
+  margin: 1vh;
   border-radius: 2vh;
   background-color: var(--background-color);
   display: flex;
@@ -9,7 +9,7 @@
 }
 
 .participantViewName {
-  font-size: larger;
+  font-size: 2.5vh;
 }
 
 .participantKickButton {
@@ -20,7 +20,6 @@
   padding: 0.5vh;
   font-size: larger;
   border-radius: 1vh;
-  margin-right: 2vh;
   transition: background-color 0.34s ease;
 }
 

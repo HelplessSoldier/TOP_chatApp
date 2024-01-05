@@ -1,0 +1,17 @@
+.deleteChatButton {
+  height: 5vh;
+  width: 5vw;
+  background-color: var(--accent-color);
+  border: 3px solid transparent;
+  outline: none;
+  margin: 1vh;
+}
+
+.deleteChatButton:hover {
+  background-color: black;
+  border: 3px solid white;
+}
+
+.deleteChatIcon {
+  height: 55%;
+}

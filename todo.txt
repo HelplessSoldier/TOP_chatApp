@@ -1,1 +1,8 @@
+immediate todos
 - chat search elements
+- kick user logic
+- delete chat logic
+- delete chat confirmation styling
+
+generally: 
+- implement chat
