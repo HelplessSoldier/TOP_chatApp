@@ -1,7 +1,8 @@
 import { useState } from "react";
+import SingleChat from "./SingleChat";
 import "./Chats.css";
 
-export default function Chats({ setPageState }) {
+export default function Chats({ setPageState, chatsList }) {
   const [expanded, setExpanded] = useState(true);
 
   const handleExpandButton = () => {
@@ -32,6 +33,13 @@ export default function Chats({ setPageState }) {
         </div>
       </div>
       <hr />
+      {expanded && (
+        <div className="friendsListContainer">
+          {chatsList.map((chat) => {
+            return <SingleChat key={chat._id} chatObject={chat} />;
+          })}
+        </div>
+      )}
     </div>
   );
 }
