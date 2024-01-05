@@ -1,0 +1,16 @@
+.singleChatContainer {
+  background-color: var(--background-color);
+  margin: 1vh;
+  padding: 1vh;
+  border-radius: 1vh;
+  border-bottom: 1px solid var(--accent-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 2vh;
+}
+
+.chatName {
+  font-size: larger;
+}
