@@ -72,3 +72,8 @@ select {
 .instanceInfoIcon {
   height: 100%;
 }
+
+.nameMissingWarning {
+  font-size: larger;
+  margin-top: 1vh;
+}

@@ -7,7 +7,7 @@ import {
   apiVersion,
 } from "../../../../publicGlobals/apiGlobals.json";
 
-const newChatUri = serverUri + ":" + serverPort + apiVersion + '/chat/new-chat';
+const newChatUri = serverUri + ":" + serverPort + apiVersion + "/chat/new-chat";
 console.log(newChatUri);
 
 export default function NewChatForm({ setPageState }) {
@@ -24,11 +24,16 @@ export default function NewChatForm({ setPageState }) {
 
   const handleChatSubmit = (e) => {
     e.preventDefault();
-    const data = new FormData(e.target);
+    const formElement = e.target;
+    const data = new FormData(formElement);
+
     if (data.get("name") === "") {
       setEmptyField(true);
       return;
+    } else {
+      setEmptyField(false);
     }
+
     const token = getCookie(document.cookie, "jwt");
     const msg = {
       message: "New chat request",
@@ -36,15 +41,17 @@ export default function NewChatForm({ setPageState }) {
       chatName: data.get("name"),
       chatType: data.get("instanceType"),
     };
+
     const success = sendNewChatRequest(msg, newChatUri);
+
     if (success) {
-      setPageState('Chat')
+      setPageState("Chat");
     }
   };
 
   const handleInfoButton = (e) => {
     e.preventDefault();
-    setInstanceDescriptions(true);
+    setInstanceDescriptions((a) => !a);
   };
 
   return (
@@ -66,7 +73,11 @@ export default function NewChatForm({ setPageState }) {
               );
             })}
           </select>
-          <button className="instanceInfoButton" onClick={handleInfoButton}>
+          <button
+            type="button"
+            className="instanceInfoButton"
+            onClick={handleInfoButton}
+          >
             <img
               src="./icons/question-circle-svgrepo-com.svg"
               className="instanceInfoIcon"
@@ -91,6 +102,7 @@ export default function NewChatForm({ setPageState }) {
           </ul>
         </>
       )}
+      {emptyField && <p className="nameMissingWarning">Name Missing</p>}
     </div>
   );
 }
@@ -100,10 +112,10 @@ async function sendNewChatRequest(msg, uri) {
     method: "POST",
     mode: "cors",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(msg)
-  })
+    body: JSON.stringify(msg),
+  });
 
   if (response.ok) {
     return true;

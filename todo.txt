@@ -3,6 +3,8 @@ immediate todos
 - kick user logic
 - delete chat logic
 - delete chat confirmation styling
+- friend options logic
+- show chats in sidebar
 
 generally: 
 - implement chat
