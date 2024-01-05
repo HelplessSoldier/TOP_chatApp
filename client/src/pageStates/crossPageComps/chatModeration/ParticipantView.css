@@ -3,8 +3,27 @@
   margin: 0.55vh;
   border-radius: 2vh;
   background-color: var(--background-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .participantViewName {
   font-size: larger;
+}
+
+.participantKickButton {
+  color: white;
+  background-color: var(--secondary-color);
+  border: none;
+  outline: none;
+  padding: 0.5vh;
+  font-size: larger;
+  border-radius: 1vh;
+  margin-right: 2vh;
+  transition: background-color 0.34s ease;
+}
+
+.participantKickButton:hover {
+  background-color: red;
 }

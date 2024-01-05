@@ -2,9 +2,11 @@ import getUsers from "../../../helpers/getUsers";
 import { useEffect, useState } from "react";
 import "./ModerateChatWindow.css";
 import ParticipantView from "./ParticipantView";
+import KickUserConfirmation from "./KickUserConfirmation";
 
 export default function ModerateChatWindow({ chatObject, setSelectedChat }) {
   const [participants, setParticipants] = useState([]);
+  const [userToKick, setUserToKick] = useState(null);
 
   const handleCloseButton = () => {
     setSelectedChat(null);
@@ -20,6 +22,7 @@ export default function ModerateChatWindow({ chatObject, setSelectedChat }) {
 
   return (
     <div className="chatModerationRoot">
+      {userToKick && <KickUserConfirmation userObject={userToKick} setUserToKick={setUserToKick} />}
       <div className="chatModerationHeaderContainer">
         <h2 className="chatModerationName">{chatObject.name}:</h2>
         <button
@@ -36,7 +39,7 @@ export default function ModerateChatWindow({ chatObject, setSelectedChat }) {
         <h3 className="moderationSectionHeader">Participants</h3>
         {participants.map((userObject) => {
           return (
-            <ParticipantView userObject={userObject} key={userObject._id} />
+            <ParticipantView userObject={userObject} setUserToKick={setUserToKick} key={userObject._id} />
           );
         })}
       </div>
