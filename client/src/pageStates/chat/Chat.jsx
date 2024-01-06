@@ -13,13 +13,17 @@ export default function Chat({ setPageState, setUserObject, setSocket }) {
     socket.onopen = () => {
       socket.onmessage = (event) => {
         const responseJson = JSON.parse(event.data);
-        if (responseJson.message === "No user") {
-          setPageState("LogIn");
-        } else if (responseJson.message === "User successfully verified") {
-          setResponseObject(responseJson);
-          setUserObject(responseJson);
-        } else {
-          console.log(responseJson.message);
+
+        switch (responseJson.message) {
+          case "No user":
+            setPageState("LogIn");
+            break;
+          case "User successfully verified":
+            setResponseObject(responseJson);
+            setUserObject(responseJson);
+            break;
+          default:
+            console.log(responseJson.message);
         }
       };
     };

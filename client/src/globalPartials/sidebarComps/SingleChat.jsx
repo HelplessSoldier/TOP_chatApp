@@ -14,7 +14,6 @@ export default function SingleChat({ userObject, chatObject, socket }) {
     });
 
     socket.send(msg);
-    console.log('message sent: ', msg)
   };
 
   return (
