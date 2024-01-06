@@ -2,7 +2,7 @@ const getCookieFromString = require("../../helpers/getCookieFromString");
 const User = require("../../models/User");
 const jwt = require("jsonwebtoken");
 
-async function handleConnect(socket, req) {
+async function handleConnect(socket, req, userSocketMap) {
   console.log("Client connected");
   let currentUser = null;
   try {
@@ -19,6 +19,7 @@ async function handleConnect(socket, req) {
   if (currentUser === null) {
     socket.send(JSON.stringify({ message: "No user" }));
   } else {
+    userSocketMap[currentUser._id] = socket;
     socket.send(
       JSON.stringify({
         message: "User successfully verified",

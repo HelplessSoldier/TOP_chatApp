@@ -8,10 +8,11 @@ const Chat = require("../models/Chat");
 const User = require("../models/User");
 require("dotenv").config();
 
+const userSocketMap = {};
 const server = new WebSocket.Server({ port: 8888 });
 
 server.on("connection", (ws, req) => {
-  handleConnect(ws, req);
+  handleConnect(ws, req, userSocketMap);
 
   try {
     ws.on("message", (message) => {
