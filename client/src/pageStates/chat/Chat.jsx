@@ -13,7 +13,6 @@ export default function Chat({ setPageState, setUserObject, setSocket }) {
     socket.onopen = () => {
       socket.onmessage = (event) => {
         const responseJson = JSON.parse(event.data);
-
         switch (responseJson.message) {
           case "No user":
             setPageState("LogIn");
