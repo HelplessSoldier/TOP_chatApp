@@ -1,10 +1,9 @@
-immediate todos
 - chat search elements
 - kick user logic
 - delete chat logic
 - delete chat confirmation styling
 - friend options logic
 - show chats in sidebar
-
-generally: 
+- send current chat messages upon connection
+- send new chat upon switch
 - implement chat
