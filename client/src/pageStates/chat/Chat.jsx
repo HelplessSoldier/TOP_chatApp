@@ -2,6 +2,7 @@ import "./Chat.css";
 import globals from "../../../../publicGlobals/apiGlobals.json";
 import { useEffect, useState } from "react";
 import getCookie from "../../helpers/getCookie";
+import ChatBox from "./chatPartials/ChatBox";
 
 export default function Chat({ setPageState, setUserObject, setSocket }) {
   const [chatObject, setChatObject] = useState(null);
@@ -12,7 +13,8 @@ export default function Chat({ setPageState, setUserObject, setSocket }) {
     setSocket(socket);
 
     socket.onopen = () => {
-      sendChatObjectRequest(socket)
+      sendChatObjectRequest(socket);
+
       socket.onmessage = (event) => {
         const responseJson = JSON.parse(event.data);
         switch (responseJson.message) {
@@ -21,6 +23,9 @@ export default function Chat({ setPageState, setUserObject, setSocket }) {
             break;
           case "User successfully verified":
             setUserObject(responseJson);
+            break;
+          case "Chat found":
+            setChatObject(responseJson.chatObject);
             break;
           default:
             console.log(responseJson.message);
@@ -40,29 +45,18 @@ export default function Chat({ setPageState, setUserObject, setSocket }) {
     return () => socket.close();
   }, [setPageState, setUserObject, setSocket]);
 
-  const handleSendMessage = (e) => {
-    e.preventDefault();
-    const message = e.target.chatInput.value;
-    console.log(message);
-  };
-
   return (
     <div className="chatRoot">
-      <div className="chatContainer">
-        <div className="messagesContainer"></div>
-        <form className="messageInputContainer" onSubmit={handleSendMessage}>
-          <input type="text" className="chatInput" name="chatInput" />
-        </form>
-      </div>
+      <ChatBox chatObject={chatObject} />
     </div>
   );
 }
 
 function sendChatObjectRequest(socket) {
-  const token = getCookie(document.cookie, 'jwt')
+  const token = getCookie(document.cookie, "jwt");
   const chatObjectRequestMessage = {
     message: "User requesting current chat",
     token,
-  }
+  };
   socket.send(JSON.stringify(chatObjectRequestMessage));
 }

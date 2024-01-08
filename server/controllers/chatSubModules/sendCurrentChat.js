@@ -13,6 +13,7 @@ async function sendCurrentChat(message, socket) {
     const requestingUser = await User.findById(userId);
     const currentChatId = requestingUser.currentChat;
     const requestedChat = await Chat.findById(currentChatId);
+
     let responseMessage = null;
     if (requestedChat) {
       const chatObject = requestedChat.toObject();
@@ -26,6 +27,7 @@ async function sendCurrentChat(message, socket) {
         chatObject,
       };
     }
+
     socket.send(JSON.stringify(responseMessage));
   } catch (err) {
     console.error(err);
