@@ -6,7 +6,6 @@ const getCookieFromString = require("../helpers/getCookieFromString");
 const jwt = require("jsonwebtoken");
 const Chat = require("../models/Chat");
 const User = require("../models/User");
-const handleDisconnect = require("./chatSubModules/handleDisconnect");
 require("dotenv").config();
 
 const userSocketMap = {};
