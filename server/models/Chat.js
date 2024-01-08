@@ -13,8 +13,10 @@ const chatSchema = new Schema({
   },
   messages: [
     {
-      type: mongoose.Types.ObjectId,
-      ref: "Message",
+      sentByUsername: { type: String, required: true },
+      sentById: { type: mongoose.Types.ObjectId, ref: "User", required: true },
+      messageBody: { type: String, required: true },
+      timestamp: { type: Date, default: Date.now },
     },
   ],
 });

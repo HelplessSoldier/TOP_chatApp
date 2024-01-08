@@ -4,6 +4,7 @@ const handleFriendRequestReject = require("./handleRejectFriendRequest");
 const handleFriendRequestAccept = require("./handleFriendRequestAccepted");
 const handleSwitchChatRequest = require("./handleSwitchChatRequest");
 const handleDisconnect = require("./handleDisconnect");
+const sendCurrentChat = require("./sendCurrentChat");
 
 function messageSwitch(message, socket, userSocketMap) {
   switch (message.message) {
@@ -24,6 +25,9 @@ function messageSwitch(message, socket, userSocketMap) {
       break;
     case "User closed socket":
       handleDisconnect(message, userSocketMap);
+      break;
+    case "User requesting current chat":
+      sendCurrentChat(message, socket);
       break;
     default:
       console.log(`Unknown message received: ${message.message}`);

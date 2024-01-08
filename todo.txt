@@ -8,4 +8,3 @@
 - send new chat upon switch
 - implement chat
 
-**** - remove socket from memory upon close - ****

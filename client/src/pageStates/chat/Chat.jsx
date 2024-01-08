@@ -1,15 +1,18 @@
 import "./Chat.css";
 import globals from "../../../../publicGlobals/apiGlobals.json";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import getCookie from "../../helpers/getCookie";
 
 export default function Chat({ setPageState, setUserObject, setSocket }) {
+  const [chatObject, setChatObject] = useState(null);
+
   useEffect(() => {
     const wsUri = globals.webSocketUri;
     const socket = new WebSocket(wsUri);
     setSocket(socket);
 
     socket.onopen = () => {
+      sendChatObjectRequest(socket)
       socket.onmessage = (event) => {
         const responseJson = JSON.parse(event.data);
         switch (responseJson.message) {
@@ -53,4 +56,13 @@ export default function Chat({ setPageState, setUserObject, setSocket }) {
       </div>
     </div>
   );
+}
+
+function sendChatObjectRequest(socket) {
+  const token = getCookie(document.cookie, 'jwt')
+  const chatObjectRequestMessage = {
+    message: "User requesting current chat",
+    token,
+  }
+  socket.send(JSON.stringify(chatObjectRequestMessage));
 }
