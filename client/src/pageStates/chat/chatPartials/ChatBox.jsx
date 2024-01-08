@@ -7,15 +7,17 @@ export default function ChatBox({ chatObject, socket }) {
 
   const handleSendMessage = (e) => {
     e.preventDefault();
-    const tokenCookie = getCookie(document.cookie, "jwt");
-    const newChatMessageRequest = {
-      message: "New chat message",
-      chatId: chatObject._id,
-      token: tokenCookie,
-      body: messageInput,
-    };
-    socket.send(JSON.stringify(newChatMessageRequest));
-    setMessageInput("");
+    if (messageInput.trim() !== '') {
+      const tokenCookie = getCookie(document.cookie, "jwt");
+      const newChatMessageRequest = {
+        message: "New chat message",
+        chatId: chatObject._id,
+        token: tokenCookie,
+        body: messageInput,
+      };
+      socket.send(JSON.stringify(newChatMessageRequest));
+      setMessageInput("");
+    }
   };
 
   const handleMessageChange = (e) => {

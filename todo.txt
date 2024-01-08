@@ -7,4 +7,4 @@
 - send current chat messages upon connection
 - send new chat upon switch
 - implement chat
-
+- change chat clientside when swapping user.currentchat

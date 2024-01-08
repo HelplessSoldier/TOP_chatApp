@@ -31,7 +31,7 @@ function messageSwitch(message, socket, userSocketMap) {
       sendCurrentChat(message, socket);
       break;
     case "New chat message":
-      handleNewChatMessage(message, socket);
+      handleNewChatMessage(message, userSocketMap);
       break;
     default:
       console.log(`Unknown message received: ${message.message}`);
