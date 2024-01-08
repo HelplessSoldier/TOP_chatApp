@@ -53,6 +53,7 @@ function getPage(pageState, setPageState, setUserObject, socket, setSocket) {
         <Chat
           setPageState={setPageState}
           setUserObject={setUserObject}
+          socket={socket}
           setSocket={setSocket}
         />
       );

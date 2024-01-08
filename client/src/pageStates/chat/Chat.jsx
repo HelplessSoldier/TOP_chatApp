@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import getCookie from "../../helpers/getCookie";
 import ChatBox from "./chatPartials/ChatBox";
 
-export default function Chat({ setPageState, setUserObject, setSocket }) {
+export default function Chat({ setPageState, setUserObject, socket, setSocket }) {
   const [chatObject, setChatObject] = useState(null);
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export default function Chat({ setPageState, setUserObject, setSocket }) {
 
   return (
     <div className="chatRoot">
-      <ChatBox chatObject={chatObject} />
+      <ChatBox chatObject={chatObject} socket={socket} />
     </div>
   );
 }

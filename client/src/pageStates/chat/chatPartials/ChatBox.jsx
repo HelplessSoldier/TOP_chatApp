@@ -1,18 +1,26 @@
 import { useState } from "react";
+import getCookie from "../../../helpers/getCookie";
 import "./ChatBox.css";
 
-export default function ChatBox({ chatObject }) {
+export default function ChatBox({ chatObject, socket }) {
   const [messageInput, setMessageInput] = useState("");
 
   const handleSendMessage = (e) => {
     e.preventDefault();
-    console.log(messageInput);
-    setMessageInput('');
+    const tokenCookie = getCookie(document.cookie, "jwt");
+    const newChatMessageRequest = {
+      message: "New chat message",
+      chatId: chatObject._id,
+      token: tokenCookie,
+      body: messageInput,
+    };
+    socket.send(JSON.stringify(newChatMessageRequest));
+    setMessageInput("");
   };
 
   const handleMessageChange = (e) => {
     setMessageInput(e.target.value);
-  }
+  };
 
   return (
     <div className="chatContainer">
