@@ -17,13 +17,11 @@ server.on("connection", (ws, req) => {
   try {
     ws.on("message", (message) => {
       const parsedMessage = JSON.parse(message);
-      messageSwitch(parsedMessage, ws);
+      messageSwitch(parsedMessage, ws, userSocketMap);
     });
   } catch (err) {
     console.error(err);
   }
-
-  ws.on("close", () => { handleDisconnect() });
 });
 
 exports.new_chat_post = asyncHandler(async (req, res, next) => {

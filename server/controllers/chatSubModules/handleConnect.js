@@ -3,7 +3,6 @@ const User = require("../../models/User");
 const jwt = require("jsonwebtoken");
 
 async function handleConnect(socket, req, userSocketMap) {
-  console.log("Client connected");
   let currentUser = null;
   try {
     const cookies = req.headers.cookie;
