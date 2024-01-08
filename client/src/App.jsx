@@ -37,12 +37,12 @@ function App() {
         setPageState={setPageState}
         socket={socket}
       />
-      {getPage(pageState, setPageState, setUserObject, socket, setSocket)}
+      {getPage(pageState, setPageState, userObject, setUserObject, socket, setSocket)}
     </div>
   );
 }
 
-function getPage(pageState, setPageState, setUserObject, socket, setSocket) {
+function getPage(pageState, setPageState, userObject, setUserObject, socket, setSocket) {
   switch (pageState) {
     case "LogIn":
       return <LogIn setPageState={setPageState} />;
@@ -55,6 +55,7 @@ function getPage(pageState, setPageState, setUserObject, socket, setSocket) {
           setUserObject={setUserObject}
           socket={socket}
           setSocket={setSocket}
+          userObject={userObject}
         />
       );
     case "Account":
