@@ -5,6 +5,7 @@ const handleFriendRequestAccept = require("./handleFriendRequestAccepted");
 const handleSwitchChatRequest = require("./handleSwitchChatRequest");
 const handleDisconnect = require("./handleDisconnect");
 const sendCurrentChat = require("./sendCurrentChat");
+const handleNewChatMessage = require('./handleNewChatMessage');
 
 function messageSwitch(message, socket, userSocketMap) {
   switch (message.message) {
@@ -28,6 +29,9 @@ function messageSwitch(message, socket, userSocketMap) {
       break;
     case "User requesting current chat":
       sendCurrentChat(message, socket);
+      break;
+    case "New chat message":
+      handleNewChatMessage(message, socket);
       break;
     default:
       console.log(`Unknown message received: ${message.message}`);
