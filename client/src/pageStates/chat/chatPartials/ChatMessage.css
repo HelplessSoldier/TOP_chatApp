@@ -1,0 +1,41 @@
+.userChatBoxContainer {
+  background-color: var(--secondary-color);
+  margin-left: 8vh;
+  margin-right: 3vh;
+}
+
+.ChatBoxContainer {
+  background-color: var(--background-color);
+  margin-right: 8vw;
+  margin-left: 3vh;
+}
+
+.ChatBoxContainer,
+.userChatBoxContainer {
+  border-radius: 2vh;
+  margin-top: 3vh;
+  margin-bottom: 1vh;
+  padding: 2vh;
+}
+
+.chatBoxRoot {
+  display: flex;
+  flex-direction: column;
+}
+
+.chatTimestamp {
+  margin-left: 2vw;
+}
+
+.chatTimestampUser {
+  text-align: right;
+  margin-right: 2vw;
+}
+
+.chatUsername {
+  font-size: large;
+}
+
+.chatBody {
+  font-size: large;
+}

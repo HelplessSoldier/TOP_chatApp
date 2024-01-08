@@ -29,7 +29,6 @@ export default function Chat({ setPageState, setUserObject, socket, setSocket, u
             break;
           case "New chat message received":
             console.log(responseJson);
-            console.log(chatObject);
             break;
           default:
             console.log(responseJson.message);

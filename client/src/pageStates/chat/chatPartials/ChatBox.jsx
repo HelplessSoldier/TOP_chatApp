@@ -29,7 +29,7 @@ export default function ChatBox({ chatObject, socket, userObject }) {
     <div className="chatContainer">
       <div className="messagesContainer">
         {chatObject && chatObject.messages.map((message) => {
-          return <ChatMessage message={message} userObject={userObject} />
+          return <ChatMessage key={message._id} message={message} userObject={userObject} />
         })}
       </div>
       <form className="messageInputContainer" onSubmit={handleSendMessage}>
