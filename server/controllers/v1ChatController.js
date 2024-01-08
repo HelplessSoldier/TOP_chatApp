@@ -6,6 +6,7 @@ const getCookieFromString = require("../helpers/getCookieFromString");
 const jwt = require("jsonwebtoken");
 const Chat = require("../models/Chat");
 const User = require("../models/User");
+const handleDisconnect = require("./chatSubModules/handleDisconnect");
 require("dotenv").config();
 
 const userSocketMap = {};
@@ -13,7 +14,6 @@ const server = new WebSocket.Server({ port: 8888 });
 
 server.on("connection", (ws, req) => {
   handleConnect(ws, req, userSocketMap);
-
   try {
     ws.on("message", (message) => {
       const parsedMessage = JSON.parse(message);
@@ -23,7 +23,7 @@ server.on("connection", (ws, req) => {
     console.error(err);
   }
 
-  ws.on("close", () => console.log("Client disconnected"));
+  ws.on("close", () => { handleDisconnect() });
 });
 
 exports.new_chat_post = asyncHandler(async (req, res, next) => {

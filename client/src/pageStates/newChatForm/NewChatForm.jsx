@@ -8,7 +8,6 @@ import {
 } from "../../../../publicGlobals/apiGlobals.json";
 
 const newChatUri = serverUri + ":" + serverPort + apiVersion + "/chat/new-chat";
-console.log(newChatUri);
 
 export default function NewChatForm({ setPageState }) {
   const [instanceDescriptions, setInstanceDescriptions] = useState(false);

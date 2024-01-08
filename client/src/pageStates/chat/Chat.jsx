@@ -1,10 +1,9 @@
 import "./Chat.css";
 import globals from "../../../../publicGlobals/apiGlobals.json";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import getCookie from "../../helpers/getCookie";
 
 export default function Chat({ setPageState, setUserObject, setSocket }) {
-  const [responseObject, setResponseObject] = useState(null);
-
   useEffect(() => {
     const wsUri = globals.webSocketUri;
     const socket = new WebSocket(wsUri);
@@ -18,7 +17,6 @@ export default function Chat({ setPageState, setUserObject, setSocket }) {
             setPageState("LogIn");
             break;
           case "User successfully verified":
-            setResponseObject(responseJson);
             setUserObject(responseJson);
             break;
           default:
@@ -26,6 +24,16 @@ export default function Chat({ setPageState, setUserObject, setSocket }) {
         }
       };
     };
+
+    addEventListener("beforeunload", () => {
+      const token = getCookie(document.cookie, "jwt");
+      const closeMessage = {
+        message: "User closed socket",
+        token,
+      };
+      socket.send(JSON.stringify(closeMessage));
+    });
+
     return () => socket.close();
   }, [setPageState, setUserObject, setSocket]);
 
