@@ -25,6 +25,7 @@ async function handleNewChatMessage(message, userSocketMap) {
       sentByUsername: currentUser.username,
       sentById: currentUser._id,
       messageBody: chatMessage,
+      timestamp: Date.now(),
     };
 
     const responseObject = {

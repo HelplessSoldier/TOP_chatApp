@@ -4,7 +4,13 @@ import { useEffect, useState } from "react";
 import getCookie from "../../helpers/getCookie";
 import ChatBox from "./chatPartials/ChatBox";
 
-export default function Chat({ setPageState, setUserObject, socket, setSocket, userObject }) {
+export default function Chat({
+  setPageState,
+  setUserObject,
+  socket,
+  setSocket,
+  userObject,
+}) {
   const [chatObject, setChatObject] = useState(null);
 
   useEffect(() => {
@@ -28,7 +34,7 @@ export default function Chat({ setPageState, setUserObject, socket, setSocket, u
             setChatObject(responseJson.chatObject);
             break;
           case "New chat message received":
-            console.log(responseJson);
+            addNewChatMessage(responseJson.messageObject, setChatObject);
             break;
           default:
             console.log(responseJson.message);
@@ -50,7 +56,11 @@ export default function Chat({ setPageState, setUserObject, socket, setSocket, u
 
   return (
     <div className="chatRoot">
-      <ChatBox chatObject={chatObject} socket={socket} userObject={userObject} />
+      <ChatBox
+        chatObject={chatObject}
+        socket={socket}
+        userObject={userObject}
+      />
     </div>
   );
 }
@@ -62,4 +72,13 @@ function sendChatObjectRequest(socket) {
     token,
   };
   socket.send(JSON.stringify(chatObjectRequestMessage));
+}
+
+function addNewChatMessage(newMessage, setChatObject) {
+  setChatObject((prevChatObject) => {
+    return {
+      ...prevChatObject,
+      messages: [...prevChatObject.messages, newMessage],
+    };
+  });
 }

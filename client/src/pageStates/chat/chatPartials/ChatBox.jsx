@@ -35,11 +35,11 @@ export default function ChatBox({ chatObject, socket, userObject }) {
     setMessageInput(e.target.value);
   };
 
-  const handleMessageContainerScroll = (e) => {
+  const handleMessageContainerScroll = () => {
     setScrolling(true);
   };
 
-  const handleGotoBottomButton = (e) => {
+  const handleGotoBottomButton = () => {
     messagesContainerRef.current.scrollTop =
       messagesContainerRef.current.scrollHeight;
     setTimeout(() => {
