@@ -16,6 +16,14 @@ export default function ChatBox({ chatObject, socket, userObject }) {
     }, 100);
   }, []);
 
+  useEffect(() => {
+    messagesContainerRef.current.scrollTop =
+      messagesContainerRef.current.scrollHeight;
+    setTimeout(() => {
+      setScrolling(false);
+    }, 10)
+  }, [chatObject]);
+
   const handleSendMessage = (e) => {
     e.preventDefault();
     if (messageInput.trim() !== "") {
