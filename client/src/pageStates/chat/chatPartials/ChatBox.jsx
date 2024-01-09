@@ -32,7 +32,11 @@ export default function ChatBox({ chatObject, socket, userObject }) {
   };
 
   const handleGotoBottomButton = (e) => {
-    console.log("ayylmao");
+    messagesContainerRef.current.scrollTop =
+      messagesContainerRef.current.scrollHeight;
+    setTimeout(() => {
+      setScrolling(false);
+    }, 300);
   };
 
   useEffect(() => {
