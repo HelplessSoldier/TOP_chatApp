@@ -8,6 +8,14 @@ export default function ChatBox({ chatObject, socket, userObject }) {
   const [scrolling, setScrolling] = useState(false);
   const messagesContainerRef = useRef(null);
 
+  useEffect(() => {
+    setTimeout(() => {
+      messagesContainerRef.current.scrollTop =
+        messagesContainerRef.current.scrollHeight;
+      setScrolling(false);
+    }, 100);
+  }, []);
+
   const handleSendMessage = (e) => {
     e.preventDefault();
     if (messageInput.trim() !== "") {
