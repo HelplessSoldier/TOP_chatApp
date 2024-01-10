@@ -36,8 +36,11 @@ export default function Chat({
           case "New chat message received":
             addNewChatMessage(responseJson.messageObject, setChatObject);
             break;
+          case "Successfully switched chat":
+            sendChatObjectRequest(socket);
+            break;
           default:
-            console.log(responseJson.message);
+            console.log(responseJson);
         }
       };
     };

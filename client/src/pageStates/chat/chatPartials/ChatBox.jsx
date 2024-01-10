@@ -24,7 +24,7 @@ export default function ChatBox({ chatObject, socket, userObject }) {
       scrollToBottom();
       setScrolling(false);
       setShowGotoBottom(false);
-    }, 100);
+    }, 200);
   }, []);
 
   useEffect(() => {
