@@ -7,16 +7,19 @@ export default function ChatBox({ chatObject, socket, userObject }) {
   const [messageInput, setMessageInput] = useState("");
   const [scrolling, setScrolling] = useState(false);
   const [showGotoBottom, setShowGotoBottom] = useState(false);
+  const [scriptScrolling, setScriptScrolling] = useState(false);
   const messagesContainerRef = useRef(null);
 
   const scrollToBottom = () => {
     if (messagesContainerRef.current) {
+      setScriptScrolling(true);
       messagesContainerRef.current.scrollTop =
         messagesContainerRef.current.scrollHeight;
     }
   };
 
   useEffect(() => {
+    // set scroll position and states after rendering
     setTimeout(() => {
       scrollToBottom();
       setScrolling(false);
@@ -25,6 +28,7 @@ export default function ChatBox({ chatObject, socket, userObject }) {
   }, []);
 
   useEffect(() => {
+    // scroll chatbox on new message unless user scrolling
     if (!scrolling) {
       scrollToBottom();
     }
@@ -51,8 +55,12 @@ export default function ChatBox({ chatObject, socket, userObject }) {
   };
 
   const handleMessageContainerScroll = () => {
-    setScrolling(true);
-    setShowGotoBottom(true);
+    if (!scriptScrolling) {
+      setScrolling(true);
+      setShowGotoBottom(true);
+    } else {
+      setScriptScrolling(false);
+    }
   };
 
   const handleGotoBottomButton = () => {
@@ -62,12 +70,6 @@ export default function ChatBox({ chatObject, socket, userObject }) {
       setShowGotoBottom(false);
     }, 300);
   };
-
-  useEffect(() => {
-    if (chatObject && !scrolling) {
-      scrollToBottom();
-    }
-  }, [chatObject, scrolling]);
 
   return (
     <div className="chatContainer">
@@ -106,7 +108,6 @@ export default function ChatBox({ chatObject, socket, userObject }) {
           onChange={handleMessageChange}
         />
       </form>
-      {scrolling && <p>scrolling</p>}
     </div>
   );
 }
