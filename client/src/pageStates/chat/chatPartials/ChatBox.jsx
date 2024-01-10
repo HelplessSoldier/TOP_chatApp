@@ -9,10 +9,16 @@ export default function ChatBox({ chatObject, socket, userObject }) {
   const [showGotoBottom, setShowGotoBottom] = useState(false);
   const messagesContainerRef = useRef(null);
 
-  useEffect(() => {
-    setTimeout(() => {
+  const scrollToBottom = () => {
+    if (messagesContainerRef.current) {
       messagesContainerRef.current.scrollTop =
         messagesContainerRef.current.scrollHeight;
+    }
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      scrollToBottom();
       setScrolling(false);
       setShowGotoBottom(false);
     }, 100);
@@ -20,8 +26,7 @@ export default function ChatBox({ chatObject, socket, userObject }) {
 
   useEffect(() => {
     if (!scrolling) {
-      messagesContainerRef.current.scrollTop =
-        messagesContainerRef.current.scrollHeight;
+      scrollToBottom();
     }
     setShowGotoBottom(false);
   }, [chatObject, scrolling]);
@@ -51,8 +56,7 @@ export default function ChatBox({ chatObject, socket, userObject }) {
   };
 
   const handleGotoBottomButton = () => {
-    messagesContainerRef.current.scrollTop =
-      messagesContainerRef.current.scrollHeight;
+    scrollToBottom();
     setTimeout(() => {
       setScrolling(false);
       setShowGotoBottom(false);
@@ -60,11 +64,8 @@ export default function ChatBox({ chatObject, socket, userObject }) {
   };
 
   useEffect(() => {
-    if (chatObject) {
-      if (messagesContainerRef.current && !scrolling) {
-        messagesContainerRef.current.scrollTop =
-          messagesContainerRef.current.scrollHeight;
-      }
+    if (chatObject && !scrolling) {
+      scrollToBottom();
     }
   }, [chatObject, scrolling]);
 
@@ -105,6 +106,7 @@ export default function ChatBox({ chatObject, socket, userObject }) {
           onChange={handleMessageChange}
         />
       </form>
+      {scrolling && <p>scrolling</p>}
     </div>
   );
 }
