@@ -6,6 +6,7 @@ import ChatMessage from "./ChatMessage";
 export default function ChatBox({ chatObject, socket, userObject }) {
   const [messageInput, setMessageInput] = useState("");
   const [scrolling, setScrolling] = useState(false);
+  const [showGotoBottom, setShowGotoBottom] = useState(false);
   const messagesContainerRef = useRef(null);
 
   useEffect(() => {
@@ -13,6 +14,7 @@ export default function ChatBox({ chatObject, socket, userObject }) {
       messagesContainerRef.current.scrollTop =
         messagesContainerRef.current.scrollHeight;
       setScrolling(false);
+      setShowGotoBottom(false);
     }, 100);
   }, []);
 
@@ -21,7 +23,7 @@ export default function ChatBox({ chatObject, socket, userObject }) {
       messagesContainerRef.current.scrollTop =
         messagesContainerRef.current.scrollHeight;
     }
-    setScrolling(false);
+    setShowGotoBottom(false);
   }, [chatObject, scrolling]);
 
   const handleSendMessage = (e) => {
@@ -45,6 +47,7 @@ export default function ChatBox({ chatObject, socket, userObject }) {
 
   const handleMessageContainerScroll = () => {
     setScrolling(true);
+    setShowGotoBottom(true);
   };
 
   const handleGotoBottomButton = () => {
@@ -52,6 +55,7 @@ export default function ChatBox({ chatObject, socket, userObject }) {
       messagesContainerRef.current.scrollHeight;
     setTimeout(() => {
       setScrolling(false);
+      setShowGotoBottom(false);
     }, 300);
   };
 
@@ -83,7 +87,7 @@ export default function ChatBox({ chatObject, socket, userObject }) {
           })}
       </div>
 
-      {scrolling && (
+      {showGotoBottom && (
         <button className="gotoBottomButton" onClick={handleGotoBottomButton}>
           <img
             className="gotoBottomIcon"
