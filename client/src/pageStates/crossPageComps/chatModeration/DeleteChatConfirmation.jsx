@@ -1,6 +1,6 @@
 import './DeleteChatConfirmation.css';
 
-export default function DeleteChatConfirmation({ chatObject }) {
+export default function DeleteChatConfirmation({ chatObject, setShowDeleteConfirmation }) {
   const handleConfirm = (e) => {
     e.preventDefault();
     console.log('delete chat confirm button pressed')
@@ -8,7 +8,7 @@ export default function DeleteChatConfirmation({ chatObject }) {
 
   const handleCancel = (e) => {
     e.preventDefault();
-    console.log('delete chat cancel button pressed')
+    setShowDeleteConfirmation(false);
   }
 
   return (

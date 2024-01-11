@@ -17,7 +17,6 @@ export default function ModerateChatWindow({ chatObject, setSelectedChat }) {
 
   const handleDeleteChatButton = (e) => {
     e.preventDefault();
-    console.log("delete button presses for ", chatObject.name);
     setShowDeleteConfirmation(true);
   };
 
@@ -32,7 +31,10 @@ export default function ModerateChatWindow({ chatObject, setSelectedChat }) {
   return (
     <div className="chatModerationRoot">
       {showDeleteConfirmation && (
-        <DeleteChatConfirmation chatObject={chatObject} />
+        <DeleteChatConfirmation
+          chatObject={chatObject}
+          setShowDeleteConfirmation={setShowDeleteConfirmation}
+        />
       )}
       {userToKick && (
         <KickUserConfirmation
