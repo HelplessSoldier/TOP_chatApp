@@ -49,7 +49,7 @@ export default function Header({
   return (
     <>
       <div className="headerContainer">
-        <h1 className="headerLogo">SPRK</h1>
+        <h1 className="headerLogo" onClick={handleChatButtonClick}>SPRK</h1>
         {isLoggedIn && (
           <SearchBar socket={socket} setSearchResults={setSearchResults} />
         )}

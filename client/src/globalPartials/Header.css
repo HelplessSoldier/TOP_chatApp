@@ -15,6 +15,10 @@
   letter-spacing: .34vw;
 }
 
+.headerLogo:hover {
+  cursor: pointer;
+}
+
 .headerButton {
   display: flex;
   justify-content: center;
