@@ -1,4 +1,4 @@
-.deleteChatButton {
+.deleteChatConfirmButton {
   height: 5vh;
   width: 5vw;
   background-color: var(--accent-color);
@@ -7,11 +7,11 @@
   margin: 1vh;
 }
 
-.deleteChatButton:hover {
+.deleteChatConfirmButton:hover {
   background-color: black;
   border: 3px solid white;
 }
 
-.deleteChatIcon {
+.deleteChatConfirmIcon {
   height: 55%;
 }

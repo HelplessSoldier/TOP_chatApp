@@ -43,8 +43,8 @@
 
 .dangerZoneContainer {
   border: 3px solid red;
-  margin: 2vh;
-  border-radius: 1vh;
+  margin: 5vh;
+  border-radius: 3vh;
   padding: 2vh;
 }
 

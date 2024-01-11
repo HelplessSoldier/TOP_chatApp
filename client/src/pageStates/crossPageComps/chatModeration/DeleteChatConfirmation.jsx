@@ -15,12 +15,12 @@ export default function DeleteChatConfirmation({ chatObject }) {
     <div className='deleteChatConfirmationContainer'>
       <h1>Deleting: {chatObject.name}</h1>
       <h2>Are you sure?</h2>
-      <div className='deleteChatButtonContainer'>
-        <button className="deleteChatButton" onClick={handleConfirm}>
-          <img src="./icons/checkmark-svgrepo-com.svg" className="deleteChatIcon" />
+      <div className='deleteChatConfirmButtonContainer'>
+        <button className="deleteChatConfirmButton" onClick={handleConfirm}>
+          <img src="./icons/checkmark-svgrepo-com.svg" className="deleteChatConfirmIcon" />
         </button>
-        <button className="deleteChatButton" onClick={handleCancel}>
-          <img src="./icons/cancel-svgrepo-com.svg" className="deleteChatIcon" />
+        <button className="deleteChatConfirmButton" onClick={handleCancel}>
+          <img src="./icons/cancel-svgrepo-com.svg" className="deleteChatConfirmIcon" />
         </button>
       </div>
     </div>
