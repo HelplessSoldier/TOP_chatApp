@@ -11,8 +11,20 @@
   padding-right: 2vh;
 }
 
+.singleChatContainer:hover {
+  background-color: var(--accent-color);
+  cursor: pointer;
+}
+
 .chatName {
   font-size: larger;
+}
+
+.selectedChatDisplay {
+  background-color: var(--accent-color);
+  height: 1.5vh;
+  width: 1.5vh;
+  border-radius: .75vh;
 }
 
 .chatSelectButton {

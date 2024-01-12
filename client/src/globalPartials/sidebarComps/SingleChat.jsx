@@ -1,6 +1,8 @@
 import "./SingleChat.css";
 
 export default function SingleChat({ userObject, chatObject, socket }) {
+  const isCurrentChat = userObject.currentChat === chatObject._id;
+
   const handleSelectChatButton = () => {
     const jwtToken = document.cookie
       .split(";")
@@ -17,14 +19,9 @@ export default function SingleChat({ userObject, chatObject, socket }) {
   };
 
   return (
-    <div className="singleChatContainer">
+    <div className="singleChatContainer" onClick={handleSelectChatButton}>
       <p className="chatName">{chatObject.chatName}</p>
-      <button className="chatSelectButton" onClick={handleSelectChatButton}>
-        <img
-          src="./icons/chat-square-svgrepo-com.svg"
-          className="chatSelectIcon"
-        />
-      </button>
+      {isCurrentChat && <div className="selectedChatDisplay"></div>}
     </div>
   );
 }

@@ -29,6 +29,7 @@ async function handleConnect(socket, req, userSocketMap) {
         sentFriendRequests: currentUser.sentFriendRequests,
         chats: currentUser.chats,
         chatInvites: currentUser.chatInvites,
+        currentChat: currentUser.currentChat,
       })
     );
   }
