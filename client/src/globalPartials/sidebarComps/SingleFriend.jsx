@@ -1,11 +1,14 @@
 import "./SingleFriend.css";
 
-export default function SingleFriend({ friendObject }) {
-
+export default function SingleFriend({
+  friendObject,
+  setSelectedFriend,
+  setPageState,
+}) {
   const handleOptionsButton = () => {
-    console.log(friendObject.username, friendObject._id)
-    return;
-  }
+    setSelectedFriend(friendObject);
+    setPageState("FriendOptions");
+  };
 
   return (
     <div className="singleFriendContainer">

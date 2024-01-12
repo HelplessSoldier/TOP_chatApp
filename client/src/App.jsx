@@ -8,12 +8,14 @@ import Chat from "./pageStates/chat/Chat";
 import Account from "./pageStates/account/Account";
 import SearchResultsView from "./globalPartials/headerComps/SearchResultsView";
 import NewChatForm from "./pageStates/newChatForm/NewChatForm.jsx";
+import FriendOptions from "./pageStates/friendOptions/FriendOptions.jsx";
 
 function App() {
   const [pageState, setPageState] = useState("Chat");
   const [userObject, setUserObject] = useState(null);
   const [socket, setSocket] = useState(null);
   const [searchResults, setSearchResults] = useState(null);
+  const [selectedFriend, setSelectedFriend] = useState(null);
 
   return (
     <div className="mainRoot">
@@ -37,13 +39,30 @@ function App() {
         setPageState={setPageState}
         socket={socket}
         setUserObject={setUserObject}
+        setSelectedFriend={setSelectedFriend}
       />
-      {getPage(pageState, setPageState, userObject, setUserObject, socket, setSocket)}
+      {getPage(
+        pageState,
+        setPageState,
+        userObject,
+        setUserObject,
+        socket,
+        setSocket,
+        selectedFriend
+      )}
     </div>
   );
 }
 
-function getPage(pageState, setPageState, userObject, setUserObject, socket, setSocket) {
+function getPage(
+  pageState,
+  setPageState,
+  userObject,
+  setUserObject,
+  socket,
+  setSocket,
+  selectedFriend
+) {
   switch (pageState) {
     case "LogIn":
       return <LogIn setPageState={setPageState} />;
@@ -69,6 +88,8 @@ function getPage(pageState, setPageState, userObject, setUserObject, socket, set
       );
     case "NewChat":
       return <NewChatForm setPageState={setPageState} />;
+    case "FriendOptions":
+      return <FriendOptions selectedFriend={selectedFriend} />;
     default:
       return null;
   }

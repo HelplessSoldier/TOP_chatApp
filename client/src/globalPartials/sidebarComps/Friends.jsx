@@ -2,11 +2,15 @@ import { useState } from "react";
 import SingleFriend from "./SingleFriend";
 import "./Friends.css";
 
-export default function Friends({ friendsList }) {
+export default function Friends({
+  friendsList,
+  setSelectedFriend,
+  setPageState,
+}) {
   const [expanded, setExpanded] = useState(true);
 
   const handleExpandButton = () => {
-    setExpanded((prevExpanded) => !prevExpanded);
+    setExpanded((a) => !a);
   };
 
   return (
@@ -27,7 +31,14 @@ export default function Friends({ friendsList }) {
       {expanded && (
         <div className="friendsListContainer">
           {friendsList.map((friend) => {
-            return <SingleFriend key={friend.username} friendObject={friend} />;
+            return (
+              <SingleFriend
+                key={friend.username}
+                friendObject={friend}
+                setSelectedFriend={setSelectedFriend}
+                setPageState={setPageState}
+              />
+            );
           })}
         </div>
       )}
