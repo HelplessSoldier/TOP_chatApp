@@ -49,6 +49,7 @@ export default function DeleteChatConfirmation({
 async function deleteChatRequest(uri) {
   const response = await fetch(uri, {
     method: "DELETE",
+    credentials: "include",
   });
   if (response.ok) {
     console.log("finish this nerd");

@@ -51,7 +51,28 @@ exports.chat_get = asyncHandler(async (req, res) => {
 });
 
 exports.chat_delete = asyncHandler(async (req, res) => {
-  console.log("got into chat_delete, unimplimented");
-  console.log(req.cookies)
-  res.json({ message: "got into chat delete" });
+  const token = req.cookies.jwt;
+  const userId = jwt.verify(token, process.env.secret).userId;
+
+  const requestingUser = await User.findById(userId);
+  const chatToDeleteId = req.params.chatid;
+  const chatOwnedByUser = requestingUser.ownedChats.includes(chatToDeleteId);
+
+  if (!chatOwnedByUser) {
+    res.json({ message: "Cannot delete", detail: "user does not own chat" });
+    return;
+  }
+
+  const chatToDelete = await Chat.findById(chatToDeleteId);
+  if (!chatToDelete) {
+    res.json({ message: "Cannot delete", detail: "chat was not found" })
+  }
+
+  await chatToDelete.deleteOne();
+  const checkChat = await Chat.findById(chatToDeleteId);
+  if (checkChat) {
+    res.json({ message: "Cannot delete", detail: "failed to delete chat" })
+  } else {
+    res.json({ message: "Successfully deleted chat" })
+  }
 });
