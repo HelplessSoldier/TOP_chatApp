@@ -14,12 +14,17 @@ export default function FriendOptions({
   return (
     <div className="friendOptionsContainer">
       <div className="friendOptionsHeaderAndExitContainer">
-        <button onClick={handleExitButton}>exit</button>
         <h1>
-          hi from the friend options pageState! selectedfriend is{" "}
-          {JSON.stringify(selectedFriend)}
+          {selectedFriend.username}
         </h1>
+        <button className="friendOptionsExitButton" onClick={handleExitButton}>
+          <img
+            className="friendOptionsExitIcon"
+            src="./icons/close-svgrepo-com.svg"
+          />
+        </button>
       </div>
+      <hr />
     </div>
   );
 }

@@ -4,3 +4,20 @@
   padding: 3vh;
   margin: 10vh;
 }
+
+.friendOptionsHeaderAndExitContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1vh;
+}
+
+.friendOptionsExitButton {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.friendOptionsExitIcon {
+  height: 3vw;
+  width: 3vw;
+}
