@@ -5,13 +5,7 @@ import FriendRequests from "./accountComps/FriendRequests";
 import ChatInvites from "./accountComps/ChatInvites";
 import OwnedChats from "./accountComps/OwnedChats";
 import ModerateChatWindow from "../crossPageComps/chatModeration/ModerateChatWindow";
-
-const userGetUri =
-  globals.serverUri +
-  ":" +
-  globals.serverPort +
-  globals.apiVersion +
-  "/current-user";
+import getAccountInfo from "../../helpers/getAccountInfo";
 
 export default function Account({ socket, setSocket }) {
   const [userObject, setUserObject] = useState(null);
@@ -28,7 +22,7 @@ export default function Account({ socket, setSocket }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const accountObject = await getAccountInfo(userGetUri);
+        const accountObject = await getAccountInfo();
         setUserObject(accountObject.user);
       } catch (err) {
         console.error(err);
@@ -86,19 +80,3 @@ export default function Account({ socket, setSocket }) {
   );
 }
 
-async function getAccountInfo(url) {
-  let data = null;
-
-  try {
-    const response = await fetch(url, {
-      method: "GET",
-      credentials: "include",
-    });
-    if (response.ok) {
-      data = await response.json();
-    }
-    return data;
-  } catch (err) {
-    console.error(err);
-  }
-}
