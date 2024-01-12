@@ -59,19 +59,19 @@ exports.chat_delete = asyncHandler(async (req, res) => {
   const chatOwnedByUser = requestingUser.ownedChats.includes(chatToDeleteId);
 
   if (!chatOwnedByUser) {
-    res.json({ message: "Cannot delete", detail: "user does not own chat" });
+    res.json({ message: "Cannot delete", detail: "User does not own chat" });
     return;
   }
 
   const chatToDelete = await Chat.findById(chatToDeleteId);
   if (!chatToDelete) {
-    res.json({ message: "Cannot delete", detail: "chat was not found" })
+    res.json({ message: "Cannot delete", detail: "Chat was not found" })
   }
 
   await chatToDelete.deleteOne();
   const checkChat = await Chat.findById(chatToDeleteId);
   if (checkChat) {
-    res.json({ message: "Cannot delete", detail: "failed to delete chat" })
+    res.json({ message: "Cannot delete", detail: "Failed to delete chat" })
   } else {
     res.json({ message: "Successfully deleted chat" })
   }
