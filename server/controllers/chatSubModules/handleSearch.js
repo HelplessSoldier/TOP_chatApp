@@ -2,7 +2,6 @@ const User = require('../../models/User');
 const Chat = require('../../models/Chat');
 
 async function handleSearch(message, socket) {
-  console.log(message);
   const searchTerm = message.searchTerm;
 
   if (searchTerm === '') {

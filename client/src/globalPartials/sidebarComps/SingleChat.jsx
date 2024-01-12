@@ -23,6 +23,9 @@ export default function SingleChat({
 
     socket.send(msg);
     setTimeout(async () => {
+      // TODO: this should really be triggered by a confirmation from the server
+      // that the account has been updated. timeout's hacky but works as long
+      // as the client has reasonable latency
       await getAccountInfo().then((data) => setUserObject(data.user));
     }, 50);
   };

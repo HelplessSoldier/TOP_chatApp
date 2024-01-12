@@ -125,7 +125,6 @@ exports.sign_up_post = [
 
     try {
       await newUser.save();
-      console.log("user saved");
       res.json({ message: "Succesfully saved user" });
     } catch (err) {
       res.status(500).json({
