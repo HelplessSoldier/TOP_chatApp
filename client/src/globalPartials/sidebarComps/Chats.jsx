@@ -2,7 +2,13 @@ import { useState } from "react";
 import SingleChat from "./SingleChat";
 import "./Chats.css";
 
-export default function Chats({ setPageState, chatsList, socket, userObject }) {
+export default function Chats({
+  setPageState,
+  chatsList,
+  socket,
+  userObject,
+  setUserObject,
+}) {
   const [expanded, setExpanded] = useState(true);
 
   const handleExpandButton = () => {
@@ -42,6 +48,7 @@ export default function Chats({ setPageState, chatsList, socket, userObject }) {
                 userObject={userObject}
                 chatObject={chat}
                 socket={socket}
+                setUserObject={setUserObject}
               />
             );
           })}

@@ -17,6 +17,7 @@ export default async function getAccountInfo() {
     if (response.ok) {
       data = await response.json();
     }
+    console.log(data);
     return data;
   } catch (err) {
     console.error(err);

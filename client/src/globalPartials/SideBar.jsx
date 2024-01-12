@@ -9,7 +9,7 @@ const apiUri =
 const userGetUri = apiUri + "/user";
 const chatGetUri = apiUri + "/chat";
 
-export default function SideBar({ userObject, setPageState, socket }) {
+export default function SideBar({ userObject, setPageState, socket, setUserObject }) {
   const [friendsList, setFriendsList] = useState([]);
   const [chatsList, setChatsList] = useState([]);
   const [updateCountFri, setUpdateCountFri] = useState(0);
@@ -42,6 +42,7 @@ export default function SideBar({ userObject, setPageState, socket }) {
         chatsList={chatsList}
         userObject={userObject}
         socket={socket}
+        setUserObject={setUserObject}
       />
       <Friends friendsList={friendsList} />
     </div>

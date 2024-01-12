@@ -36,6 +36,7 @@ function App() {
         userObject={userObject}
         setPageState={setPageState}
         socket={socket}
+        setUserObject={setUserObject}
       />
       {getPage(pageState, setPageState, userObject, setUserObject, socket, setSocket)}
     </div>
