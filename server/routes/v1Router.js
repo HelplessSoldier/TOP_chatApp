@@ -8,5 +8,6 @@ router.get("/", v1Controller.root_get);
 router.get('/current-user', v1Controller.currentUser_get);
 router.get('/user/:userid', v1Controller.user_get);
 router.get('/chat/:chatid', v1Controller.chat_get);
+router.delete('/chat/:chatid', v1Controller.chat_delete);
 
 module.exports = router;

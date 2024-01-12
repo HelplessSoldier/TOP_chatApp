@@ -49,3 +49,8 @@ exports.chat_get = asyncHandler(async (req, res, next) => {
   const chatObject = foundChat.toObject();
   res.json({ message: "Chat found", chat: chatObject });
 });
+
+exports.chat_delete = asyncHandler(async (req, res, next) => {
+  console.log("got into chat_delete, unimplimented");
+  res.json({ message: "got into chat delete" });
+});
