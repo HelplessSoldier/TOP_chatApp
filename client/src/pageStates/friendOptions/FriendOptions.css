@@ -1,0 +1,6 @@
+.friendOptionsContainer {
+  border-radius: 3vh;
+  background-color: var(--darker-background-color);
+  padding: 3vh;
+  margin: 10vh;
+}

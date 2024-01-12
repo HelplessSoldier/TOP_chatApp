@@ -48,7 +48,8 @@ function App() {
         setUserObject,
         socket,
         setSocket,
-        selectedFriend
+        selectedFriend,
+        setSelectedFriend
       )}
     </div>
   );
@@ -61,7 +62,8 @@ function getPage(
   setUserObject,
   socket,
   setSocket,
-  selectedFriend
+  selectedFriend,
+  setSelectedFriend
 ) {
   switch (pageState) {
     case "LogIn":
@@ -89,7 +91,13 @@ function getPage(
     case "NewChat":
       return <NewChatForm setPageState={setPageState} />;
     case "FriendOptions":
-      return <FriendOptions selectedFriend={selectedFriend} />;
+      return (
+        <FriendOptions
+          selectedFriend={selectedFriend}
+          setSelectedFriend={setSelectedFriend}
+          setPageState={setPageState}
+        />
+      );
     default:
       return null;
   }
