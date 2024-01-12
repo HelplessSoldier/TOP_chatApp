@@ -11,7 +11,6 @@ export default function DeleteChatConfirmation({
     ":" +
     globals.serverPort +
     globals.apiVersion +
-    "/" +
     "/chat/" +
     String(chatId);
 
@@ -48,7 +47,6 @@ export default function DeleteChatConfirmation({
 }
 
 async function deleteChatRequest(uri) {
-  console.log(`uri: ${uri}`);
   const response = await fetch(uri, {
     method: "DELETE",
   });
