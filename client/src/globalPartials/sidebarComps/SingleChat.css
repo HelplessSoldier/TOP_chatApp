@@ -16,6 +16,10 @@
   cursor: pointer;
 }
 
+.singleChatContainer:hover > div {
+  background-color: var(--background-color);
+}
+
 .chatName {
   font-size: larger;
 }

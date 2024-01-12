@@ -1,10 +1,15 @@
 import getAccountInfo from "../../helpers/getAccountInfo";
 import "./SingleChat.css";
 
-export default function SingleChat({ userObject, chatObject, socket, setUserObject }) {
+export default function SingleChat({
+  userObject,
+  chatObject,
+  socket,
+  setUserObject,
+}) {
   const isCurrentChat = userObject.currentChat === chatObject._id;
 
-  const handleSelectChatButton = async () => {
+  const handleSelectChatButton = () => {
     const jwtToken = document.cookie
       .split(";")
       .find((row) => row.startsWith("jwt="))
@@ -17,9 +22,9 @@ export default function SingleChat({ userObject, chatObject, socket, setUserObje
     });
 
     socket.send(msg);
-
-    const userInfo = await getAccountInfo();
-    setUserObject(userInfo.user);
+    setTimeout(async () => {
+      await getAccountInfo().then((data) => setUserObject(data.user));
+    }, 50);
   };
 
   return (
