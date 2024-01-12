@@ -7,8 +7,13 @@ export default function DeleteChatConfirmation({
 }) {
   const chatId = chatObject._id;
   const deleteChatUri =
-    globals.serverUri + ":" + globals.serverPort + "/chat/" + String(chatId);
-  console.log(deleteChatUri);
+    globals.serverUri +
+    ":" +
+    globals.serverPort +
+    globals.apiVersion +
+    "/" +
+    "/chat/" +
+    String(chatId);
 
   const handleConfirm = (e) => {
     e.preventDefault();
@@ -43,6 +48,7 @@ export default function DeleteChatConfirmation({
 }
 
 async function deleteChatRequest(uri) {
+  console.log(`uri: ${uri}`);
   const response = await fetch(uri, {
     method: "DELETE",
   });
