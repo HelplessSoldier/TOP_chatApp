@@ -96,6 +96,7 @@ function getPage(
           selectedFriend={selectedFriend}
           setSelectedFriend={setSelectedFriend}
           setPageState={setPageState}
+          userObject={userObject}
         />
       );
     default:

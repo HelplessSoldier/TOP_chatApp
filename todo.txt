@@ -1,10 +1,12 @@
 - chat search elements
 - kick user logic
-- delete chat logic
-- delete chat confirmation styling
 - friend options logic
-- show chats in sidebar
-- send current chat messages upon connection
-- send new chat upon switch
-- implement chat
-- change chat clientside when swapping user.currentchat
+- allow for searching chats, return any friends/friends+/public that can be joined without invite
+- join chat if allowed, then update sidebar
+✅ delete chat logic 
+✅ delete chat confirmation styling 
+✅ show chats in sidebar 
+✅ send current chat messages upon connection 
+✅ send new chat upon switch 
+✅ implement chat 
+✅ change chat clientside when swapping user.currentchat 
