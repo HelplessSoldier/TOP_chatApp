@@ -23,7 +23,7 @@ server.on("connection", (ws, req) => {
   }
 });
 
-exports.new_chat_post = asyncHandler(async (req, res, next) => {
+exports.new_chat_post = asyncHandler(async (req, res) => {
   try {
     const body = req.body;
     const secret = process.env.secret;
