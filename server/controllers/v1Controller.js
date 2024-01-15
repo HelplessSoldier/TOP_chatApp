@@ -65,19 +65,29 @@ exports.chat_delete = asyncHandler(async (req, res) => {
 
   const chatToDelete = await Chat.findById(chatToDeleteId);
   if (!chatToDelete) {
-    res.json({ message: "Cannot delete", detail: "Chat was not found" })
+    res.json({ message: "Cannot delete", detail: "Chat was not found" });
   }
 
   await chatToDelete.deleteOne();
   const checkChat = await Chat.findById(chatToDeleteId);
   if (checkChat) {
-    res.json({ message: "Cannot delete", detail: "Failed to delete chat" })
+    res.json({ message: "Cannot delete", detail: "Failed to delete chat" });
   } else {
-    res.json({ message: "Successfully deleted chat" })
+    res.json({ message: "Successfully deleted chat" });
   }
 });
 
 exports.user_friend_put = asyncHandler(async (req, res) => {
-  console.log('got into v1Controller.user_friend_put');
-  res.json({ message: 'got into v1Controller.user_friend_put' });
-})
+  //TODO: finish this
+  const token = req.cookies.jwt;
+
+  const userId = jwt.verify(token, process.env.secret).userId;
+  const userToRemoveId = req.params.userid;
+
+  const currentUser = await User.findById(userId);
+  const userToRemove = await User.findById(userToRemoveId);
+
+  console.log(userToRemove);
+  console.log(currentUser);
+  res.json({ message: "user_friend_put not fully implemented" });
+});

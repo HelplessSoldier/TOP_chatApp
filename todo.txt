@@ -3,6 +3,7 @@
 - friend options logic
 - allow for searching chats, return any friends/friends+/public that can be joined without invite
 - join chat if allowed, then update sidebar
+- fix friend add?
 ✅ delete chat logic 
 ✅ delete chat confirmation styling 
 ✅ show chats in sidebar 
