@@ -15,7 +15,7 @@ async function sendCurrentChat(message, socket) {
     const requestedChat = await Chat.findById(currentChatId);
 
     let responseMessage = null;
-    if (requestedChat) {
+    if (requestedChat !== null) {
       const chatObject = requestedChat.toObject();
       responseMessage = {
         message: "Chat found",
@@ -24,7 +24,6 @@ async function sendCurrentChat(message, socket) {
     } else {
       responseMessage = {
         message: "No chat found",
-        chatObject,
       };
     }
 
