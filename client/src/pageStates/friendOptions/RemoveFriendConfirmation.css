@@ -1,0 +1,35 @@
+.removeFriendConfirmationContainer {
+  position: absolute;
+  background-color: var(--background-color);
+  border-radius: 2vh;
+  padding: 4vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid red;
+}
+
+.removeFriendConfirmationCancelButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid transparent;
+  background-color: transparent;
+  padding: 1vh;
+  border-radius: 50%;
+}
+
+.removeFriendConfirmationCancelButton:hover {
+  border: 2px solid white;
+}
+
+.removeFriendConfirmationCancelIcon {
+  height: 5vh;
+}
+
+.removeFriendConfirmationHeader {
+  display: flex;
+  gap: 4vw;
+  padding-bottom: 2vh;
+  border-bottom: 1px solid var(--secondary-color);
+}

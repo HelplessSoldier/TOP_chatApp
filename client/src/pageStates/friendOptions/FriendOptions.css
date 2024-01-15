@@ -1,4 +1,5 @@
 .friendOptionsContainer {
+  position: relative;
   border-radius: 3vh;
   background-color: var(--darker-background-color);
   padding: 3vh;
@@ -9,12 +10,6 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 1vh;
-}
-
-.friendOptionsExitButton {
-  background-color: transparent;
-  border: none;
-  outline: none;
 }
 
 .friendOptionsExitIcon {
@@ -36,4 +31,18 @@
 .friendActionsButton:hover {
   background-color: var(--darker-background-color);
   border: 3px solid white;
+}
+
+.friendOptionsExitButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid transparent;
+  background-color: transparent;
+  padding: 1vh;
+  border-radius: 50%;
+}
+
+.friendOptionsExitButton:hover {
+  border: 2px solid white;
 }

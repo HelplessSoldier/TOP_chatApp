@@ -1,3 +1,5 @@
+import "./RemoveFriendConfirmation.css";
+
 export default function RemoveFriendConfirmation({
   userObject,
   selectedFriend,
@@ -15,7 +17,10 @@ export default function RemoveFriendConfirmation({
           className="removeFriendConfirmationCancelButton"
           onClick={handleCloseButton}
         >
-          <img src="./icons/close-svgrepo-com.svg" />
+          <img
+            src="./icons/close-svgrepo-com.svg"
+            className="removeFriendConfirmationCancelIcon"
+          />
         </button>
       </div>
     </div>
