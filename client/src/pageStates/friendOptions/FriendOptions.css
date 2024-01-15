@@ -23,12 +23,17 @@
 }
 
 .friendActionsButton {
-  background-color: var(--accent-color);
+  background-color: var(--secondary-color);
   font-size: larger;
   color: white;
-  border: none;
+  border: 3px solid transparent;
   outline: none;
   padding: 2vh;
   border-radius: 2vh;
   margin: 1vh;
+}
+
+.friendActionsButton:hover {
+  background-color: var(--darker-background-color);
+  border: 3px solid white;
 }
