@@ -76,3 +76,8 @@ exports.chat_delete = asyncHandler(async (req, res) => {
     res.json({ message: "Successfully deleted chat" })
   }
 });
+
+exports.user_friend_put = asyncHandler(async (req, res) => {
+  console.log('got into v1Controller.user_friend_put');
+  res.json({ message: 'got into v1Controller.user_friend_put' });
+})

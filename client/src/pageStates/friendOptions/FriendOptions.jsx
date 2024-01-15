@@ -55,9 +55,7 @@ export default function FriendOptions({
   };
 
   const handleRemoveFriendButton = () => {
-    console.log("remove friend not implemented");
     setShowRemoveFriendConfirmation(true);
-    return;
   };
 
   const handleInviteButton = () => {
@@ -112,6 +110,7 @@ export default function FriendOptions({
           userObject={userObject}
           selectedFriend={selectedFriend}
           setShowRemoveFriendConfirmation={setShowRemoveFriendConfirmation}
+          setPageState={setPageState}
         />
       )}
     </div>
@@ -120,8 +119,8 @@ export default function FriendOptions({
 
 // what should this include?
 // 1: remove friend
-//  -- popup confirmation message
-//  -- send req
+//  -- popup confirmation message ✅
+//  -- send req ✅
 //
 // 2: send dm? then set a dm icon on friend in sidebar
 //  -- add dmRequests to user model
