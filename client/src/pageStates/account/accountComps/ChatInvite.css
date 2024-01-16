@@ -1,4 +1,28 @@
 .chatInviteContainer {
-  border: 1px solid red;
-  margin-top: 1vh;
+  margin: 1vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hiddenChatInviteButton {
+  background-color: transparent;
+  border: 2px solid transparent;
+  margin: 1vh;
+  border-radius: 1vh;
+  padding: 0.1vh;
+}
+
+.hiddenChatInviteButton:hover {
+  border: 2px solid var(--accent-color);
+}
+
+.chatInviteIcon {
+  height: 3vh;
+  width: 3vh;
+}
+
+.chatInviteText {
+  margin: 0.55vh;
+  font-size: larger;
 }
