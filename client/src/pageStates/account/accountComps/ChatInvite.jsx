@@ -1,5 +1,5 @@
 import "./ChatInvite.css";
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function ChatInvite({ chatObject, userObject, socket }) {
   const [displayed, setDisplayed] = useState(true);
@@ -26,7 +26,7 @@ export default function ChatInvite({ chatObject, userObject, socket }) {
 
   socket.addEventListener("message", (event) => {
     const msg = JSON.parse(event.data);
-    if (msg.message === 'Remove chat invite') {
+    if (msg.message === "Remove chat invite") {
       const chatToRemoveId = msg.chatId;
       if (chatToRemoveId === chatObject._id) {
         setDisplayed(false);
@@ -37,9 +37,13 @@ export default function ChatInvite({ chatObject, userObject, socket }) {
   if (displayed) {
     return (
       <div className="chatInviteContainer">
-        <p className="chatInviteText">
-          Invited to chat: {chatObject.chatName}. Sent by {chatObject.sentByName}
-        </p>
+        <div className="chatInviteTextContainer">
+          <p className="chatInviteText">
+            Invited to chat: {chatObject.chatName}.{" "}
+          </p>
+          <p className="chatInviteText">Sent by {chatObject.sentByName}</p>
+        </div>
+
         <div className="friendreqButtonContainer">
           <button className="hiddenChatInviteButton" onClick={handleAccept}>
             <img

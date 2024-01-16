@@ -26,9 +26,12 @@ async function handleChatInviteAccept(message, socket) {
           detail: "User already participant of chat",
         })
       );
-      console.error("User already has chat")
+      console.error("User already has chat");
       return;
     }
+
+    // add user as participant to chat
+    chat.participants.push(user._id);
 
     // add chats id to user and remove the invite
     user.chats.push(chat._id);
@@ -36,7 +39,7 @@ async function handleChatInviteAccept(message, socket) {
       (chatInvite) => chatInvite.chatid.toString() !== chat._id.toString()
     );
 
-    await user.save();
+    await Promise.all([user.save(), chat.save()]);
 
     socket.send(
       JSON.stringify({
