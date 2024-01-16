@@ -1,13 +1,23 @@
 import "./ChatInvite.css";
 
-export default function ChatInvite({ chatObject, socket }) {
+export default function ChatInvite({ chatObject, userObject, socket }) {
   const handleAccept = () => {
-    console.log("handle accept");
+    const message = JSON.stringify({
+      message: "Chat invite accepted",
+      userId: userObject._id,
+      chatId: chatObject.chatid,
+    });
+    socket.send(message)
     return;
   };
 
   const handleReject = () => {
-    console.log("handle reject");
+    const message = JSON.stringify({
+      message: "Chat invite rejected",
+      userId: userObject._id,
+      chatId: chatObject.chatid,
+    });
+    socket.send(message)
     return;
   };
 

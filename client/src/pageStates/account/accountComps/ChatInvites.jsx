@@ -10,6 +10,7 @@ export default function ChatInvites({ ChatInvites, userObject, socket }) {
         <ChatInvite
           key={chatObject._id}
           chatObject={chatObject}
+          userObject={userObject}
           socket={socket}
         />
       ))}
