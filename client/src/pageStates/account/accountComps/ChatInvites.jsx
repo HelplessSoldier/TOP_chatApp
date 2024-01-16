@@ -1,10 +1,12 @@
 import './ChatInvites.css';
+import ChatInvite from './ChatInvite';
 
 export default function ChatInvites({ ChatInvites, userObject }) {
-  console.log(userObject.chatInvites)
   return (
     <>
-      <h1>Hi from the chatinvites comp!</h1>
+      {userObject.chatInvites.map((chatObject) => (
+        <ChatInvite key={chatObject._id} chatObject={chatObject} />
+      ))}
     </>
   )
 }

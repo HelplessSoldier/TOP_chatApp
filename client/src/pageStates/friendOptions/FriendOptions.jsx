@@ -137,14 +137,3 @@ export default function FriendOptions({
     </div>
   );
 }
-
-// what should this include?
-// 1: remove friend
-//  -- popup confirmation message ✅
-//  -- send req ✅
-//
-// 2: invite to a chat
-//  -- need list of current users chats ✅
-//  -- dropdown of which chat to invite the user to depending on instance type. ✅
-//  -- cannot invite user if not owner and invite.✅ serverside impl still needed
-//  -- add sentby field to chat invites?
