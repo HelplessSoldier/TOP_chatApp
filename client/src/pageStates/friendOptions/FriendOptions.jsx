@@ -49,11 +49,6 @@ export default function FriendOptions({
     return;
   };
 
-  const handleDirectMessageButton = () => {
-    console.log("dms not implemented");
-    return;
-  };
-
   const handleRemoveFriendButton = () => {
     setShowRemoveFriendConfirmation(true);
   };
@@ -77,13 +72,6 @@ export default function FriendOptions({
       <hr />
 
       <div className="friendActionsContainer">
-        <button
-          className="friendActionsButton"
-          onClick={handleDirectMessageButton}
-        >
-          Direct Message
-        </button>
-
         <div className="friendActionsInviteContainer">
           <select className="friendActionsInviteDropdown">
             {chats.map((chat) => (
@@ -122,14 +110,8 @@ export default function FriendOptions({
 //  -- popup confirmation message ✅
 //  -- send req ✅
 //
-// 2: send dm? then set a dm icon on friend in sidebar
-//  -- add dmRequests to user model
-//  -- dmRequests should just be uid
-//  -- once accepted create an invite instance
-//      of chat with requesting and accepting user
-//
-// 3: invite to a chat
+// 2: invite to a chat
 //  -- need list of current users chats ✅
 //  -- dropdown of which chat to invite the user to depending on instance type. ✅
-//  -- cannot invite user if not owner and invite. serverside
+//  -- cannot invite user if not owner and invite.✅ serverside impl still needed
 //  -- add sentby field to chat invites?

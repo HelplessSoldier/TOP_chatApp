@@ -10,7 +10,12 @@ const userSchema = new Schema({
   chats: [{ type: Schema.Types.ObjectId, ref: "Chat" }],
   ownedChats: [{ type: Schema.Types.ObjectId, ref: "Chat" }],
   currentChat: { type: Schema.Types.ObjectId, ref: "Chat" },
-  chatInvites: [{ type: Schema.Types.ObjectId, ref: "Chat" }],
+  chatInvites: [
+    {
+      chatid: { type: Schema.Types.ObjectId, ref: "Chat" },
+      sentById: { type: Schema.Types.ObjectId, ref: "User" },
+    },
+  ],
   friends: [{ type: Schema.Types.ObjectId, ref: "User" }],
   friendRequests: [{ type: Schema.Types.ObjectId, ref: "User" }],
   sentFriendRequests: [{ type: Schema.Types.ObjectId, ref: "User" }],
