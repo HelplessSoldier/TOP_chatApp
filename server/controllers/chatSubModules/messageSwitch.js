@@ -5,7 +5,9 @@ const handleFriendRequestAccept = require("./handleFriendRequestAccepted");
 const handleSwitchChatRequest = require("./handleSwitchChatRequest");
 const handleDisconnect = require("./handleDisconnect");
 const sendCurrentChat = require("./sendCurrentChat");
-const handleNewChatMessage = require('./handleNewChatMessage');
+const handleNewChatMessage = require("./handleNewChatMessage");
+const handleChatInviteAccept = require("./handleChatInviteAccept");
+const handleChatInviteReject = require("./handleChatInviteReject");
 
 function messageSwitch(message, socket, userSocketMap) {
   switch (message.message) {
@@ -32,6 +34,12 @@ function messageSwitch(message, socket, userSocketMap) {
       break;
     case "New chat message":
       handleNewChatMessage(message, userSocketMap);
+      break;
+    case "Chat invite accepted":
+      handleChatInviteAccept(message, socket);
+      break;
+    case "Chat invite rejected":
+      handleChatInviteReject(message, socket);
       break;
     default:
       console.log(`Unknown message received: ${message.message}`);
