@@ -8,6 +8,7 @@ const sendCurrentChat = require("./sendCurrentChat");
 const handleNewChatMessage = require("./handleNewChatMessage");
 const handleChatInviteAccept = require("./handleChatInviteAccept");
 const handleChatInviteReject = require("./handleChatInviteReject");
+const handleJoinPublicChat = require('./handleJoinPublicChat');
 
 function messageSwitch(message, socket, userSocketMap) {
   switch (message.message) {
@@ -40,6 +41,9 @@ function messageSwitch(message, socket, userSocketMap) {
       break;
     case "Chat invite rejected":
       handleChatInviteReject(message, socket);
+      break;
+    case "Join public chat from search":
+      handleJoinPublicChat(message, socket);
       break;
     default:
       console.log(`Unknown message received: ${message.message}`);
