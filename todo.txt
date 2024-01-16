@@ -3,6 +3,7 @@ mainly: allow for joining chats through invites in account
 - kick user logic
 - allow for searching chats, return any friends/friends+/public that can be joined without invite
 - join chat if allowed, then update sidebar
+- show confirmation that chat invite was sent
 ✅ friend options logic
 ✅ delete chat logic 
 ✅ delete chat confirmation styling 
