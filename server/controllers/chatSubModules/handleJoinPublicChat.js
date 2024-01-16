@@ -20,6 +20,7 @@ async function handleJoinPublicChat(message, socket) {
     }
 
     user.chats.push(chat._id);
+    user.currentChat = chat._id;
     chat.participants.push(user._id);
 
     await Promise.all([user.save(), chat.save()]);
