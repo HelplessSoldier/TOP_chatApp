@@ -1,8 +1,9 @@
+mainly: allow for joining chats through invites in account
 - chat search elements
 - kick user logic
-- friend options logic
 - allow for searching chats, return any friends/friends+/public that can be joined without invite
 - join chat if allowed, then update sidebar
+✅ friend options logic
 ✅ delete chat logic 
 ✅ delete chat confirmation styling 
 ✅ show chats in sidebar 
