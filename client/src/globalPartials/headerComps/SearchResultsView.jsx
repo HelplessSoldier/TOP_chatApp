@@ -6,7 +6,7 @@ export default function SearchResultsView({
   searchResults,
   setSearchResults,
   userObject,
-  socket
+  socket,
 }) {
   const handleCloseButton = () => {
     setSearchResults(null);
@@ -34,12 +34,25 @@ export default function SearchResultsView({
           if (user._id === userObject._id) {
             return null;
           }
-          return <SearchElementUser key={user._id} user={user} userObject={userObject} socket={socket} />;
+          return (
+            <SearchElementUser
+              key={user._id}
+              user={user}
+              userObject={userObject}
+              socket={socket}
+            />
+          );
         })}
 
-        {hasChats && <h2>Chats: </h2>}
+        {hasChats && <h2>Public Chats: </h2>}
         {searchResults.chats.map((chat) => {
-          return <SearchElementChat key={chat._id} chat={chat} />;
+          return (
+            <SearchElementChat
+              key={chat._id}
+              chatObject={chat}
+              userObject={userObject}
+            />
+          );
         })}
       </div>
     </div>
