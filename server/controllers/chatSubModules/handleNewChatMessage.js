@@ -38,7 +38,9 @@ async function handleNewChatMessage(message, userSocketMap) {
 
     participants.map((userId) => {
       const currentSocket = userSocketMap[userId];
-      currentSocket.send(JSON.stringify(responseObject));
+      if (currentSocket) {
+        currentSocket.send(JSON.stringify(responseObject));
+      }
     });
   } catch (err) {
     console.error(err);
