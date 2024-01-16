@@ -51,6 +51,7 @@ export default function SearchResultsView({
               key={chat._id}
               chatObject={chat}
               userObject={userObject}
+              socket={socket}
             />
           );
         })}

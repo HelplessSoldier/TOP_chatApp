@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./SearchElement.css";
 
 export default function SearchElementUser(inputs) {
   const [alreadySent, setAlreadySent] = useState(false);
