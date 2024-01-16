@@ -76,7 +76,8 @@ export default function FriendOptions({
       });
 
       if (response.ok) {
-        console.log(response);
+        const message = await response.json();
+        console.log(message);
       }
     };
     sendInviteRequest();

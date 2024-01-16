@@ -109,6 +109,24 @@ exports.user_invite_put = asyncHandler(async (req, res) => {
     const chatId = req.params.chatid;
     const userId = req.params.userid;
     const reqUserId = jwt.verify(req.cookies.jwt, process.env.secret).userId;
+
+    const chat = await Chat.findById(chatId);
+    const user = await User.findById(userId);
+    const requestingUser = await User.findById(reqUserId);
+
+    if (!chat || !user || !requestingUser) {
+      res.json({ message: "Failed to send invite" });
+    }
+
+    const inviteObject = {
+      chatid: chat._id,
+      sentById: requestingUser._id,
+    }
+    user.chatInvites.push(inviteObject);
+
+    await user.save();
+
+    res.json({ message: "Invite sent" })
   } catch (err) {
     console.error(err);
     res.json({ message: "Failed to add chat invite to user", error: err });
