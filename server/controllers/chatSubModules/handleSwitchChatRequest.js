@@ -5,7 +5,6 @@ require("dotenv").config();
 
 async function handleSwitchChatRequest(message, socket) {
   try {
-    console.log('Switch chat request message: ', message);
     const secret = process.env.secret;
 
     const userInfo = jwt.verify(message.token, secret);

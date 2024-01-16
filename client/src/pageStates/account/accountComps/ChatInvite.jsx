@@ -28,7 +28,7 @@ export default function ChatInvite({ chatObject, userObject, socket }) {
     const msg = JSON.parse(event.data);
     if (msg.message === "Remove chat invite") {
       const chatToRemoveId = msg.chatId;
-      if (chatToRemoveId === chatObject._id) {
+      if (chatToRemoveId === chatObject.chatid) {
         setDisplayed(false);
       }
     }
@@ -39,9 +39,9 @@ export default function ChatInvite({ chatObject, userObject, socket }) {
       <div className="chatInviteContainer">
         <div className="chatInviteTextContainer">
           <p className="chatInviteText">
-            Invited to chat: {chatObject.chatName}.{" "}
+            {chatObject.chatName}
           </p>
-          <p className="chatInviteText">Sent by {chatObject.sentByName}</p>
+          <p className="chatInviteTextSmol">Sent by {chatObject.sentByName}</p>
         </div>
 
         <div className="friendreqButtonContainer">
