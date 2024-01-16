@@ -32,13 +32,9 @@ async function handleChatInviteAccept(message, socket) {
 
     // add chats id to user and remove the invite
     user.chats.push(chat._id);
-
-    // this isn't removing the chat invite?
-    console.log("Before filter: ", user.chatInvites);
     user.chatInvites = user.chatInvites.filter(
       (chatInvite) => chatInvite.chatid.toString() !== chat._id.toString()
     );
-    console.log("After filter: ", user.chatInvites);
 
     await user.save();
 
