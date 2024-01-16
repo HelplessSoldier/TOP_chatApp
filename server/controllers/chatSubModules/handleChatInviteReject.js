@@ -11,7 +11,6 @@ async function handleChatInviteReject(message, socket) {
 
     await user.save();
 
-    // sent success message if ok
     socket.send(
       JSON.stringify({
         message: "Remove chat invite",
