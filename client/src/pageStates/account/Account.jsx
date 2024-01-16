@@ -60,6 +60,7 @@ export default function Account({ socket, setSocket }) {
               <ChatInvites
                 chatInvites={userObject.chatInvites}
                 userObject={userObject}
+                socket={socket}
               />
             )}
             {userObject.ownedChats.length > 0 && (

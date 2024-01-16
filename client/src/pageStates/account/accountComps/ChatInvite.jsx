@@ -1,13 +1,13 @@
 import "./ChatInvite.css";
 
-export default function ChatInvite({ chatObject }) {
+export default function ChatInvite({ chatObject, socket }) {
   const handleAccept = () => {
-    console.log('handle accept')
+    console.log("handle accept");
     return;
   };
 
   const handleReject = () => {
-    console.log('handle reject')
+    console.log("handle reject");
     return;
   };
 
