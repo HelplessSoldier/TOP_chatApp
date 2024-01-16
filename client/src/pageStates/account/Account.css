@@ -8,7 +8,8 @@
   position: relative;
   background-color: var(--darker-background-color);
   border-radius: 2vh;
-  overflow: scroll;
+  overflow-y: scroll;
+  word-wrap: break-word;
   width: 55%;
   height: 89%;
 }
