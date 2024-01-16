@@ -3,6 +3,7 @@ import { useState } from "react";
 import "./FriendOptions.css";
 import { useEffect } from "react";
 import RemoveFriendConfirmation from "./RemoveFriendConfirmation";
+import globals from "../../../../publicGlobals/apiGlobals.json";
 
 export default function FriendOptions({
   selectedFriend,
@@ -11,6 +12,7 @@ export default function FriendOptions({
   userObject,
 }) {
   const [chats, setChats] = useState([]);
+  const [selectedChat, setSelectedChat] = useState("");
   const [showRemoveFriendConfirmation, setShowRemoveFriendConfirmation] =
     useState(false);
 
@@ -54,12 +56,39 @@ export default function FriendOptions({
   };
 
   const handleInviteButton = () => {
-    console.log("invite friend not implemented");
-    return;
+    if (selectedChat === "") {
+      return;
+    }
+    const sendInviteRequest = async () => {
+      const inviteUserUrl =
+        globals.serverUri +
+        ":" +
+        globals.serverPort +
+        globals.apiVersion +
+        "/user/invite/" +
+        selectedChat +
+        "/" +
+        selectedFriend._id;
+
+      const response = await fetch(inviteUserUrl, {
+        method: "PUT",
+        credentials: "include",
+      });
+
+      if (response.ok) {
+        console.log(response);
+      }
+    };
+    sendInviteRequest();
+  };
+
+  const handleChatSelectChange = (e) => {
+    setSelectedChat(e.target.value);
   };
 
   return (
     <div className="friendOptionsContainer">
+      <p>{selectedChat}</p>
 
       <div className="friendOptionsHeaderAndExitContainer">
         <h1>{selectedFriend.username}</h1>
@@ -74,7 +103,11 @@ export default function FriendOptions({
 
       <div className="friendActionsContainer">
         <div className="friendActionsInviteContainer">
-          <select className="friendActionsInviteDropdown">
+          <select
+            className="friendActionsInviteDropdown"
+            onChange={handleChatSelectChange}
+          >
+            <option value="">Select Chat...</option>
             {chats.map((chat) => (
               <option key={chat._id} value={chat._id}>
                 {chat.name}
@@ -102,7 +135,6 @@ export default function FriendOptions({
           setPageState={setPageState}
         />
       )}
-
     </div>
   );
 }

@@ -103,3 +103,14 @@ exports.user_friend_remove_put = asyncHandler(async (req, res) => {
     res.json({ message: "Failed to remove friend", error: err });
   }
 });
+
+exports.user_invite_put = asyncHandler(async (req, res) => {
+  try {
+    const chatId = req.params.chatid;
+    const userId = req.params.userid;
+    const reqUserId = jwt.verify(req.cookies.jwt, process.env.secret).userId;
+  } catch (err) {
+    console.error(err);
+    res.json({ message: "Failed to add chat invite to user", error: err });
+  }
+});
