@@ -60,6 +60,7 @@ export default function FriendOptions({
 
   return (
     <div className="friendOptionsContainer">
+
       <div className="friendOptionsHeaderAndExitContainer">
         <h1>{selectedFriend.username}</h1>
         <button className="friendOptionsExitButton" onClick={handleExitButton}>
@@ -101,6 +102,7 @@ export default function FriendOptions({
           setPageState={setPageState}
         />
       )}
+
     </div>
   );
 }

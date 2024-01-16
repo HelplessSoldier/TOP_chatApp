@@ -3,13 +3,15 @@
   border-radius: 3vh;
   background-color: var(--darker-background-color);
   padding: 3vh;
-  margin: 10vh;
+  margin: 20vh;
 }
 
 .friendOptionsHeaderAndExitContainer {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 1vh;
+  padding-left: 2vw;
 }
 
 .friendOptionsExitIcon {
@@ -23,9 +25,9 @@
   color: white;
   border: 3px solid transparent;
   outline: none;
-  padding: 2vh;
+  padding: 1vh;
   border-radius: 2vh;
-  margin: 1vh;
+  margin-top: 3vh;
 }
 
 .friendActionsButton:hover {
@@ -45,4 +47,14 @@
 
 .friendOptionsExitButton:hover {
   border: 2px solid white;
+}
+
+.friendActionsContainer {
+  margin: 2vh;
+  padding: 1vh;
+}
+
+.friendActionsInviteDropdown {
+  margin-right: 3vw;
+  margin-bottom: 2vh;
 }
