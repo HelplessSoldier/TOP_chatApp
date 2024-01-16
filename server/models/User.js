@@ -13,7 +13,9 @@ const userSchema = new Schema({
   chatInvites: [
     {
       chatid: { type: Schema.Types.ObjectId, ref: "Chat" },
+      chatName: { type: String },
       sentById: { type: Schema.Types.ObjectId, ref: "User" },
+      sentByName: { type: String },
     },
   ],
   friends: [{ type: Schema.Types.ObjectId, ref: "User" }],

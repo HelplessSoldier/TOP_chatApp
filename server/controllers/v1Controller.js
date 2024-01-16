@@ -120,7 +120,9 @@ exports.user_invite_put = asyncHandler(async (req, res) => {
 
     const inviteObject = {
       chatid: chat._id,
+      chatName: chat.name,
       sentById: requestingUser._id,
+      sentByName: requestingUser.username,
     }
     user.chatInvites.push(inviteObject);
 

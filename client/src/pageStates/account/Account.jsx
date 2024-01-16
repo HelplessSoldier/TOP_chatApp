@@ -57,7 +57,10 @@ export default function Account({ socket, setSocket }) {
               />
             )}
             {userObject.chatInvites.length > 0 && (
-              <ChatInvites chatInvites={userObject.chatInvites} />
+              <ChatInvites
+                chatInvites={userObject.chatInvites}
+                userObject={userObject}
+              />
             )}
             {userObject.ownedChats.length > 0 && (
               <OwnedChats
@@ -79,4 +82,3 @@ export default function Account({ socket, setSocket }) {
     </div>
   );
 }
-
