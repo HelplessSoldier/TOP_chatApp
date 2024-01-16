@@ -20,7 +20,8 @@ export default function RemoveFriendConfirmation({
       globals.serverPort +
       globals.apiVersion +
       "/user" +
-      "/friends/" +
+      "/friends" +
+      "/remove/" +
       selectedFriend._id;
 
     const response = await fetch(friendDeleteUri, {

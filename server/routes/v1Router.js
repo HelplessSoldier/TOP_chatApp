@@ -9,6 +9,6 @@ router.get('/current-user', v1Controller.currentUser_get);
 router.get('/user/:userid', v1Controller.user_get);
 router.get('/chat/:chatid', v1Controller.chat_get);
 router.delete('/chat/:chatid', v1Controller.chat_delete);
-router.put('/user/friends/:userid', v1Controller.user_friend_put); // used to remove friend from user object
+router.put('/user/friends/remove/:userid', v1Controller.user_friend_remove_put); // used to remove friend from user object
 
 module.exports = router;

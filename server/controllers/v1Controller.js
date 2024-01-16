@@ -77,17 +77,29 @@ exports.chat_delete = asyncHandler(async (req, res) => {
   }
 });
 
-exports.user_friend_put = asyncHandler(async (req, res) => {
-  //TODO: finish this
-  const token = req.cookies.jwt;
+exports.user_friend_remove_put = asyncHandler(async (req, res) => {
+  try {
+    const token = req.cookies.jwt;
 
-  const userId = jwt.verify(token, process.env.secret).userId;
-  const userToRemoveId = req.params.userid;
+    const userId = jwt.verify(token, process.env.secret).userId;
+    const userToRemoveId = req.params.userid;
 
-  const currentUser = await User.findById(userId);
-  const userToRemove = await User.findById(userToRemoveId);
+    const currentUser = await User.findById(userId);
+    const userToRemove = await User.findById(userToRemoveId);
 
-  console.log(userToRemove);
-  console.log(currentUser);
-  res.json({ message: "user_friend_put not fully implemented" });
+    currentUser.friends = currentUser.friends.filter(
+      (_id) => _id.toString() !== userToRemove._id.toString()
+    );
+
+    userToRemove.friends = userToRemove.friends.filter(
+      (_id) => _id.toString() !== currentUser._id.toString()
+    );
+
+    await Promise.all([userToRemove.save(), currentUser.save()]);
+
+    res.json({ message: "Successfully removed friend" });
+  } catch (err) {
+    console.error(err);
+    res.json({ message: "Failed to remove friend", error: err });
+  }
 });
