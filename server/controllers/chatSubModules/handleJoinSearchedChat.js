@@ -1,19 +1,21 @@
 const jwt = require("jsonwebtoken");
 const User = require("../../models/User");
 const Chat = require("../../models/Chat");
+const canJoinChat = require('./canJoinChat');
 require("dotenv").config();
 
-async function handleJoinPublicChat(message, socket) {
+
+async function handleJoinSearchedChat(message, socket) {
   try {
     const userId = jwt.verify(message.jwt, process.env.secret).userId;
     const user = await User.findById(userId);
     const chat = await Chat.findById(message.chatId);
 
-    if (!chat.instanceType === "public") {
+    if (!canJoinChat(user, chat)) {
       socket.send(
         JSON.stringify({
           message: "Failed to join chat",
-          detail: "Chat not public",
+          detail: "User doesn't have permission to join this chat",
         })
       );
       return;
@@ -42,4 +44,4 @@ async function handleJoinPublicChat(message, socket) {
   }
 }
 
-module.exports = handleJoinPublicChat;
+module.exports = handleJoinSearchedChat;
