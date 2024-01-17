@@ -12,6 +12,7 @@ export default function SignOutAreYouSure({
     setUserObject(null);
     setPageState("LogIn");
     setShowSignoutConfirm(false);
+    window.location.reload();
   }
 
   const handleCancel = (e) => {

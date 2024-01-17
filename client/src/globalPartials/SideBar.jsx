@@ -22,6 +22,23 @@ export default function SideBar({
   const [updateCountCha, setUpdateCountCha] = useState(0);
 
   useEffect(() => {
+    if (socket) {
+      socket.addEventListener("message", (event) => {
+        const message = JSON.parse(event.data);
+        if (message.message === "Successfully joined chat") {
+          window.location.reload();
+        }
+      });
+    }
+  }, [
+    socket,
+    setUpdateCountCha,
+    setUpdateCountFri,
+    setChatsList,
+    setFriendsList,
+  ]);
+
+  useEffect(() => {
     if (userObject && friendsList.length === 0 && updateCountFri < 3) {
       setUpdateCountFri((a) => a + 1);
       getFriends(userObject.friends, setFriendsList);
