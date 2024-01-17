@@ -24,7 +24,11 @@ export default function KickUserConfirmation({
       });
 
       if (response.ok) {
-        console.log("kick successful?");
+        const message = await response.json();
+        if (message.message === "Successfully kicked user") {
+          userToKick.username = 'Successfully kicked user'
+          setUserToKick(null);
+        }
       }
     };
     sendKickRequest();
