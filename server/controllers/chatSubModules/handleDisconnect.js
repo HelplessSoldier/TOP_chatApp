@@ -4,6 +4,9 @@ require('dotenv').config();
 
 function handleDisconnect(message, userSocketMap) {
   const token = getCookieFromString(message.token, 'jwt')
+  if (!token) {
+    return;
+  }
   const userInfo = jwt.verify(token, process.env.secret)
   const userId = userInfo.userId;
   if (userSocketMap[userId]) {

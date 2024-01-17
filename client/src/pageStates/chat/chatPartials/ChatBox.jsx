@@ -82,7 +82,7 @@ export default function ChatBox({ chatObject, socket, userObject }) {
           chatObject.messages.map((message) => {
             return (
               <ChatMessage
-                key={message._id}
+                key={message.timestamp}
                 message={message}
                 userObject={userObject}
               />

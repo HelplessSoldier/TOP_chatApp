@@ -8,6 +8,9 @@ async function sendCurrentChat(message, socket) {
   try {
     const tokenCookie = message.token;
     const token = getCookieFromString(tokenCookie, "jwt");
+    if (!token) {
+      return;
+    }
     const userInfo = jwt.verify(token, process.env.secret);
     const userId = userInfo.userId;
     const requestingUser = await User.findById(userId);

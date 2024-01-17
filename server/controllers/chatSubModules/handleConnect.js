@@ -8,6 +8,9 @@ async function handleConnect(socket, req, userSocketMap) {
     const cookies = req.headers.cookie;
     const secret = process.env.secret;
     const token = getCookieFromString(cookies, "jwt");
+    if (!token) {
+      return;
+    }
     const jwtPayload = jwt.verify(token, secret);
     const uid = jwtPayload.userId;
     currentUser = await User.findById(uid);

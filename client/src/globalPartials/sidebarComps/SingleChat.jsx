@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import getAccountInfo from "../../helpers/getAccountInfo";
 import "./SingleChat.css";
 
@@ -7,7 +8,12 @@ export default function SingleChat({
   socket,
   setUserObject,
 }) {
-  const isCurrentChat = userObject.currentChat === chatObject._id;
+  const [isCurrentChat, setIsCurrentChat] = useState(false);
+
+  useEffect(() => {
+    const chatSelected = userObject.currentChat === chatObject._id;
+    setIsCurrentChat(chatSelected);
+  }, [userObject, chatObject])
 
   const handleSelectChatButton = () => {
     const jwtToken = document.cookie
