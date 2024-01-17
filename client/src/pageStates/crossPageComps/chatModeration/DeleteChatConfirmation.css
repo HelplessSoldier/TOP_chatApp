@@ -17,6 +17,10 @@
 }
 
 .deleteChatConfirmationContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   background-color: var(--background-color);
   border: 3px solid var(--accent-color);
@@ -34,4 +38,8 @@
   font-size: larger;
   color: white;
   background-color: var(--secondary-color);
+}
+
+.couldNotDeleteChatHeader {
+  text-align: center;
 }

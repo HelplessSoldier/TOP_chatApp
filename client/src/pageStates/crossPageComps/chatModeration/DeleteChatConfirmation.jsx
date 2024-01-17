@@ -7,6 +7,7 @@ export default function DeleteChatConfirmation({
   setShowDeleteConfirmation,
 }) {
   const [currentState, setCurrentState] = useState("standard");
+  const [success, setSuccess] = useState(false);
   const [errorDetail, setErrorDetail] = useState("");
   const chatId = chatObject._id;
   const deleteChatUri =
@@ -19,7 +20,12 @@ export default function DeleteChatConfirmation({
 
   const handleConfirm = (e) => {
     e.preventDefault();
-    deleteChatRequest(deleteChatUri, setErrorDetail, setCurrentState);
+    deleteChatRequest(
+      deleteChatUri,
+      setErrorDetail,
+      setCurrentState,
+      setSuccess
+    );
   };
 
   const handleCancel = (e) => {
@@ -50,10 +56,15 @@ export default function DeleteChatConfirmation({
         </>
       )}
 
+      {success && <p>Chat deleted!</p>}
+
       {currentState === "error" && (
         <>
-          <h2>Could not delete chat: {errorDetail}</h2>
-          <button className="deleteChatConfirmButton errorCloseButton" onClick={handleCancel}>
+          <h2 className="couldNotDeleteChatHeader">Could not delete chat: {errorDetail}</h2>
+          <button
+            className="deleteChatConfirmButton errorCloseButton"
+            onClick={handleCancel}
+          >
             Okay
           </button>
         </>
@@ -62,21 +73,34 @@ export default function DeleteChatConfirmation({
   );
 }
 
-async function deleteChatRequest(uri, setErrorDetail, setCurrentState) {
+async function deleteChatRequest(
+  uri,
+  setErrorDetail,
+  setCurrentState,
+  setSuccess
+) {
   const response = await fetch(uri, {
     method: "DELETE",
     credentials: "include",
   });
 
   if (!response.ok) {
-    setErrorDetail("No response from server");
-    setCurrentState("error");
-    return;
+    const message = await response.json();
+    if (message.message === "Cannot delete") {
+      setSuccess(false);
+      setCurrentState("error");
+      setErrorDetail(message.detail);
+      return;
+    } else {
+      setSuccess(false);
+      setErrorDetail("No response from server");
+      setCurrentState("error");
+      return;
+    }
   }
 
   const message = await response.json();
-  if (message.message === "Cannot delete") {
-    setCurrentState("error");
-    setErrorDetail(message.detail);
+  if (message.message === "Successfully deleted chat") {
+    setSuccess(true);
   }
 }
