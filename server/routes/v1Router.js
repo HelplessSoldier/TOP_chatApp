@@ -11,5 +11,6 @@ router.get('/chat/:chatid', v1Controller.chat_get);
 router.delete('/chat/:chatid', v1Controller.chat_delete);
 router.put('/user/friends/remove/:userid', v1Controller.user_friend_remove_put); // remove friend from both users
 router.put('/user/invite/:chatid/:userid', v1Controller.user_invite_put); // add chatInvites object to user
+router.put('/chat/kick/:chatid/:userid', v1Controller.chat_kick_user_put); // remove user from chat via moderation
 
 module.exports = router;

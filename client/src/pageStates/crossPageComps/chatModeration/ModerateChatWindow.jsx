@@ -38,8 +38,9 @@ export default function ModerateChatWindow({ chatObject, setSelectedChat }) {
       )}
       {userToKick && (
         <KickUserConfirmation
-          userObject={userToKick}
+          userToKick={userToKick}
           setUserToKick={setUserToKick}
+          chatObject={chatObject}
         />
       )}
       <div className="chatModerationHeaderContainer">

@@ -1,9 +1,10 @@
-- chat search elements
 - kick user logic in owned chat moderation
 - open moderation from chat page
-- allow for searching chats, return any friends/friends+/public that can be joined without invite
-- join chat if allowed, then update sidebar
+- allow for searching chats, return any friends/friends+/✅public that can be joined without invite
+    still need logic for friends and friends+!!!
 - show confirmation that chat invite was sent
+✅ chat search elements
+✅ join chat if allowed, then update sidebar
 ✅ allow for joining chats through invites in account
 ✅ friend options logic
 ✅ delete chat logic 

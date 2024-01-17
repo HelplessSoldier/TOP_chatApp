@@ -123,14 +123,19 @@ exports.user_invite_put = asyncHandler(async (req, res) => {
       chatName: chat.name,
       sentById: requestingUser._id,
       sentByName: requestingUser.username,
-    }
+    };
     user.chatInvites.push(inviteObject);
 
     await user.save();
 
-    res.json({ message: "Invite sent" })
+    res.json({ message: "Invite sent" });
   } catch (err) {
     console.error(err);
     res.json({ message: "Failed to add chat invite to user", error: err });
   }
+});
+
+exports.chat_kick_user_put = asyncHandler(async (req, res) => {
+  console.log("got into chat_kick_user_put controller");
+  res.json({ message: "got into chat_kick_user_put controller" });
 });
