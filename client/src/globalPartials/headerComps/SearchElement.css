@@ -32,3 +32,9 @@
 .searchResultButton.clicked {
   background-color: green;
 }
+
+.typeAndJoinButtonContainer {
+  display: flex;
+  align-items: center;
+  gap: 3vw;
+}

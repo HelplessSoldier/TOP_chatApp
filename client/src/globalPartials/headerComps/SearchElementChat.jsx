@@ -35,9 +35,12 @@ export default function SearchElementChat({ chatObject, userObject, socket }) {
         <h2 className="searchChatName">
           {chatObject.name}
         </h2>
-        <button className={"searchResultButton" + (isClicked ? " clicked" : "")} onClick={handleJoinChatButton}>
-          Join Chat
-        </button>
+        <div className="typeAndJoinButtonContainer">
+          <h3>{chatObject.instanceType}</h3>
+          <button className={"searchResultButton" + (isClicked ? " clicked" : "")} onClick={handleJoinChatButton}>
+            Join Chat
+          </button>
+        </div>
       </div>
     );
   } else {

@@ -4,7 +4,6 @@ const Chat = require("../../models/Chat");
 const canJoinChat = require('./canJoinChat');
 require("dotenv").config();
 
-
 async function handleJoinSearchedChat(message, socket) {
   try {
     const userId = jwt.verify(message.jwt, process.env.secret).userId;

@@ -14,6 +14,7 @@ export default function SearchResultsView({
 
   const hasUsers = searchResults.users.length > 0;
   const hasChats = searchResults.chats.length > 0;
+  console.log(searchResults.chats);
 
   return (
     <div className="searchResultsContainer">

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./SearchBar.css";
+import getCookie from "../../helpers/getCookie";
 
 export default function SearchBar({ socket, setSearchResults }) {
   const [noResults, setNoResults] = useState(false);
@@ -32,12 +33,17 @@ export default function SearchBar({ socket, setSearchResults }) {
   }, [socket, setSearchResults]);
 
   const handleSearchSubmit = (e) => {
+    const token = getCookie(document.cookie, "jwt");
     e.preventDefault();
 
     const searchTerm = e.target.searchInput.value;
 
     socket.send(
-      JSON.stringify({ message: "Search request", searchTerm: searchTerm })
+      JSON.stringify({
+        message: "Search request",
+        searchTerm: searchTerm,
+        token,
+      })
     );
   };
 
