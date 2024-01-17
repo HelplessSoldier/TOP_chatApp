@@ -21,8 +21,6 @@ export default function SingleChat({
       .find((row) => row.startsWith("jwt="))
       .split("=")[1];
 
-    console.log(chatObject);
-
     const msg = JSON.stringify({
       message: "Switch chat request",
       token: jwtToken,

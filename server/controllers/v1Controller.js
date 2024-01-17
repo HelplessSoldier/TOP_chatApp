@@ -173,7 +173,6 @@ exports.chat_kick_user_put = asyncHandler(async (req, res) => {
 
     const isOwner = chat.owner.toString() === requestingUser._id.toString();
     if (!isOwner) {
-      console.log("got into owner check");
       res.status(403).json({
         message: "Cannot kick user",
         detail: "Requesting user is not the owner of this chat",
