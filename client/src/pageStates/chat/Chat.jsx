@@ -3,6 +3,7 @@ import globals from "../../../../publicGlobals/apiGlobals.json";
 import { useEffect, useState } from "react";
 import getCookie from "../../helpers/getCookie";
 import ChatBox from "./chatPartials/ChatBox";
+import ModerateChatWindow from "../crossPageComps/chatModeration/ModerateChatWindow";
 
 export default function Chat({
   setPageState,
@@ -12,7 +13,13 @@ export default function Chat({
   userObject,
 }) {
   const [chatObject, setChatObject] = useState(null);
+  const [selectedChat, setSelectedChat] = useState(null);
   const [isOwner, setIsOwner] = useState(false);
+
+  const handleGotoModerationButton = () => {
+    console.log("goto moderation pressed");
+    setSelectedChat(chatObject);
+  };
 
   useEffect(() => {
     const wsUri = globals.webSocketUri;
@@ -70,17 +77,22 @@ export default function Chat({
 
   return (
     <div className="chatRoot">
-
       <ChatBox
         chatObject={chatObject}
         socket={socket}
         userObject={userObject}
+        selectedChat={selectedChat}
+        setSelectedChat={setSelectedChat}
       />
 
       {isOwner && (
-        <button className="gotoModerationButton">Go to chat moderation</button>
+        <button
+          className="gotoModerationButton"
+          onClick={handleGotoModerationButton}
+        >
+          Go to chat moderation
+        </button>
       )}
-
     </div>
   );
 }

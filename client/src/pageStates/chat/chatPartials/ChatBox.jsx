@@ -1,9 +1,16 @@
 import { useState, useEffect, useRef } from "react";
 import getCookie from "../../../helpers/getCookie";
+import ModerateChatWindow from "../../crossPageComps/chatModeration/ModerateChatWindow";
 import "./ChatBox.css";
 import ChatMessage from "./ChatMessage";
 
-export default function ChatBox({ chatObject, socket, userObject }) {
+export default function ChatBox({
+  chatObject,
+  socket,
+  userObject,
+  selectedChat,
+  setSelectedChat,
+}) {
   const [messageInput, setMessageInput] = useState("");
   const [scrolling, setScrolling] = useState(false);
   const [showGotoBottom, setShowGotoBottom] = useState(false);
@@ -108,6 +115,13 @@ export default function ChatBox({ chatObject, socket, userObject }) {
           onChange={handleMessageChange}
         />
       </form>
+
+      {selectedChat && (
+        <ModerateChatWindow
+          chatObject={selectedChat}
+          setSelectedChat={setSelectedChat}
+        />
+      )}
     </div>
   );
 }

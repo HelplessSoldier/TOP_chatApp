@@ -1,5 +1,4 @@
-- open moderation from chat page
-
+✅ open moderation from chat page
 ✅ allow for searching chats, return any friends/friends+/public that can be joined without invite
 ✅ show confirmation that chat was deleted in moderation
 ✅ show confirmation that chat invite was sent in user options
