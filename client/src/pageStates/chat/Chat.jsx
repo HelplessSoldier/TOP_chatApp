@@ -12,6 +12,7 @@ export default function Chat({
   userObject,
 }) {
   const [chatObject, setChatObject] = useState(null);
+  const [isOwner, setIsOwner] = useState(false);
 
   useEffect(() => {
     const wsUri = globals.webSocketUri;
@@ -57,13 +58,29 @@ export default function Chat({
     return () => socket.close();
   }, [setPageState, setUserObject, setSocket]);
 
+  useEffect(() => {
+    if (userObject && chatObject) {
+      if (userObject._id.toString() === chatObject.owner.toString()) {
+        setIsOwner(true);
+      } else {
+        setIsOwner(false);
+      }
+    }
+  }, [userObject, chatObject]);
+
   return (
     <div className="chatRoot">
+
       <ChatBox
         chatObject={chatObject}
         socket={socket}
         userObject={userObject}
       />
+
+      {isOwner && (
+        <button className="gotoModerationButton">Go to chat moderation</button>
+      )}
+
     </div>
   );
 }

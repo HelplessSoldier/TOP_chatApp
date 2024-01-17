@@ -1,6 +1,22 @@
 .chatRoot {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  padding-top: 4vh;
 }
 
+.gotoModerationButton {
+  color: white;
+  background-color: var(--secondary-color);
+  font-size: larger;
+  border: 1px solid transparent;
+  outline: none;
+  padding: 1vh;
+  border-radius: 2vh;
+  margin-left: 2vw;
+}
+
+.gotoModerationButton:hover {
+  border: 1px solid white;
+  background-color: black;
+}
