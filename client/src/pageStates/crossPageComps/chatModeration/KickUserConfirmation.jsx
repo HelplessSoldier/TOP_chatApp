@@ -27,7 +27,6 @@ export default function KickUserConfirmation({
         console.log("kick successful?");
       }
     };
-
     sendKickRequest();
   };
 

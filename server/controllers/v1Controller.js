@@ -15,39 +15,41 @@ exports.currentUser_get = asyncHandler(async (req, res) => {
   const currentUser = await User.findById(userId);
 
   if (!currentUser) {
-    res.json({ message: "Error: User not found" });
+    res.status(404).json({ message: "Error: User not found" });
     return;
   }
 
   const userObject = currentUser.toObject();
   delete userObject.password;
 
-  res.json({ message: "Successfully retrieved user", user: userObject });
+  res
+    .status(200)
+    .json({ message: "Successfully retrieved user", user: userObject });
 });
 
 exports.user_get = asyncHandler(async (req, res) => {
   const foundUser = await User.findById(req.params.userid);
 
   if (!foundUser) {
-    res.json({ message: "User not found" });
+    res.status(404).json({ message: "User not found" });
     return;
   }
 
   const userObject = foundUser.toObject();
   delete userObject.password;
-  res.json({ message: "User found", user: userObject });
+  res.status(200).json({ message: "User found", user: userObject });
 });
 
 exports.chat_get = asyncHandler(async (req, res) => {
   const foundChat = await Chat.findById(req.params.chatid);
 
   if (!foundChat) {
-    res.json({ message: "Chat not found" });
+    res.status(404).json({ message: "Chat not found" });
     return;
   }
 
   const chatObject = foundChat.toObject();
-  res.json({ message: "Chat found", chat: chatObject });
+  res.status(200).json({ message: "Chat found", chat: chatObject });
 });
 
 exports.chat_delete = asyncHandler(async (req, res) => {
@@ -59,21 +61,27 @@ exports.chat_delete = asyncHandler(async (req, res) => {
   const chatOwnedByUser = requestingUser.ownedChats.includes(chatToDeleteId);
 
   if (!chatOwnedByUser) {
-    res.json({ message: "Cannot delete", detail: "User does not own chat" });
+    res
+      .status(403)
+      .json({ message: "Cannot delete", detail: "User does not own chat" });
     return;
   }
 
   const chatToDelete = await Chat.findById(chatToDeleteId);
   if (!chatToDelete) {
-    res.json({ message: "Cannot delete", detail: "Chat was not found" });
+    res
+      .status(500)
+      .json({ message: "Cannot delete", detail: "Chat was not found" });
   }
 
   await chatToDelete.deleteOne();
   const checkChat = await Chat.findById(chatToDeleteId);
   if (checkChat) {
-    res.json({ message: "Cannot delete", detail: "Failed to delete chat" });
+    res
+      .status(500)
+      .json({ message: "Cannot delete", detail: "Failed to delete chat" });
   } else {
-    res.json({ message: "Successfully deleted chat" });
+    res.status(200).json({ message: "Successfully deleted chat" });
   }
 });
 
@@ -97,10 +105,10 @@ exports.user_friend_remove_put = asyncHandler(async (req, res) => {
 
     await Promise.all([userToRemove.save(), currentUser.save()]);
 
-    res.json({ message: "Successfully removed friend" });
+    res.status(200).json({ message: "Successfully removed friend" });
   } catch (err) {
     console.error(err);
-    res.json({ message: "Failed to remove friend", error: err });
+    res.status(500).json({ message: "Failed to remove friend", error: err });
   }
 });
 
@@ -115,7 +123,7 @@ exports.user_invite_put = asyncHandler(async (req, res) => {
     const requestingUser = await User.findById(reqUserId);
 
     if (!chat || !user || !requestingUser) {
-      res.json({ message: "Failed to send invite" });
+      res.status(500).json({ message: "Failed to send invite" });
     }
 
     const inviteObject = {
@@ -131,11 +139,45 @@ exports.user_invite_put = asyncHandler(async (req, res) => {
     res.json({ message: "Invite sent" });
   } catch (err) {
     console.error(err);
-    res.json({ message: "Failed to add chat invite to user", error: err });
+    res
+      .status(500)
+      .json({ message: "Failed to add chat invite to user", error: err });
   }
 });
 
 exports.chat_kick_user_put = asyncHandler(async (req, res) => {
-  console.log("got into chat_kick_user_put controller");
-  res.json({ message: "got into chat_kick_user_put controller" });
+  try {
+    const chatId = req.params.chatid;
+    const userId = req.params.userid;
+    const reqUserId = jwt.verify(req.cookies.jwt, process.env.secret).userId;
+
+    const userToKick = await User.findById(userId);
+    const requestingUser = await User.findById(reqUserId);
+    const chat = await Chat.findById(chatId);
+
+    const isOwner = chat.owner.toString() === requestingUser._id.toString();
+    if (!isOwner) {
+      console.log("got into owner check");
+      res.status(403).json({
+        message: "Cannot kick user",
+        detail: "Requesting user is not the owner of this chat",
+      });
+      return;
+    }
+
+    chat.participants = chat.participants.filter(
+      (_id) => _id.toString() !== userToKick._id.toString()
+    );
+
+    userToKick.chats = userToKick.chats.filter(
+      (_id) => _id.toString() !== chat._id.toString()
+    );
+
+    await Promise.all([userToKick.save(), chat.save()]);
+
+    res.status(200).json({ message: "Successfully kicked user" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Failed to kick user" });
+  }
 });
