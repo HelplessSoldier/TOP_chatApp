@@ -1,5 +1,8 @@
 async function canJoinChat(user, chat) {
   // instance types: ["public", "friends", "friendsPlus", "invite", "invitePlus"],
+  if (chat.instanceType === "invite" || chat.instanceType === "invitePlus") {
+    return false;
+  }
 
   if (chat.instanceType === "public") {
     // anyone can join pubs

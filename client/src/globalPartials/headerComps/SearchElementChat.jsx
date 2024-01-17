@@ -29,15 +29,16 @@ export default function SearchElementChat({ chatObject, userObject, socket }) {
     }
   }, [userObject, chatObject, setAlreadyParticipant]);
 
-  if (!alreadyParticipant) {
+  if (chatObject.canJoin) {
     return (
       <div className="searchElementContainer">
-        <h2 className="searchChatName">
-          {chatObject.name}
-        </h2>
+        <h2 className="searchChatName">{chatObject.name}</h2>
         <div className="typeAndJoinButtonContainer">
           <h3>{chatObject.instanceType}</h3>
-          <button className={"searchResultButton" + (isClicked ? " clicked" : "")} onClick={handleJoinChatButton}>
+          <button
+            className={"searchResultButton" + (isClicked ? " clicked" : "")}
+            onClick={handleJoinChatButton}
+          >
             Join Chat
           </button>
         </div>

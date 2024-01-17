@@ -9,8 +9,6 @@ async function handleSearch(message, socket) {
     message.token.split("=")[1],
     process.env.secret
   ).userId;
-  const currentUser = await User.findById(userId);
-
   const searchTerm = message.searchTerm;
 
   if (searchTerm === "") {
@@ -21,11 +19,17 @@ async function handleSearch(message, socket) {
   const searchRegex = new RegExp(searchTerm, "i");
   const foundUsers = await User.find({ username: searchRegex });
 
-  // i'd like this to be filtered by canJoinChat (returns bool)
+  const currentUser = await User.findById(userId);
   const foundChats = await Chat.find({ name: searchRegex });
+  const filteredChats = await Promise.all(
+    foundChats.map(async (chat) => ({
+      ...chat.toObject(),
+      canJoin: await canJoinChat(currentUser, chat)
+    }))
+  )
 
   let returnObject = {};
-  if (foundUsers.length === 0 && foundChats.length === 0) {
+  if (foundUsers.length === 0 && filteredChats.length === 0) {
     returnObject.message = "No items found";
   } else {
     returnObject.message = "Found items";
@@ -37,7 +41,7 @@ async function handleSearch(message, socket) {
 
     returnObject.searchTerm = searchTerm;
     returnObject.users = strippedUsers;
-    returnObject.chats = foundChats;
+    returnObject.chats = filteredChats;
   }
 
   const returnMessage = JSON.stringify(returnObject);
