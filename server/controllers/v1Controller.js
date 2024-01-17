@@ -122,8 +122,24 @@ exports.user_invite_put = asyncHandler(async (req, res) => {
     const user = await User.findById(userId);
     const requestingUser = await User.findById(reqUserId);
 
+    if (
+      user.chatInvites.some(
+        (invite) => invite.chatid.toString() === chat._id.toString()
+      )
+    ) {
+      res.status(409).json({
+        message: "Failed to send invite",
+        detail: "User already invited",
+      });
+      return;
+    }
+
     if (!chat || !user || !requestingUser) {
-      res.status(500).json({ message: "Failed to send invite" });
+      res.status(500).json({
+        message: "Failed to send invite",
+        detail: "Could not find documents",
+      });
+      return;
     }
 
     const inviteObject = {

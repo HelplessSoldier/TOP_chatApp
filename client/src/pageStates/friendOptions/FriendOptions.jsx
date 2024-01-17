@@ -13,6 +13,8 @@ export default function FriendOptions({
 }) {
   const [chats, setChats] = useState([]);
   const [selectedChat, setSelectedChat] = useState("");
+  const [showInviteSent, setSendInviteSent] = useState(false);
+  const [inviteError, setInviteError] = useState(null);
   const [showRemoveFriendConfirmation, setShowRemoveFriendConfirmation] =
     useState(false);
 
@@ -77,7 +79,14 @@ export default function FriendOptions({
 
       if (response.ok) {
         const message = await response.json();
-        console.log(message);
+        if (message.message === "Invite sent") {
+          setSendInviteSent(true);
+        }
+      } else {
+        const message = await response.json();
+        if (message.message === "Failed to send invite") {
+          setInviteError(message.detail);
+        }
       }
     };
     sendInviteRequest();
@@ -117,6 +126,14 @@ export default function FriendOptions({
             Invite
           </button>
         </div>
+
+        {showInviteSent && (
+          <p>Invite sent!</p>
+        )}
+
+        {inviteError && (
+          <p>Invite error: {inviteError}</p>
+        )}
 
         <button
           className="friendActionsButton"

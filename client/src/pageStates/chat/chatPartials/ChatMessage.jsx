@@ -8,7 +8,7 @@ export default function ChatMessage({ message, userObject }) {
   return (
     <div className="chatBoxRoot">
       <div className={(isCurrentUser ? "user" : "") + "ChatBoxContainer"}>
-        <p className="chatUsername">{message.sentByUsername}:</p>
+        <p className="chatUsername" >{message.sentByUsername}:</p>
         <p className="chatBody">{message.messageBody}</p>
       </div>
       <p className={isCurrentUser ? "chatTimestampUser" : "chatTimestamp"}>

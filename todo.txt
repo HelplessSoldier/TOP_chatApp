@@ -3,7 +3,6 @@
     still need logic for friends and friends+!!!
 - show confirmation that chat invite was sent in user options
 - show confirmation that chat was deleted in moderation
-- change username color based on username hash?
 
 ✅ kick user logic in owned chat moderation
 ✅ chat search elements
