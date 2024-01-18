@@ -17,7 +17,12 @@ const app = express();
 
 connectToMongo("mongodb://localhost:27017/chatApp", mongoose);
 
-const allowedOrigins = ["http://localhost:3000", "http://localhost:5173"];
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://localhost:5173",
+  "http://192.168.1.72:5173",
+  "http://192.168.1.72:3000",
+];
 
 app.use(morgan("dev"));
 app.use(
@@ -30,6 +35,8 @@ app.use(
       }
     },
     credentials: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    optionsSuccessStatus: 204,
   })
 );
 app.use(cookieParser());
