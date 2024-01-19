@@ -1,6 +1,18 @@
 import "./SearchResultsView.css";
 import SearchElementUser from "./SearchElementUser";
 import SearchElementChat from "./SearchElementChat";
+import PropTypes from "prop-types";
+import {
+  searchResultsProps,
+  userObjectProps,
+} from "../../helpers/propValidation";
+
+SearchResultsView.propTypes = {
+  searchResults: PropTypes.shape(searchResultsProps),
+  setSearchResults: PropTypes.func,
+  userObject: PropTypes.shape(userObjectProps),
+  socket: PropTypes.object,
+};
 
 export default function SearchResultsView({
   searchResults,

@@ -28,4 +28,39 @@ const chatObjectProps = {
   chatName: PropTypes.string,
 };
 
-export { userObjectProps, chatsListProps, friendsListProps, chatObjectProps };
+const messageProps = {
+  _id: PropTypes.string,
+  messageBody: PropTypes.string,
+  sentById: PropTypes.string,
+  sentByUsername: PropTypes.string,
+  timestamp: PropTypes.string,
+};
+
+const searchResultsProps = {
+  searchTerm: PropTypes.string,
+  chats: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string,
+      canJoin: PropTypes.bool,
+      instanceType: PropTypes.string,
+      invitedUsers: PropTypes.arrayOf(PropTypes.object),
+      messages: PropTypes.arrayOf(PropTypes.shape(messageProps)),
+      name: PropTypes.string,
+      owner: PropTypes.string,
+      participants: PropTypes.arrayOf(PropTypes.string),
+    })
+  ),
+  users: PropTypes.arrayOf(PropTypes.shape({
+    _id: PropTypes.string,
+    username: PropTypes.string,
+  }))
+};
+
+export {
+  userObjectProps,
+  chatsListProps,
+  friendsListProps,
+  chatObjectProps,
+  messageProps,
+  searchResultsProps,
+};

@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 import "./SearchBar.css";
 import getCookie from "../../helpers/getCookie";
+import PropTypes from 'prop-types';
+
+SearchBar.propTypes = {
+  socket: PropTypes.object,
+  setSearchResults: PropTypes.func,
+}
 
 export default function SearchBar({ socket, setSearchResults }) {
   const [noResults, setNoResults] = useState(false);

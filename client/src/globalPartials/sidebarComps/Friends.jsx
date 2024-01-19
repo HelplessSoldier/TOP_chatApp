@@ -17,8 +17,6 @@ export default function Friends({
 }) {
   const [expanded, setExpanded] = useState(true);
 
-  console.log(friendsList);
-
   const handleExpandButton = () => {
     setExpanded((a) => !a);
   };

@@ -1,4 +1,11 @@
 import "./SignOutAreYouSure.css";
+import PropTypes from "prop-types";
+
+SignOutAreYouSure.propTypes = {
+  setPageState: PropTypes.func,
+  setShowSignoutConfirm: PropTypes.func,
+  setUserObject: PropTypes.func,
+}
 
 export default function SignOutAreYouSure({
   setPageState,

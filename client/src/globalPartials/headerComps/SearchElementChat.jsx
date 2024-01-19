@@ -1,5 +1,13 @@
 import "./SearchElement.css";
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { chatObjectProps, userObjectProps } from "../../helpers/propValidation";
+
+SearchElementChat.propTypes = {
+  chatObject: PropTypes.shape(chatObjectProps),
+  userObject: PropTypes.shape(userObjectProps),
+  socket: PropTypes.object,
+};
 
 export default function SearchElementChat({ chatObject, userObject, socket }) {
   const [alreadyParticipant, setAlreadyParticipant] = useState(false);
@@ -29,7 +37,7 @@ export default function SearchElementChat({ chatObject, userObject, socket }) {
     }
   }, [userObject, chatObject, setAlreadyParticipant]);
 
-  if (chatObject.canJoin) {
+  if (chatObject.canJoin && !alreadyParticipant) {
     return (
       <div className="searchElementContainer">
         <h2 className="searchChatName">{chatObject.name}</h2>
