@@ -4,6 +4,15 @@ import "./FriendOptions.css";
 import { useEffect } from "react";
 import RemoveFriendConfirmation from "./RemoveFriendConfirmation";
 import globals from "../../../../publicGlobals/apiGlobals.json";
+import PropTypes from 'prop-types';
+import { userObjectProps, friendsListProps } from "../../helpers/propValidation";
+
+FriendOptions.propTypes = {
+  selectedFriend: PropTypes.shape(friendsListProps),
+  setSelectedFriend: PropTypes.func,
+  setPageState: PropTypes.func,
+  userObject: PropTypes.shape(userObjectProps),
+}
 
 export default function FriendOptions({
   selectedFriend,

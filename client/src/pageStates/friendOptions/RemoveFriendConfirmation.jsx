@@ -1,14 +1,20 @@
 import "./RemoveFriendConfirmation.css";
 import globals from "../../../../publicGlobals/apiGlobals.json";
 import { useState } from "react";
+import PropTypes from 'prop-types';
+import { friendsListProps } from "../../helpers/propValidation";
+
+RemoveFriendConfirmation.propTypes = {
+  selectedFriend: PropTypes.shape(friendsListProps),
+  setShowRemoveFriendConfirmation: PropTypes.func,
+  setPageState: PropTypes.func,
+}
 
 export default function RemoveFriendConfirmation({
-  userObject,
   selectedFriend,
   setShowRemoveFriendConfirmation,
   setPageState,
 }) {
-  const [showFailure, setShowFailure] = useState(false);
   const handleCloseButton = () => {
     setShowRemoveFriendConfirmation(false);
   };
@@ -30,10 +36,7 @@ export default function RemoveFriendConfirmation({
     })
 
     if (response.ok) {
-      setShowFailure(false);
       setPageState("Chat");
-    } else {
-      setShowFailure(true);
     }
   };
 
