@@ -1,6 +1,16 @@
 import { useState } from "react";
 import SingleChat from "./SingleChat";
 import "./Chats.css";
+import PropTypes from 'prop-types';
+import { userObjectProps, chatsListProps } from "../../helpers/propValidation";
+
+Chats.propTypes = {
+  setPageState: PropTypes.func,
+  chatsList: PropTypes.arrayOf(PropTypes.shape(chatsListProps)),
+  socket: PropTypes.object,
+  userObject: PropTypes.shape(userObjectProps),
+  setUserObject: PropTypes.func,
+}
 
 export default function Chats({
   setPageState,

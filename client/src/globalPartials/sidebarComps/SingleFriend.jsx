@@ -1,4 +1,12 @@
 import "./SingleFriend.css";
+import PropTypes from "prop-types";
+import { friendsListProps } from "../../helpers/propValidation";
+
+SingleFriend.propTypes = {
+  friendObject: PropTypes.shape(friendsListProps),
+  setSelectedFriend: PropTypes.func,
+  setPageState: PropTypes.func,
+};
 
 export default function SingleFriend({
   friendObject,

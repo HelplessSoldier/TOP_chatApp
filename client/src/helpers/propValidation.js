@@ -13,4 +13,19 @@ const userObjectProps = {
   username: PropTypes.string,
 };
 
-export { userObjectProps };
+const chatsListProps = {
+  _id: PropTypes.string,
+  chatName: PropTypes.string,
+};
+
+const friendsListProps = {
+  _id: PropTypes.string,
+  username: PropTypes.string,
+};
+
+const chatObjectProps = {
+  _id: PropTypes.string,
+  chatName: PropTypes.string,
+};
+
+export { userObjectProps, chatsListProps, friendsListProps, chatObjectProps };

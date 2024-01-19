@@ -3,11 +3,21 @@ import globals from "../../../publicGlobals/apiGlobals.json";
 import { useEffect, useState } from "react";
 import Friends from "./sidebarComps/Friends";
 import Chats from "./sidebarComps/Chats";
+import PropTypes from "prop-types";
+import { userObjectProps } from "../helpers/propValidation";
 
 const apiUri =
   globals.serverUri + ":" + globals.serverPort + globals.apiVersion;
 const userGetUri = apiUri + "/user";
 const chatGetUri = apiUri + "/chat";
+
+SideBar.propTypes = {
+  userObject: PropTypes.shape(userObjectProps),
+  setPageState: PropTypes.func,
+  socket: PropTypes.object,
+  setUserObject: PropTypes.func,
+  setSelectedFriend: PropTypes.func,
+};
 
 export default function SideBar({
   userObject,

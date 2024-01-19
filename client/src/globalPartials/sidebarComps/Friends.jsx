@@ -1,6 +1,14 @@
 import { useState } from "react";
 import SingleFriend from "./SingleFriend";
 import "./Friends.css";
+import PropTypes from "prop-types";
+import { friendsListProps } from "../../helpers/propValidation";
+
+Friends.propTypes = {
+  friendsList: PropTypes.arrayOf(PropTypes.shape(friendsListProps)),
+  setSelectedFriend: PropTypes.func,
+  setPageState: PropTypes.func,
+};
 
 export default function Friends({
   friendsList,
@@ -8,6 +16,8 @@ export default function Friends({
   setPageState,
 }) {
   const [expanded, setExpanded] = useState(true);
+
+  console.log(friendsList);
 
   const handleExpandButton = () => {
     setExpanded((a) => !a);

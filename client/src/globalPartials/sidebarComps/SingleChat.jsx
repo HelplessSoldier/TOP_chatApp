@@ -1,6 +1,15 @@
 import { useState, useEffect } from "react";
 import getAccountInfo from "../../helpers/getAccountInfo";
 import "./SingleChat.css";
+import PropTypes from "prop-types";
+import { userObjectProps, chatObjectProps } from "../../helpers/propValidation";
+
+SingleChat.propTypes = {
+  userObject: PropTypes.shape(userObjectProps),
+  chatObject: PropTypes.arrayOf(PropTypes.shape(chatObjectProps)),
+  socket: PropTypes.object,
+  setUserObject: PropTypes.func,
+};
 
 export default function SingleChat({
   userObject,
@@ -13,7 +22,7 @@ export default function SingleChat({
   useEffect(() => {
     const chatSelected = userObject.currentChat === chatObject._id;
     setIsCurrentChat(chatSelected);
-  }, [userObject, chatObject])
+  }, [userObject, chatObject]);
 
   const handleSelectChatButton = () => {
     const jwtToken = document.cookie
