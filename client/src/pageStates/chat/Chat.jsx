@@ -3,7 +3,7 @@ import globals from "../../../../publicGlobals/apiGlobals.json";
 import { useEffect, useState } from "react";
 import getCookie from "../../helpers/getCookie";
 import ChatBox from "./chatPartials/ChatBox";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { userObjectProps } from "../../helpers/propValidation";
 
 Chat.propTypes = {
@@ -12,7 +12,7 @@ Chat.propTypes = {
   socket: PropTypes.object,
   setSocket: PropTypes.func,
   userObject: PropTypes.shape(userObjectProps),
-}
+};
 
 export default function Chat({
   setPageState,

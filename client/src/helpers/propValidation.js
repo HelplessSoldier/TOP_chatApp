@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const userObjectProps = {
   _id: PropTypes.string,
-  chatInvites: PropTypes.arrayOf(PropTypes.string || PropTypes.object),
+  chatInvites: PropTypes.arrayOf(PropTypes.object),
   chats: PropTypes.arrayOf(PropTypes.string),
   currentChat: PropTypes.string,
   email: PropTypes.string,
