@@ -1,6 +1,13 @@
 import "./DeleteChatConfirmation.css";
 import globals from "../../../../../publicGlobals/apiGlobals.json";
 import { useState } from "react";
+import PropTypes from 'prop-types';
+import { chatObjectProps } from "../../../helpers/propValidation";
+
+DeleteChatConfirmation.propTypes = {
+  chatObject: PropTypes.shape(chatObjectProps),
+  setShowDeleteConfirmation: PropTypes.func,
+}
 
 export default function DeleteChatConfirmation({
   chatObject,

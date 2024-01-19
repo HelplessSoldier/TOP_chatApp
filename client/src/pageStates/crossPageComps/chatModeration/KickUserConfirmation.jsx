@@ -1,5 +1,16 @@
 import "./KickUserConfirmation.css";
 import globals from "../../../../../publicGlobals/apiGlobals.json";
+import PropTypes from "prop-types";
+import {
+  userObjectProps,
+  chatObjectProps,
+} from "../../../helpers/propValidation";
+
+KickUserConfirmation.propTypes = {
+  userToKick: PropTypes.shape(userObjectProps),
+  setUserToKick: PropTypes.func,
+  chatObject: PropTypes.shape(chatObjectProps),
+};
 
 export default function KickUserConfirmation({
   userToKick,
@@ -26,7 +37,7 @@ export default function KickUserConfirmation({
       if (response.ok) {
         const message = await response.json();
         if (message.message === "Successfully kicked user") {
-          userToKick.username = 'Successfully kicked user'
+          userToKick.username = "Successfully kicked user";
           setUserToKick(null);
         }
       }

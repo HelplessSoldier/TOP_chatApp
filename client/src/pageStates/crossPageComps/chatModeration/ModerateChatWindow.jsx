@@ -4,6 +4,13 @@ import "./ModerateChatWindow.css";
 import ParticipantView from "./ParticipantView";
 import KickUserConfirmation from "./KickUserConfirmation";
 import DeleteChatConfirmation from "./DeleteChatConfirmation";
+import PropTypes from "prop-types";
+import { chatObjectProps } from "../../../helpers/propValidation";
+
+ModerateChatWindow.propTypes = {
+  chatObject: PropTypes.shape(chatObjectProps),
+  setSelectedChat: PropTypes.func,
+};
 
 export default function ModerateChatWindow({ chatObject, setSelectedChat }) {
   const [participants, setParticipants] = useState([]);

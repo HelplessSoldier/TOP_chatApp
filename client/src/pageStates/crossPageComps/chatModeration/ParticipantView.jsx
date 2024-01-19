@@ -1,4 +1,15 @@
 import "./ParticipantView.css";
+import PropTypes from "prop-types";
+import {
+  userObjectProps,
+  chatObjectModerationProps
+} from "../../../helpers/propValidation";
+
+ParticipantView.propTypes = {
+  userObject: PropTypes.shape(userObjectProps),
+  setUserToKick: PropTypes.func,
+  chatObject: PropTypes.shape(chatObjectModerationProps),
+}
 
 export default function ParticipantView({
   userObject,

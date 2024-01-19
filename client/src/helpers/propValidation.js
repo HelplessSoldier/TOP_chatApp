@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const userObjectProps = {
   _id: PropTypes.string,
-  chatInvites: PropTypes.arrayOf(PropTypes.string),
+  chatInvites: PropTypes.arrayOf(PropTypes.string || PropTypes.object),
   chats: PropTypes.arrayOf(PropTypes.string),
   currentChat: PropTypes.string,
   email: PropTypes.string,
@@ -36,6 +36,16 @@ const messageProps = {
   timestamp: PropTypes.string,
 };
 
+const chatObjectModerationProps = {
+  _id: PropTypes.string,
+  instanceType: PropTypes.string,
+  invitedUsers: PropTypes.arrayOf(PropTypes.object),
+  messages: PropTypes.arrayOf(PropTypes.shape(messageProps)),
+  name: PropTypes.string,
+  owner: PropTypes.string,
+  participants: PropTypes.arrayOf(PropTypes.string),
+}
+
 const searchResultsProps = {
   searchTerm: PropTypes.string,
   chats: PropTypes.arrayOf(
@@ -63,4 +73,5 @@ export {
   chatObjectProps,
   messageProps,
   searchResultsProps,
+  chatObjectModerationProps
 };
