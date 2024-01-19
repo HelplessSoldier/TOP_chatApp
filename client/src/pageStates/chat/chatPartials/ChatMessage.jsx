@@ -1,4 +1,11 @@
 import "./ChatMessage.css";
+import PropTypes from 'prop-types';
+import { userObjectProps, messageProps } from "../../../helpers/propValidation";
+
+ChatMessage.propTypes = {
+  message: PropTypes.shape(messageProps),
+  userObject: PropTypes.shape(userObjectProps),
+}
 
 export default function ChatMessage({ message, userObject }) {
   const isCurrentUser = message.sentById === userObject._id;

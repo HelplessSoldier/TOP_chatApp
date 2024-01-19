@@ -6,7 +6,7 @@ import { userObjectProps, chatObjectProps } from "../../helpers/propValidation";
 
 SingleChat.propTypes = {
   userObject: PropTypes.shape(userObjectProps),
-  chatObject: PropTypes.arrayOf(PropTypes.shape(chatObjectProps)),
+  chatObject: PropTypes.shape(chatObjectProps),
   socket: PropTypes.object,
   setUserObject: PropTypes.func,
 };

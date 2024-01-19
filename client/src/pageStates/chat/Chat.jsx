@@ -3,7 +3,16 @@ import globals from "../../../../publicGlobals/apiGlobals.json";
 import { useEffect, useState } from "react";
 import getCookie from "../../helpers/getCookie";
 import ChatBox from "./chatPartials/ChatBox";
-import ModerateChatWindow from "../crossPageComps/chatModeration/ModerateChatWindow";
+import PropTypes from 'prop-types';
+import { userObjectProps } from "../../helpers/propValidation";
+
+Chat.propTypes = {
+  setPageState: PropTypes.func,
+  setUserObject: PropTypes.func,
+  socket: PropTypes.object,
+  setSocket: PropTypes.func,
+  userObject: PropTypes.shape(userObjectProps),
+}
 
 export default function Chat({
   setPageState,

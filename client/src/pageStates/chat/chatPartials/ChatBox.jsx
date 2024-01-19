@@ -3,6 +3,19 @@ import getCookie from "../../../helpers/getCookie";
 import ModerateChatWindow from "../../crossPageComps/chatModeration/ModerateChatWindow";
 import "./ChatBox.css";
 import ChatMessage from "./ChatMessage";
+import PropTypes from "prop-types";
+import {
+  chatObjectProps,
+  userObjectProps,
+} from "../../../helpers/propValidation";
+
+ChatBox.propTypes = {
+  chatObject: PropTypes.shape(chatObjectProps),
+  socket: PropTypes.object,
+  userObject: PropTypes.shape(userObjectProps),
+  selectedChat: PropTypes.shape(chatObjectProps),
+  setSelectedChat: PropTypes.func,
+};
 
 export default function ChatBox({
   chatObject,
