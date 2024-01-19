@@ -6,6 +6,12 @@ import ChatInvites from "./accountComps/ChatInvites";
 import OwnedChats from "./accountComps/OwnedChats";
 import ModerateChatWindow from "../crossPageComps/chatModeration/ModerateChatWindow";
 import getAccountInfo from "../../helpers/getAccountInfo";
+import PropTypes from 'prop-types';
+
+Account.propTypes = {
+  socket: PropTypes.object,
+  setSocket: PropTypes.func,
+}
 
 export default function Account({ socket, setSocket }) {
   const [userObject, setUserObject] = useState(null);
@@ -58,7 +64,6 @@ export default function Account({ socket, setSocket }) {
             )}
             {userObject.chatInvites.length > 0 && (
               <ChatInvites
-                chatInvites={userObject.chatInvites}
                 userObject={userObject}
                 socket={socket}
               />

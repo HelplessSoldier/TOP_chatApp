@@ -2,6 +2,14 @@ import "./AccountSections.css";
 import { useState, useEffect } from "react";
 import getUsers from "../../../helpers/getUsers";
 import FriendReq from "./FriendReq";
+import PropTypes from 'prop-types';
+import { userObjectProps } from "../../../helpers/propValidation";
+
+FriendRequests.propTypes = {
+  friendRequests: PropTypes.arrayOf(PropTypes.string),
+  currentUser: PropTypes.shape(userObjectProps),
+  socket: PropTypes.object,
+}
 
 export default function FriendRequests({ friendRequests, currentUser, socket }) {
   const [requestingUsers, setRequestingUsers] = useState([]);

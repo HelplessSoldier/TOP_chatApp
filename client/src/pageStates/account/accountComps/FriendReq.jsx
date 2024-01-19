@@ -1,5 +1,13 @@
 import { useState } from "react";
 import "./FriendReq.css";
+import PropTypes from 'prop-types';
+import { userObjectProps } from "../../../helpers/propValidation";
+
+FriendReq.propTypes = {
+  requestingUser: PropTypes.shape(userObjectProps),
+  currentUser: PropTypes.shape(userObjectProps),
+  socket: PropTypes.object,
+}
 
 export default function FriendReq({ requestingUser, currentUser, socket }) {
   const [displayed, setDisplayed] = useState(true);

@@ -1,5 +1,16 @@
 import "./ChatInvite.css";
 import { useState } from "react";
+import PropTypes from "prop-types";
+import {
+  chatObjectProps,
+  userObjectProps,
+} from "../../../helpers/propValidation";
+
+ChatInvite.propTypes = {
+  chatObject: PropTypes.shape(chatObjectProps),
+  userObject: PropTypes.shape(userObjectProps),
+  socket: PropTypes.object,
+}
 
 export default function ChatInvite({ chatObject, userObject, socket }) {
   const [displayed, setDisplayed] = useState(true);
@@ -38,9 +49,7 @@ export default function ChatInvite({ chatObject, userObject, socket }) {
     return (
       <div className="chatInviteContainer">
         <div className="chatInviteTextContainer">
-          <p className="chatInviteText">
-            {chatObject.chatName}
-          </p>
+          <p className="chatInviteText">{chatObject.chatName}</p>
           <p className="chatInviteTextSmol">Sent by {chatObject.sentByName}</p>
         </div>
 
