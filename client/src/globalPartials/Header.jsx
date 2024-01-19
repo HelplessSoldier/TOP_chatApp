@@ -3,6 +3,16 @@ import "./Header.css";
 import SearchBar from "./headerComps/SearchBar";
 import SignOutAreYouSure from "./headerComps/SignOutAreYouSure";
 import hasAlerts from "../helpers/hasAlerts";
+import PropTypes from "prop-types";
+import { userObjectProps } from "../helpers/propValidation";
+
+Header.propTypes = {
+  setPageState: PropTypes.func,
+  userObject: PropTypes.shape(userObjectProps),
+  setUserObject: PropTypes.func,
+  socket: PropTypes.object,
+  setSearchResults: PropTypes.func,
+};
 
 export default function Header({
   setPageState,
@@ -49,7 +59,9 @@ export default function Header({
   return (
     <>
       <div className="headerContainer">
-        <h1 className="headerLogo" onClick={handleChatButtonClick}>SPRK</h1>
+        <h1 className="headerLogo" onClick={handleChatButtonClick}>
+          SPRK
+        </h1>
         {isLoggedIn && (
           <SearchBar socket={socket} setSearchResults={setSearchResults} />
         )}
