@@ -1,6 +1,5 @@
 import "./RemoveFriendConfirmation.css";
 import globals from "../../../../publicGlobals/apiGlobals.json";
-import { useState } from "react";
 import PropTypes from 'prop-types';
 import { friendsListProps } from "../../helpers/propValidation";
 

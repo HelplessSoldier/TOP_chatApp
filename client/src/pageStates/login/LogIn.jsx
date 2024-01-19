@@ -1,11 +1,15 @@
 import "./LogIn.css";
 import globals from "../../../../publicGlobals/apiGlobals.json";
 import { useState } from "react";
+import PropTypes from "prop-types";
+
+LogIn.propTypes = {
+  setPageState: PropTypes.func,
+};
 
 const apiUri =
   globals.serverUri + ":" + globals.serverPort + globals.apiVersion;
 const loginUri = apiUri + "/accounts/login";
-const logoutUri = apiUri + "/accounts/logout";
 
 export default function LogIn({ setPageState }) {
   const [validationErrors, setValidationErrors] = useState([]);
@@ -33,7 +37,7 @@ export default function LogIn({ setPageState }) {
 
       if (response.ok && responseData.message !== "Validation error") {
         setValidationErrors([]);
-        setPageState('Chat')
+        setPageState("Chat");
       } else {
         setValidationErrors(responseData.errors);
       }

@@ -1,6 +1,11 @@
 import { useState } from "react";
 import "./SignUp.css";
 import globals from "../../../../publicGlobals/apiGlobals.json";
+import PropTypes from "prop-types";
+
+SignUp.propTypes = {
+  setPageState: PropTypes.func,
+};
 
 const apiUri =
   globals.serverUri + ":" + globals.serverPort + globals.apiVersion;

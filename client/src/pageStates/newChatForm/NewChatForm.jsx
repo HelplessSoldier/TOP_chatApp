@@ -6,6 +6,11 @@ import {
   serverPort,
   apiVersion,
 } from "../../../../publicGlobals/apiGlobals.json";
+import PropTypes from "prop-types";
+
+NewChatForm.propTypes = {
+  setPageState: PropTypes.func,
+};
 
 const newChatUri = serverUri + ":" + serverPort + apiVersion + "/chat/new-chat";
 
