@@ -4,12 +4,15 @@ const mongoose = require("mongoose");
 const request = require("supertest");
 const express = require("express");
 const User = require("../models/User");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.post("/signup", v1AccountController.sign_up_post);
+app.post("/login", v1AccountController.log_in_post);
 
 let mongod;
 let uri;
@@ -24,8 +27,10 @@ afterAll(async () => {
   await mongod.stop;
 });
 
-describe("v1AccountController", () => {
+describe("v1AccountController signup post", () => {
   test("Valid request to sign_up_post adds the user to db", async () => {
+    // ! the User saved here is used for the valid log_in_post test later.
+    // if you change it make sure to modify the log_in_post test !
     const testBody = {
       email: "test1@example.com",
       username: "testUser1",
@@ -49,7 +54,7 @@ describe("v1AccountController", () => {
     expect(passwordsMatch).toBe(false);
   });
 
-  test("Invalid email requests don't add user", async () => {
+  test("Invalid email doesn't add user", async () => {
     const testBody = {
       email: "invalidEmailString",
       username: "validTestName",
@@ -58,18 +63,17 @@ describe("v1AccountController", () => {
     };
     const response = await request(app)
       .post("/signup")
-      .set("Content-Type", 'application/json')
+      .set("Content-Type", "application/json")
       .send(testBody);
 
     expect(response.status).toBe(403);
     expect(response.body.message).toBe("Validation errors");
 
-    const userInDb = await User.findOne({ username: 'validTestName' })
+    const userInDb = await User.findOne({ username: "validTestName" });
     expect(userInDb).toBe(null);
   });
 
-
-  test("Invalid username requests don't add user", async () => {
+  test("Invalid username request doesn't add user", async () => {
     const testBody = {
       email: "valid@email.com",
       username: "",
@@ -78,17 +82,17 @@ describe("v1AccountController", () => {
     };
     const response = await request(app)
       .post("/signup")
-      .set("Content-Type", 'application/json')
+      .set("Content-Type", "application/json")
       .send(testBody);
 
     expect(response.status).toBe(403);
     expect(response.body.message).toBe("Validation errors");
 
-    const userInDb = await User.findOne({ username: 'validTestName' })
+    const userInDb = await User.findOne({ username: "validTestName" });
     expect(userInDb).toBe(null);
   });
 
-  test("Invalid password requests don't add user", async () => {
+  test("Invalid password request doesn't add user", async () => {
     const testBody = {
       email: "valid@email.com",
       username: "validUsername",
@@ -98,17 +102,17 @@ describe("v1AccountController", () => {
 
     const response = await request(app)
       .post("/signup")
-      .set("Content-Type", 'application/json')
+      .set("Content-Type", "application/json")
       .send(testBody);
 
     expect(response.status).toBe(403);
     expect(response.body.message).toBe("Validation errors");
 
-    const userInDb = await User.findOne({ username: 'validUsername' })
+    const userInDb = await User.findOne({ username: "validUsername" });
     expect(userInDb).toBe(null);
   });
 
-  test("Invalid confirm password requests don't add user", async () => {
+  test("Invalid confirm password request doesn't add user", async () => {
     const testBody = {
       email: "valid@email.com",
       username: "validUsername_1",
@@ -118,13 +122,61 @@ describe("v1AccountController", () => {
 
     const response = await request(app)
       .post("/signup")
-      .set("Content-Type", 'application/json')
+      .set("Content-Type", "application/json")
       .send(testBody);
 
     expect(response.status).toBe(403);
     expect(response.body.message).toBe("Validation errors");
 
-    const userInDb = await User.findOne({ username: 'validUsername_1' })
+    const userInDb = await User.findOne({ username: "validUsername_1" });
     expect(userInDb).toBe(null);
+  });
+});
+
+describe("v1AccountController login post", () => {
+  test("Send 200 on valid request and send jwt", async () => {
+    const testBody = {
+      email: "test1@example.com",
+      password: "test12",
+    };
+
+    const response = await request(app)
+      .post("/login")
+      .set("Content-Type", "application/json")
+      .send(testBody);
+
+    expect(response.body.message).toBe("Verification successful");
+    expect(response.status).toBe(200);
+    expect(response.body.token === '').toBe(false);
+  });
+
+  test("Send 401 and message on invalid password", async () => {
+    const testBody = {
+      email: "test1@example.com",
+      password: "wrongPassword",
+    };
+
+    const response = await request(app)
+      .post("/login")
+      .set("Content-Type", "application/json")
+      .send(testBody);
+
+    expect(response.body.message).toBe("Validation error");
+    expect(response.status).toBe(401);
+  });
+
+  test("Send 401 and message on invalid email", async () => {
+    const testBody = {
+      email: "nonExistentUser@example.com",
+      password: "somepassword",
+    };
+
+    const response = await request(app)
+      .post("/login")
+      .set("Content-Type", "application/json")
+      .send(testBody);
+
+    expect(response.body.message).toBe("Validation error");
+    expect(response.status).toBe(401);
   });
 });

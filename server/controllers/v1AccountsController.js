@@ -18,12 +18,12 @@ exports.log_in_post = [
   asyncHandler(async (req, res, next) => {
     const val = validationResult(req);
     if (val.errors.length > 0) {
-      res.json({ message: "Validation error", errors: val.errors });
+      res.status(401).json({ message: "Validation error", errors: val.errors });
     }
 
     const foundUser = await User.findOne({ email: req.body.email });
     if (foundUser === null) {
-      res.json({
+      res.status(401).json({
         message: "Validation error",
         errors: [
           {
@@ -42,7 +42,7 @@ exports.log_in_post = [
       foundUser.password
     );
     if (!isCorrectPassword) {
-      res.json({
+      res.status(401).json({
         message: "Validation error",
         errors: [
           {
