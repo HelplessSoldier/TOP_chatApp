@@ -89,5 +89,21 @@ describe("v1Controller currentUser_get", () => {
       .get("/current-user")
       .set("Cookie", [`jwt=${incorrectJwt}`])
       .expect(404);
+
+    expect(response.body.message.toString()).toBe("Error: User not found");
+  });
+});
+
+describe("v1Controller user_get", () => {
+  test("Gets user by a valid id without sending password", async () => {
+    const response = await request(app).get(`/user/${testUser1id}`).expect(200);
+    const userObject = response.body.user;
+    expect(userObject.password).toBeUndefined();
+    expect(userObject._id.toString()).toBe(testUser1id.toString());
+  });
+
+  test("Returns 404 and user not found message on invalid id", async () => {
+    const response = await request(app).get(`/user/someinvalidid`).expect(404);
+    expect(response.body.message.toString()).toBe('Error: User not found');
   });
 });
