@@ -9,7 +9,7 @@ const userSchema = new Schema({
   password: { type: String, required: true },
   chats: [{ type: Schema.Types.ObjectId, ref: "Chat" }],
   ownedChats: [{ type: Schema.Types.ObjectId, ref: "Chat" }],
-  currentChat: { type: Schema.Types.ObjectId, ref: "Chat" },
+  currentChat: { type: Schema.Types.ObjectId, ref: "Chat", required: false },
   chatInvites: [
     {
       chatid: { type: Schema.Types.ObjectId, ref: "Chat" },
