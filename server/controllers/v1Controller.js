@@ -58,15 +58,19 @@ exports.user_get = asyncHandler(async (req, res) => {
 
 exports.chat_get = asyncHandler(async (req, res) => {
   try {
-    const foundChat = await Chat.findById(req.params.chatid);
 
-    if (!foundChat) {
-      res.status(404).json({ message: "Chat not found" });
+    let foundChat;
+    try {
+      foundChat = await Chat.findById(req.params.chatid);
+    } catch (err) {
+      res.status(404).json({ message: "Chat not found", detail: err });
       return;
     }
 
     const chatObject = foundChat.toObject();
+
     res.status(200).json({ message: "Chat found", chat: chatObject });
+
   } catch (err) {
     console.error(err);
     res

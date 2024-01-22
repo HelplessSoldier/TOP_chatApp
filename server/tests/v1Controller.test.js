@@ -104,6 +104,20 @@ describe("v1Controller user_get", () => {
 
   test("Returns 404 and user not found message on invalid id", async () => {
     const response = await request(app).get(`/user/someinvalidid`).expect(404);
-    expect(response.body.message.toString()).toBe('Error: User not found');
+    expect(response.body.message.toString()).toBe("Error: User not found");
   });
+});
+
+describe("v1Controller chat_get", () => {
+  test("Gets chat by a valid id", async () => {
+    const response = await request(app).get(`/chat/${testChat1id}`).expect(200);
+    const body = response.body;
+    expect(body.message.toString()).toBe("Chat found");
+    expect(body.chat._id.toString()).toBe(testChat1id.toString());
+  });
+
+  test("Returns 404 and not found message on invalid chat id", async () => {
+    const response = await request(app).get('/chat/someinvalidid').expect(404);
+    expect(response.body.message.toString()).toBe("Chat not found");
+  })
 });
