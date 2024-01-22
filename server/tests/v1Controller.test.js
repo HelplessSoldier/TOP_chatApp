@@ -22,7 +22,8 @@ app.put("/user/invite/:chatid/:userid", v1Controller.user_invite_put); // add ch
 app.put("/chat/kick/:chatid/:userid", v1Controller.chat_kick_user_put); // remove user from chat via moderation
 
 let mongod;
-let testUserToken; // this would normally be set as a cookie in v1AccountsController
+let testUser1Token; // this would normally be set as a cookie in v1AccountsController
+const testSecret = 'somebodyOnceToldMeTheWorldWasGonnaRollMe';
 let testUser1id;
 let testChat1id;
 beforeAll(async () => {
@@ -52,12 +53,16 @@ beforeAll(async () => {
     messages: [],
   });
   await testChat1.save();
+
   testUser1.ownedChats.push(testChat1._id);
   testUser1.chats.push(testChat1._id);
+
   await testUser1.save();
 
   testUser1id = testUser1._id;
   testChat1id = testChat1._id;
+
+  testUser1Token = jwt.sign({ userId: testUser1id }, testSecret);
 });
 
 afterAll(async () => {
