@@ -13,9 +13,11 @@ exports.currentUser_get = asyncHandler(async (req, res) => {
     const token = req.cookies.jwt;
     const tokenPayload = jwt.verify(token, process.env.secret);
     const userId = tokenPayload.userId;
-    const currentUser = await User.findById(userId);
 
-    if (!currentUser) {
+    let currentUser;
+    try {
+      currentUser = await User.findById(userId);
+    } catch (err) {
       res.status(404).json({ message: "Error: User not found" });
       return;
     }
@@ -26,8 +28,8 @@ exports.currentUser_get = asyncHandler(async (req, res) => {
     res
       .status(200)
       .json({ message: "Successfully retrieved user", user: userObject });
+
   } catch (err) {
-    console.error(err);
     res.status(500).json({
       message: "Something went wrong in currentUser_get",
       detail: err,

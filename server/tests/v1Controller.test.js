@@ -7,6 +7,7 @@ const request = require("supertest");
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const { MongoMemoryServer } = require("mongodb-memory-server");
+require("dotenv").config();
 
 const app = express();
 
@@ -23,7 +24,7 @@ app.put("/chat/kick/:chatid/:userid", v1Controller.chat_kick_user_put); // remov
 
 let mongod;
 let testUser1Token; // this would normally be set as a cookie in v1AccountsController
-const testSecret = 'somebodyOnceToldMeTheWorldWasGonnaRollMe';
+const secret = process.env.secret; // using actual secret as it's also used in the controller
 let testUser1id;
 let testChat1id;
 beforeAll(async () => {
@@ -62,7 +63,7 @@ beforeAll(async () => {
   testUser1id = testUser1._id;
   testChat1id = testChat1._id;
 
-  testUser1Token = jwt.sign({ userId: testUser1id }, testSecret);
+  testUser1Token = jwt.sign({ userId: testUser1id }, secret);
 });
 
 afterAll(async () => {
@@ -72,6 +73,21 @@ afterAll(async () => {
 
 describe("v1Controller currentUser_get", () => {
   test("Gets current user if jwt exists", async () => {
-    expect(1).toBe(1);
+    const response = await request(app)
+      .get("/current-user")
+      .set("Cookie", [`jwt=${testUser1Token}`])
+      .expect(200)
+      .expect("Content-Type", "application/json; charset=utf-8");
+
+    expect(response.body.message).toBe("Successfully retrieved user");
+    expect(response.body.user._id.toString()).toBe(testUser1id.toString());
+  });
+
+  test("Returns 404 and user not found message on incorrect jwt payload", async () => {
+    const incorrectJwt = jwt.sign({ userId: "someIdThatsNotInDb" }, secret);
+    const response = await request(app)
+      .get("/current-user")
+      .set("Cookie", [`jwt=${incorrectJwt}`])
+      .expect(404);
   });
 });
