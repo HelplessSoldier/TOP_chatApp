@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 exports.root_get = (req, res) => {
-  res.send("hi! this is the controller");
+  res.send("hi! this is the v1Controller");
 };
 
 exports.currentUser_get = asyncHandler(async (req, res) => {
