@@ -9,79 +9,108 @@ exports.root_get = (req, res) => {
 };
 
 exports.currentUser_get = asyncHandler(async (req, res) => {
-  const token = req.cookies.jwt;
-  const tokenPayload = jwt.verify(token, process.env.secret);
-  const userId = tokenPayload.userId;
-  const currentUser = await User.findById(userId);
+  try {
+    const token = req.cookies.jwt;
+    const tokenPayload = jwt.verify(token, process.env.secret);
+    const userId = tokenPayload.userId;
+    const currentUser = await User.findById(userId);
 
-  if (!currentUser) {
-    res.status(404).json({ message: "Error: User not found" });
-    return;
+    if (!currentUser) {
+      res.status(404).json({ message: "Error: User not found" });
+      return;
+    }
+
+    const userObject = currentUser.toObject();
+    delete userObject.password;
+
+    res
+      .status(200)
+      .json({ message: "Successfully retrieved user", user: userObject });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      message: "Something went wrong in currentUser_get",
+      detail: err,
+    });
   }
-
-  const userObject = currentUser.toObject();
-  delete userObject.password;
-
-  res
-    .status(200)
-    .json({ message: "Successfully retrieved user", user: userObject });
 });
 
 exports.user_get = asyncHandler(async (req, res) => {
-  const foundUser = await User.findById(req.params.userid);
+  try {
+    const foundUser = await User.findById(req.params.userid);
 
-  if (!foundUser) {
-    res.status(404).json({ message: "User not found" });
-    return;
+    if (!foundUser) {
+      res.status(404).json({ message: "User not found" });
+      return;
+    }
+
+    const userObject = foundUser.toObject();
+    delete userObject.password;
+    res.status(200).json({ message: "User found", user: userObject });
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .json({ message: "Something went wrong in user_get", detail: err });
   }
-
-  const userObject = foundUser.toObject();
-  delete userObject.password;
-  res.status(200).json({ message: "User found", user: userObject });
 });
 
 exports.chat_get = asyncHandler(async (req, res) => {
-  const foundChat = await Chat.findById(req.params.chatid);
+  try {
+    const foundChat = await Chat.findById(req.params.chatid);
 
-  if (!foundChat) {
-    res.status(404).json({ message: "Chat not found" });
-    return;
+    if (!foundChat) {
+      res.status(404).json({ message: "Chat not found" });
+      return;
+    }
+
+    const chatObject = foundChat.toObject();
+    res.status(200).json({ message: "Chat found", chat: chatObject });
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .json({ message: "Something went wrong in chat_get", detail: err });
   }
-
-  const chatObject = foundChat.toObject();
-  res.status(200).json({ message: "Chat found", chat: chatObject });
 });
 
 exports.chat_delete = asyncHandler(async (req, res) => {
-  const token = req.cookies.jwt;
-  const userId = jwt.verify(token, process.env.secret).userId;
+  try {
+    const token = req.cookies.jwt;
+    const userId = jwt.verify(token, process.env.secret).userId;
 
-  const requestingUser = await User.findById(userId);
-  const chatToDeleteId = req.params.chatid;
-  const chatOwnedByUser = requestingUser.ownedChats.includes(chatToDeleteId);
+    const requestingUser = await User.findById(userId);
+    const chatToDeleteId = req.params.chatid;
+    const chatOwnedByUser = requestingUser.ownedChats.includes(chatToDeleteId);
 
-  if (!chatOwnedByUser) {
-    res
-      .status(403)
-      .json({ message: "Cannot delete", detail: "User does not own chat" });
-    return;
-  }
+    if (!chatOwnedByUser) {
+      res
+        .status(403)
+        .json({ message: "Cannot delete", detail: "User does not own chat" });
+      return;
+    }
 
-  const chatToDelete = await Chat.findById(chatToDeleteId);
-  if (!chatToDelete) {
+    const chatToDelete = await Chat.findById(chatToDeleteId);
+    if (!chatToDelete) {
+      res
+        .status(500)
+        .json({ message: "Cannot delete", detail: "Chat was not found" });
+    }
+
+    await chatToDelete.deleteOne();
+    const checkChat = await Chat.findById(chatToDeleteId);
+    if (checkChat) {
+      res
+        .status(500)
+        .json({ message: "Cannot delete", detail: "Failed to delete chat" });
+    } else {
+      res.status(200).json({ message: "Successfully deleted chat" });
+    }
+  } catch (err) {
+    console.error(err);
     res
       .status(500)
-      .json({ message: "Cannot delete", detail: "Chat was not found" });
-  }
-
-  await chatToDelete.deleteOne();
-  const checkChat = await Chat.findById(chatToDeleteId);
-  if (checkChat) {
-    res
-      .status(500)
-      .json({ message: "Cannot delete", detail: "Failed to delete chat" });
-  } else {
-    res.status(200).json({ message: "Successfully deleted chat" });
+      .json({ message: "Something went wrong in chat_delete", detail: err });
   }
 });
 

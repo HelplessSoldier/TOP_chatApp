@@ -88,7 +88,7 @@ describe("v1AccountController signup post", () => {
     expect(response.status).toBe(403);
     expect(response.body.message).toBe("Validation errors");
 
-    const userInDb = await User.findOne({ username: "validTestName" });
+    const userInDb = await User.findOne({ username: "" });
     expect(userInDb).toBe(null);
   });
 
@@ -117,7 +117,7 @@ describe("v1AccountController signup post", () => {
       email: "valid@email.com",
       username: "validUsername_1",
       password: "validPassword",
-      confirmPassword: "alidPassword",
+      confirmPassword: "invalidConfirmPassword",
     };
 
     const response = await request(app)
