@@ -181,16 +181,22 @@ describe("v1Controller chat_kick_user_put", () => {
       .set("Cookie", [`jwt=${userToKickToken}`])
       .expect(403);
 
-    expect(response.body.toString()).toBe({
-      message: 'Cannot kick user',
-      detail: 'Requesting user is not the owner of this chat'
-    }.toString());
+    expect(response.body.toString()).toBe(
+      {
+        message: "Cannot kick user",
+        detail: "Requesting user is not the owner of this chat",
+      }.toString()
+    );
 
     const attemptedToRemoveChat = await Chat.findById(chatToDeleteId);
     const attemptedToRemoveUser = await User.findById(testUser1id);
 
-    const userStillInChat = attemptedToRemoveUser.chats.includes(attemptedToRemoveChat._id);
-    const chatStillInUser = attemptedToRemoveChat.participants.includes(attemptedToRemoveUser._id);
+    const userStillInChat = attemptedToRemoveUser.chats.includes(
+      attemptedToRemoveChat._id
+    );
+    const chatStillInUser = attemptedToRemoveChat.participants.includes(
+      attemptedToRemoveUser._id
+    );
 
     expect(userStillInChat).toBe(true);
     expect(chatStillInUser).toBe(true);
