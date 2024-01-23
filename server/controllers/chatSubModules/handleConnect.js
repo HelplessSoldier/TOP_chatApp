@@ -21,7 +21,7 @@ async function handleConnect(socket, req, userSocketMap) {
   if (currentUser === null) {
     socket.send(JSON.stringify({ message: "No user" }));
   } else {
-    userSocketMap[currentUser._id] = socket; // TODO: remove this upon socket closing
+    userSocketMap[currentUser._id] = socket;
     socket.send(
       JSON.stringify({
         message: "User successfully verified",

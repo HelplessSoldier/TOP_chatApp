@@ -29,10 +29,12 @@ exports.new_chat_post = asyncHandler(async (req, res) => {
     const secret = process.env.secret;
     const token = getCookieFromString(body.token, "jwt");
     const { userId } = jwt.verify(token, secret);
-    const user = await User.findById(userId);
 
-    if (!user) {
-      res.json({ message: "User not found" });
+    let user;
+    try {
+      user = await User.findById(userId);
+    } catch (err) {
+      res.status(404).json({ message: "User not found" });
     }
 
     const newChat = new Chat({
@@ -49,8 +51,7 @@ exports.new_chat_post = asyncHandler(async (req, res) => {
     await newChat.save();
     await user.save();
 
-    res.json({ message: "Chat created" })
-
+    res.status(200).json({ message: "Chat created" });
   } catch (err) {
     console.error(err);
   }
