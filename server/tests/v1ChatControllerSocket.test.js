@@ -20,11 +20,32 @@ const secret = process.env.secret; // using actual secret as it's also used in t
 let server;
 let userSocketMap;
 
+let testUser;
+let testUserId;
+let testUserToken;
+
 beforeAll(async () => {
   mongod = await MongoMemoryServer.create();
   const uri = mongod.getUri();
   mongoose.connect(uri);
 
+  // create user and chat db entries
+  testUser = new User({
+    email: "testUser@gmail.com",
+    username: "testUser",
+    password: "test12",
+    chats: [],
+    ownedChats: [],
+    chatInvites: [],
+    friends: [],
+    friendRequests: [],
+    sentFriendRequests: [],
+  });
+  await testUser.save();
+  testUserId = testUser._id;
+  testUserToken = jwt.sign({ userId: testUserId }, secret);
+
+  // setup mock server socket
   userSocketMap = {};
   server = new WebSocket.Server({ port: 8888 });
 
@@ -44,6 +65,7 @@ beforeAll(async () => {
 afterAll(async () => {
   mongoose.disconnect();
   await mongod.stop;
+  server.close();
 });
 
 describe("handleConnect", () => {
