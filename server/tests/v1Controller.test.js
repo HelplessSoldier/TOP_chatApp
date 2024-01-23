@@ -23,10 +23,13 @@ app.put("/user/invite/:chatid/:userid", v1Controller.user_invite_put); // add ch
 app.put("/chat/kick/:chatid/:userid", v1Controller.chat_kick_user_put); // remove user from chat via moderation
 
 let mongod;
-let testUser1Token; // this would normally be set as a cookie in v1AccountsController
 const secret = process.env.secret; // using actual secret as it's also used in the controller
+
+let chatToDeleteId;
 let testUser1id;
+let testUser1Token; // this would normally be set as a cookie in v1AccountsController
 let testChat1id;
+
 beforeAll(async () => {
   mongod = await MongoMemoryServer.create();
   const uri = mongod.getUri();
@@ -58,8 +61,20 @@ beforeAll(async () => {
   testUser1.ownedChats.push(testChat1._id);
   testUser1.chats.push(testChat1._id);
 
+  const chatToDelete = new Chat({
+    name: "DeleteMe!",
+    owner: testUser1._id,
+    participants: testUser1._id,
+    invitedUsers: [],
+    instanceType: "public",
+    messages: [],
+  });
+  await chatToDelete.save();
+
+  testUser1.ownedChats.push(chatToDelete._id);
   await testUser1.save();
 
+  chatToDeleteId = chatToDelete._id;
   testUser1id = testUser1._id;
   testChat1id = testChat1._id;
 
@@ -117,7 +132,29 @@ describe("v1Controller chat_get", () => {
   });
 
   test("Returns 404 and not found message on invalid chat id", async () => {
-    const response = await request(app).get('/chat/someinvalidid').expect(404);
+    const response = await request(app).get("/chat/someinvalidid").expect(404);
     expect(response.body.message.toString()).toBe("Chat not found");
-  })
+  });
+});
+
+describe("v1Controller chat_delete", () => {
+  test("Delete chat on valid request", async () => {
+    const response = await request(app)
+      .delete(`/chat/${chatToDeleteId}`)
+      .set("Cookie", [`jwt=${testUser1Token}`])
+      .expect(200);
+
+    expect(response.body.message.toString()).toBe("Successfully deleted chat");
+    const deletedChat = await Chat.findById(chatToDeleteId);
+    expect(deletedChat).toBe(undefined || null);
+  });
+
+  test("Returns 403 and cannot delete on invalid id (includes non owned chats)", async () => {
+    const response = await request(app)
+      .delete(`/chat/someinvalidid`)
+      .set("Cookie", [`jwt=${testUser1Token}`])
+      .expect(403);
+    const mess = response.body.message;
+    expect(mess.toString()).toBe('Cannot delete')
+  });
 });

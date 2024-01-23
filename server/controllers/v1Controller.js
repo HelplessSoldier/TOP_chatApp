@@ -58,7 +58,6 @@ exports.user_get = asyncHandler(async (req, res) => {
 
 exports.chat_get = asyncHandler(async (req, res) => {
   try {
-
     let foundChat;
     try {
       foundChat = await Chat.findById(req.params.chatid);
@@ -70,7 +69,6 @@ exports.chat_get = asyncHandler(async (req, res) => {
     const chatObject = foundChat.toObject();
 
     res.status(200).json({ message: "Chat found", chat: chatObject });
-
   } catch (err) {
     console.error(err);
     res
@@ -82,9 +80,17 @@ exports.chat_get = asyncHandler(async (req, res) => {
 exports.chat_delete = asyncHandler(async (req, res) => {
   try {
     const token = req.cookies.jwt;
-    const userId = jwt.verify(token, process.env.secret).userId;
 
-    const requestingUser = await User.findById(userId);
+    let requestingUser;
+    try {
+      const userId = jwt.verify(token, process.env.secret).userId;
+      requestingUser = await User.findById(userId);
+    } catch (err) {
+      res
+        .status(404)
+        .json({ message: "Cannot delete", detail: "User not found" });
+    }
+
     const chatToDeleteId = req.params.chatid;
     const chatOwnedByUser = requestingUser.ownedChats.includes(chatToDeleteId);
 
@@ -95,11 +101,13 @@ exports.chat_delete = asyncHandler(async (req, res) => {
       return;
     }
 
-    const chatToDelete = await Chat.findById(chatToDeleteId);
-    if (!chatToDelete) {
+    let chatToDelete;
+    try {
+      chatToDelete = await Chat.findById(chatToDeleteId);
+    } catch (err) {
       res
-        .status(500)
-        .json({ message: "Cannot delete", detail: "Chat was not found" });
+        .status(404)
+        .json({ message: "Cannot delete", detail: "Chat not found" });
     }
 
     await chatToDelete.deleteOne();
