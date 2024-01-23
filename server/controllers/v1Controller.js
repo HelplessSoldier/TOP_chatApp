@@ -191,10 +191,11 @@ exports.user_invite_put = asyncHandler(async (req, res) => {
       sentByName: requestingUser.username,
     };
     user.chatInvites.push(inviteObject);
+    chat.invitedUsers.push(user._id);
 
-    await user.save();
+    await Promise.all([user.save(), chat.save()]);
 
-    res.json({ message: "Invite sent" });
+    res.status(200).json({ message: "Invite sent" });
   } catch (err) {
     console.error(err);
     res

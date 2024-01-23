@@ -153,6 +153,29 @@ describe("v1Controller chat_get", () => {
   });
 });
 
+describe("v1Controller user_invite_put", () => {
+  // Order of tests matters for this one.
+  // Keep it above chat_delete and user_friend_remove_put
+
+  test("Invites user to chat if valid", async () => {
+    const response = await request(app)
+      .put(`/user/invite/${chatToDeleteId}/${userToUnfriendId}`)
+      .set("Cookie", [`jwt=${testUser1Token}`])
+      .expect(200);
+
+    expect(response.body.message.toString()).toBe("Invite sent");
+
+    const friendRequestRecipiant = await User.findById(userToUnfriendId);
+    const sentChat = await Chat.findById(chatToDeleteId);
+
+    const inviteId = friendRequestRecipiant.chatInvites[0].chatid.toString();
+    const chatId = sentChat._id.toString();
+    const correctInvite = inviteId === chatId;
+
+    expect(correctInvite).toBe(true);
+  });
+});
+
 describe("v1Controller chat_delete", () => {
   test("Delete chat on valid request", async () => {
     const response = await request(app)
@@ -182,7 +205,9 @@ describe("v1Controller user_friend_remove_put", () => {
       .set("Cookie", [`jwt=${testUser1Token}`])
       .expect(200);
 
-    expect(response.body.message.toString()).toBe("Successfully removed friend");
+    expect(response.body.message.toString()).toBe(
+      "Successfully removed friend"
+    );
 
     const testUser1 = await User.findById(testUser1id);
     const userToUnfriend = await User.findById(userToUnfriendId);
