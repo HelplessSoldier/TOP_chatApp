@@ -27,8 +27,10 @@ const secret = process.env.secret; // using actual secret as it's also used in t
 
 let chatToDeleteId;
 let userToUnfriendId;
+let userToKickId;
 let testUser1id;
 let testUser1Token; // this would normally be set as a cookie in v1AccountsController
+let userToKickToken;
 let testChat1id;
 
 beforeAll(async () => {
@@ -63,6 +65,20 @@ beforeAll(async () => {
   await userToUnfriend.save();
   userToUnfriendId = userToUnfriend._id;
 
+  const userToKick = new User({
+    email: "kickMe@gmail.com",
+    username: "kickable",
+    password: "test12",
+    chats: [],
+    ownedChats: [],
+    chatInvites: [],
+    friends: [testUser1._id],
+    friendRequests: [],
+    sentFriendRequests: [],
+  });
+  await userToKick.save();
+  userToKickId = userToKick._id;
+
   const testChat1 = new Chat({
     name: "testChat1",
     owner: testUser1._id,
@@ -80,7 +96,7 @@ beforeAll(async () => {
   const chatToDelete = new Chat({
     name: "DeleteMe!",
     owner: testUser1._id,
-    participants: testUser1._id,
+    participants: [testUser1._id, userToKick._id],
     invitedUsers: [],
     instanceType: "public",
     messages: [],
@@ -88,13 +104,18 @@ beforeAll(async () => {
   await chatToDelete.save();
 
   testUser1.ownedChats.push(chatToDelete._id);
+  testUser1.chats.push(chatToDelete._id);
   await testUser1.save();
 
   chatToDeleteId = chatToDelete._id;
   testUser1id = testUser1._id;
   testChat1id = testChat1._id;
 
+  userToKick.chats.push(chatToDelete._id);
+  await userToKick.save();
+
   testUser1Token = jwt.sign({ userId: testUser1id }, secret);
+  userToKickToken = jwt.sign({ userId: userToKickId }, secret);
 });
 
 afterAll(async () => {
@@ -150,6 +171,47 @@ describe("v1Controller chat_get", () => {
   test("Returns 404 and not found message on invalid chat id", async () => {
     const response = await request(app).get("/chat/someinvalidid").expect(404);
     expect(response.body.message.toString()).toBe("Chat not found");
+  });
+});
+
+describe("v1Controller chat_kick_user_put", () => {
+  test("Doesn't remove user if req user isn't owner of chat", async () => {
+    const response = await request(app)
+      .put(`/chat/kick/${chatToDeleteId}/${testUser1id}`)
+      .set("Cookie", [`jwt=${userToKickToken}`])
+      .expect(403);
+
+    expect(response.body.toString()).toBe({
+      message: 'Cannot kick user',
+      detail: 'Requesting user is not the owner of this chat'
+    }.toString());
+
+    const attemptedToRemoveChat = await Chat.findById(chatToDeleteId);
+    const attemptedToRemoveUser = await User.findById(testUser1id);
+
+    const userStillInChat = attemptedToRemoveUser.chats.includes(attemptedToRemoveChat._id);
+    const chatStillInUser = attemptedToRemoveChat.participants.includes(attemptedToRemoveUser._id);
+
+    expect(userStillInChat).toBe(true);
+    expect(chatStillInUser).toBe(true);
+  });
+
+  test("Kicks user and returns 200 if valid", async () => {
+    const response = await request(app)
+      .put(`/chat/kick/${chatToDeleteId}/${userToKickId}`)
+      .set("Cookie", [`jwt=${testUser1Token}`])
+      .expect(200);
+
+    expect(response.body.message.toString()).toBe("Successfully kicked user");
+
+    const kickedUser = await User.findById(userToKickId);
+    const kickedFromChat = await Chat.findById(chatToDeleteId);
+
+    const userInChat = kickedFromChat.participants.includes(kickedUser._id);
+    const chatInUser = kickedUser.chats.includes(kickedFromChat._id);
+
+    expect(userInChat).toBe(false);
+    expect(chatInUser).toBe(false);
   });
 });
 
