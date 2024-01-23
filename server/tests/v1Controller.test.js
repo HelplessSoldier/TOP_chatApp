@@ -26,6 +26,7 @@ let mongod;
 const secret = process.env.secret; // using actual secret as it's also used in the controller
 
 let chatToDeleteId;
+let userToUnfriendId;
 let testUser1id;
 let testUser1Token; // this would normally be set as a cookie in v1AccountsController
 let testChat1id;
@@ -48,6 +49,20 @@ beforeAll(async () => {
   });
   await testUser1.save();
 
+  const userToUnfriend = new User({
+    email: "removeMe@gmail.com",
+    username: "unfriendable",
+    password: "test12",
+    chats: [],
+    ownedChats: [],
+    chatInvites: [],
+    friends: [testUser1._id],
+    friendRequests: [],
+    sentFriendRequests: [],
+  });
+  await userToUnfriend.save();
+  userToUnfriendId = userToUnfriend._id;
+
   const testChat1 = new Chat({
     name: "testChat1",
     owner: testUser1._id,
@@ -58,6 +73,7 @@ beforeAll(async () => {
   });
   await testChat1.save();
 
+  testUser1.friends.push(userToUnfriend._id);
   testUser1.ownedChats.push(testChat1._id);
   testUser1.chats.push(testChat1._id);
 
@@ -155,6 +171,26 @@ describe("v1Controller chat_delete", () => {
       .set("Cookie", [`jwt=${testUser1Token}`])
       .expect(403);
     const mess = response.body.message;
-    expect(mess.toString()).toBe('Cannot delete')
+    expect(mess.toString()).toBe("Cannot delete");
+  });
+});
+
+describe("v1Controller user_friend_remove_put", () => {
+  test("Removes friend from both users", async () => {
+    const response = await request(app)
+      .put(`/user/friends/remove/${userToUnfriendId}`)
+      .set("Cookie", [`jwt=${testUser1Token}`])
+      .expect(200);
+
+    expect(response.body.message.toString()).toBe("Successfully removed friend");
+
+    const testUser1 = await User.findById(testUser1id);
+    const userToUnfriend = await User.findById(userToUnfriendId);
+
+    const u1IncludesU2 = testUser1.friends.includes(userToUnfriendId);
+    const u2IncludesU1 = userToUnfriend.friends.includes(testUser1id);
+
+    expect(u1IncludesU2).toBe(false);
+    expect(u2IncludesU1).toBe(false);
   });
 });

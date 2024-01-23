@@ -150,7 +150,7 @@ exports.user_friend_remove_put = asyncHandler(async (req, res) => {
     res.status(200).json({ message: "Successfully removed friend" });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: "Failed to remove friend", error: err });
+    res.status(500).json({ message: "Failed to remove friend", detail: err });
   }
 });
 
