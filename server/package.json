@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "jest": "^29.7.0",
+    "jest-websocket-mock": "^2.5.0",
     "mongodb-memory-server": "^9.1.6",
     "supertest": "^6.3.4"
   }
